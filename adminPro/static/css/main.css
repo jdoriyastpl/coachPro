@@ -141,9 +141,14 @@ header nav{
 
 header nav a{
     color:#fff;
-
     text-decoration: none;
     font-family: sans-serif;
+    font-size: 20px;
+}
+
+header nav a:hover{
+    color:#222;
+    text-decoration: none;
 }
 
 header nav h2{

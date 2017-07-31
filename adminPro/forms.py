@@ -5,8 +5,8 @@ from django import forms
 
 class UserForm(forms.ModelForm):
     GENDER = (
-    ('Male', 'male'),
-    ('Female', 'female'),
+    ('Male', 'Male'),
+    ('Female', 'Female'),
 
     )
     password = forms.CharField(widget = forms.PasswordInput())
