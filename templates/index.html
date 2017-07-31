@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+  {% block body_block %}
+
+      <div class="row">
+                <div class ="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <div id ="page-title" class="page-header"><h2>Dashboard</h2></div>
+                      <section id = "feature-content">
+                          <ul>
+                              <li>
+                                  <h3>Manage Students data</h3>
+                                      <p><a href="">Enroll Student</a>
+                                          <a href="">List of Student</a>
+                                      </p>
+                              </li>
+
+                               <li>
+                                  <h3>Manage Tutors data</h3>
+                                    <p><a href="">Enroll Tutor</a>
+                                          <a href="">List of Tutor</a>
+                                    </p>
+                              </li>
+                              <li>
+                                  <h3>Manage Fees Per Coarse</h3>
+
+                                   <p><a href="">Add Coarse</a>
+                                          <a href="">List of Coarses</a>
+                                    </p>
+                              </li>
+                          </ul>
+                      </section>
+
+                  </div>
+
+          </div>
+  {% endblock %}

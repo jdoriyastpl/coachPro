@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Student Detail{% endblock %}
+
+{% block body_block %}
+        <div class="row">
+            <div class="col-xs-8 col-xs-offset-2 col-md-12 col-md-offset-0 col-lg-12">
+
+                      <div id ="page-title" class="page-header"><h2>All Students</h2></div>
+            </div>
+        </div>
+        <div class="row" >
+        <div class="col-xs-8 col-xs-offset-2 col-md-8 col-md-offset-2">
+                        <table class="table table-responsive table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Student Subject</th>
+                                <th>Remark</th>
+                                <th>Update Profile</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                              {% for student in students_list %}
+                                <tr>
+                                    <td><a href="{%url 'students:detail' pk=student.pk %}">{{ student.name }}</a></td>
+                                    <td>{{ student.subject }}</td>
+                                    <td>{{ student.remark }}</td>
+                                    <td><a class="btn btn-primary" href="{% url 'students:student_edit' pk=student.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                                </tr>
+                               {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                  </div>
+
+
+{% endblock %}

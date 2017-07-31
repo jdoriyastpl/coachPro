@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Student Detail{% endblock %}
+
+{% block body_block %}
+        <div class="row">
+            <div class="col-sm-8 col-md-9">
+
+                <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                    <li role="presentation" class="active"><a href="{% url 'students:student_list' %}">View All</a></li>
+                </ul>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+
+                        <h3>{{ students_detail.name }}</h3>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Student Subject</th>
+                                <th>Remark</th>
+                                <th>Update Profile</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{ students_details.name }}</td>
+                                    <td>{{ students_details.subject }}</td>
+                                    <td>{{ students_details.remark }}</td>
+                                    <td><a class="btn btn-primary" href="{% url 'students:student_edit' pk=students_details.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+{% endblock %}
