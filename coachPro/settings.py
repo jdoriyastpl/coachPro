@@ -26,7 +26,7 @@ SECRET_KEY = '_i3y6b7gk@2a)vvl-&+qgyz*-%&$6i6haf)c+_&6ucmghx)m7y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['jitindoriya.pythonanywhere.com',]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'adminPro',
     'students',
+    'courses',
     'bootstrap3',
 ]
 

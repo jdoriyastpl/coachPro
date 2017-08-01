@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^$',views.IndexView.as_view(),name='home'),
     url(r'adminPro/',include('adminPro.urls',namespace='adminPro')),
     url(r'adminPro/student/',include('students.urls',namespace='student')),
+    url(r'adminPro/course/',include('courses.urls',namespace='course')),
     url(r'adminPro/',include('django.contrib.auth.urls')),
 ]
