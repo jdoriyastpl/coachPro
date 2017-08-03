@@ -10,4 +10,4 @@ class Courses(models.Model):
     yearly_fee = models.DecimalField(max_digits=20,decimal_places=2,blank=False)
 
     def get_absolute_url(self):
-        return reverse("courses:detail",kwargs={'pk':self.pk})
+        return reverse("courses:course_detail",kwargs={'pk':self.pk})

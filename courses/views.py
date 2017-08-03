@@ -15,11 +15,20 @@ class CoursesCreateView(LoginRequiredMixin,CreateView):
     redirect_field_name = 'courses/courses_list.html'
     model = Courses
 
-class CoursesListView(LoginRequiredMixin,ListView):
-    pass
+class CoursesListView(ListView):
+    model = Courses
 
-class CoursesDetailView(DetailView):
-    pass
+    def get_queryset(self):
+        return Courses.objects.order_by('name')
 
-class CoursesUpdateView(UpdateView):
-    pass
+class CoursesDetailView(LoginRequiredMixin,DetailView):
+    context_object_name = 'courses_details'
+    login_url = 'login'
+    model = Courses
+    template_name='courses/courses_details.html'
+
+class CoursesUpdateView(LoginRequiredMixin,UpdateView):
+    login_url='login'
+    form_class = CoursesForm
+    redirect_field_name='courses/courses_details.html'
+    model =Courses

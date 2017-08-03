@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Course List{% endblock %}
+
+{% block body_block %}
+        <div class="row">
+            <div class="col-xs-8 col-xs-offset-2 col-md-12 col-md-offset-0 col-lg-12">
+
+                      <div id ="page-title" class="page-header"><h2>All Available Courses</h2></div>
+            </div>
+        </div>
+        <div class="row" >
+        <div class="col-xs-8 col-xs-offset-2 col-md-8 col-md-offset-2">
+                        <table class="table table-responsive table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Course Name</th>
+                                <th>Course Monthly Fee</th>
+                                <th>Course Quarterly Fee</th>
+                                <th>Course Yearly Fee</th>
+                                <th>Edit Course</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                              {% for course in object_list %}
+                                <tr>
+                                  
+                                    <td><a href="{% url 'courses:course_detail' pk=course.pk %}">{{ course.name }}</a></td>
+                                    <td>{{ course.monthly_fee }}</td>
+                                    <td>{{ course.quarterly_fee }}</td>
+                                    <td>{{course.yearly_fee}}</td>
+                                    <td><a class="btn btn-primary" href="{% url 'courses:course_edit' pk=course.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                                </tr>
+                               {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                  </div>
+
+
+{% endblock %}

@@ -9,8 +9,8 @@
                           <ul>
                               <li>
                                   <h3>Manage Students data</h3>
-                                      <p><a href="">Enroll Student</a>
-                                          <a href="">List of Student</a>
+                                      <p><a href="{% url 'students:student_new' %}">Enroll Student</a>
+                                          <a href="{% url 'students:student_list'%}">List of Student</a>
                                       </p>
                               </li>
 
@@ -24,7 +24,7 @@
                                   <h3>Manage Fees Per Course</h3>
 
                                    <p><a href="{% url 'courses:course_new'%}">Add Course</a>
-                                          <a href="">List of Courses</a>
+                                          <a href="{% url 'courses:course_list'%}">List of Courses</a>
                                     </p>
                               </li>
                           </ul>
