@@ -17,6 +17,7 @@
                             <thead>
                             <tr>
                                 <th>Student Name</th>
+                                <th>Course Enrolled</th>
                                 <th>Student Subject</th>
                                 <th>Remark</th>
                                 <th>Update Profile</th>
@@ -25,6 +26,7 @@
                             <tbody>
                                 <tr>
                                     <td>{{ students_details.name }}</td>
+                                    <td>{{students_details.course_name.all.0.name}}</td>
                                     <td>{{ students_details.subject }}</td>
                                     <td>{{ students_details.remark }}</td>
                                     <td><a class="btn btn-primary" href="{% url 'students:student_edit' pk=students_details.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
