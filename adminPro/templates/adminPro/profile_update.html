@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Update Profile{% endblock %}
+{% load bootstrap3 %}
+
+{% block body_block %}
+
+<h1>Edit Profile</h1>
+<hr>
+<form method="POST" action="" enctype='multipart/form-data'>
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <br>
+    <input class="btn btn-success" type="submit" value='{{ title }}'>
+</form>
+
+{% endblock body_block %}

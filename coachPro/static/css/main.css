@@ -146,6 +146,12 @@ header nav a{
     font-family: sans-serif;
 }
 
+header nav a:hover{
+    color:#222;
+    text-decoration: none;
+}
+
+
 header nav h2{
     text-indent: -10000px;
     height: 0;
@@ -158,7 +164,7 @@ header nav li{
 }
 
 /*#page-title{
-    /*margin-top: 5em;*/
+    margin-top: 5em;
 }*/
 
 .page-header {

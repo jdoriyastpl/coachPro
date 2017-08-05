@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% load bootstrap3 %}
+
+{% block body_block %}
+
+<div class="container">
+  <h1>Login</h1>
+  <form method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <br>
+	<input class="btn btn-success" type="submit" value='{{ title }}'>&nbsp; &nbsp;
+    {% if request.path == "/adminPro/login/" %}
+    Don't Have an Account <a href="{% url 'adminPro:register' %}">Register Here.</a>
+    {% else %}
+    Have an Account <a href="{% url 'adminPro:login' %}">Login Here.</a>
+    {% endif %}
+</form>
+
+
+</div>
+
+
+{% endblock %}

@@ -1,20 +1,57 @@
-from django.contrib.auth.models import User
+import datetime
 from django import forms
+from django.contrib.auth import authenticate
+from django.contrib.auth.forms import UserCreationForm
+from adminPro.models import User
 
 
+class UserLoginForm(forms.Form):
+    email = forms.EmailField()
+    password = forms.CharField(widget=forms.PasswordInput)
 
-class UserForm(forms.ModelForm):
-    GENDER = (
-    ('Male', 'male'),
-    ('Female', 'female'),
+    def clean(self, *args, **kwargs):
+        email = self.cleaned_data.get("email")
+        password = self.cleaned_data.get("password")
 
-    )
-    password = forms.CharField(widget = forms.PasswordInput())
-    firstname =  forms.CharField(max_length=250)
-    lastname =  forms.CharField(max_length=250)
-    phone = forms.CharField(max_length=256)
-    gender = forms.ChoiceField( choices =GENDER, required = True)
+        if email and password:
+            user = authenticate(email=email, password=password)
+            # if not user:
+            #     raise forms.ValidationError("User Does Not Exist.")
+            # if not user.check_password(password):
+            #     raise forms.ValidationError("Password Does not Match.")
+            # if not user.is_active:
+            #     raise forms.ValidationError("User is not Active.")
 
-    class Meta():
+        return super(UserLoginForm, self).clean(*args, **kwargs)
+class UserRegistrationForm(UserCreationForm):
+    class Meta:
         model = User
-        fields = ("username","email","password")
+        fields = ("first_name",
+                  "last_name",
+                  "username",
+                  "email",
+                  "phone",
+                  "picture",
+                  "password1",
+                  "password2" )
+
+    def save(self, commit=True):
+        user = super(UserCreationForm, self).save(commit=False)
+        user.username = self.cleaned_data['username']
+        user.email = self.cleaned_data['email']
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        user.phone = self.cleaned_data['phone']
+        if commit:
+            user.save()
+        return user
+
+
+class UserProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ("first_name",
+                  "last_name",
+                  "email",
+                  "phone",
+                  "picture")
