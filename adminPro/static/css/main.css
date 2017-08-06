@@ -146,6 +146,11 @@ header nav a{
     font-family: sans-serif;
 }
 
+header nav a:hover{
+    color: #222;
+    list-style-type: none;
+}
+
 header nav h2{
     text-indent: -10000px;
     height: 0;

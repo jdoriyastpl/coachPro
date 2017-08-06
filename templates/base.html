@@ -30,9 +30,11 @@
                     <li><a href="{% url 'students:student_list' %}">Students</a></li>
                     <li><a href="">Tutors</a></li>
                     {% if user.is_authenticated %}
+<!--
                     {% if request.user.picture %}
                       <li style="padding-top: 7px;"><img title="profile image" class="img-circle" src="{{ request.user.picture.url }}" id="nav-img"></li>
                     {% endif %}
+-->
                       <li class="dropdown open">
                         <a class="dropdown-toggle" href="{{request.user.get_absolute_url}}" data-toggle="dropdown">
                         {{request.user.username}}

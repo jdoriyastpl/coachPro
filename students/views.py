@@ -16,6 +16,7 @@ class StudentsCreateView(LoginRequiredMixin,CreateView):
     redirect_field_name = 'students/students_list.html'
     model = Students
 
+
 class StudentsListView(ListView):
     model = Students
 
