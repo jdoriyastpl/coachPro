@@ -11,3 +11,9 @@ class Courses(models.Model):
 
     def get_absolute_url(self):
         return reverse("courses:course_detail",kwargs={'pk':self.pk})
+    
+    def __unicode__(self):
+        return self.name
+
+    def __str__(self):       # if python 3
+        return self.name
