@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'students',
     'courses',
     'bootstrap3',
+    #Third party apps
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [

@@ -26,7 +26,6 @@ class StudentsListView(ListView):
 class StudentsDetailView(LoginRequiredMixin,DetailView):
     context_object_name = 'students_details'
     login_url = 'login'
-    # redirect_field_name = 'students/students_list.html'
     model = Students
     template_name = 'students/students_detail.html'
 

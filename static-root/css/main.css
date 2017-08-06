@@ -141,7 +141,6 @@ header nav{
 
 header nav a{
     color:#fff;
-
     text-decoration: none;
     font-family: sans-serif;
 }
@@ -149,8 +148,7 @@ header nav a{
 header nav a:hover{
     color: #222;
     list-style-type: none;
-    
-    
+    text-decoration: none;    
 }
 
 header nav h2{

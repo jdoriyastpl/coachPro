@@ -15,12 +15,12 @@ class UserLoginForm(forms.Form):
 
         if email and password:
             user = authenticate(email=email, password=password)
-            # if not user:
-            #     raise forms.ValidationError("User Does Not Exist.")
-            # if not user.check_password(password):
-            #     raise forms.ValidationError("Password Does not Match.")
-            # if not user.is_active:
-            #     raise forms.ValidationError("User is not Active.")
+            if not user:
+                raise forms.ValidationError("User Does Not Exist.")
+            if not user.check_password(password):
+                raise forms.ValidationError("Password Does not Match.")
+            if not user.is_active:
+                raise forms.ValidationError("User is not Active.")
 
         return super(UserLoginForm, self).clean(*args, **kwargs)
 class UserRegistrationForm(UserCreationForm):

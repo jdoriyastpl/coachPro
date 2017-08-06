@@ -22,6 +22,7 @@ def login_view(request): # users will login with their Email & Password
             password = form.cleaned_data.get("password")
             # authenticates Email & Password
             user = authenticate(email=email, password=password)
+            
             login(request, user)
             return redirect("home")
         context = {"form":form,
