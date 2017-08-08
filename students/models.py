@@ -18,6 +18,15 @@ class Students(models.Model):
     city = models.CharField(max_length=80,null=False)
     state = models.CharField(max_length=80,null=False)
     adhaar_number =models.PositiveIntegerField()
+    picture = models.ImageField(null=True,
+                                blank=True,
+                                default='/students/img/default.png',
+                                height_field="height_field",
+                                width_field="width_field",
+                                verbose_name="profile picture"
+                                )
+    height_field = models.IntegerField(default=600, null=True)
+    width_field = models.IntegerField(default=600, null=True)
 
     def get_absolute_url(self):
         return reverse("students:detail",kwargs={'pk':self.pk})
@@ -26,5 +35,8 @@ class Students(models.Model):
         return self.name
 
 
-class StudentFee(models.Model):
-    student = models.ForeignKey(Students,related_name='student_name')
+class StudentPaymentDetail(models.Model):
+    student = models.OneToOneField(Students,related_name='student_name')
+    course_name = models.ForeignKey(Courses,related_name='course_name')
+    paid_amount = models.DecimalField(max_digits=20,decimal_places=2,null=False)
+    payment_date = models.DateTimeField(default=timezone.now)

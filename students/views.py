@@ -1,10 +1,10 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from students.models import Students
+from students.models import Students,StudentPaymentDetail
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from students.forms import StudentForm
+from students.forms import StudentForm,StudentPaymentDetailForm
 from django.utils import timezone
-from django.views.generic import (TemplateView,ListView,
+from django.views.generic import (View,TemplateView,ListView,
                                   DetailView,CreateView,
                                   UpdateView,DeleteView)
 # Create your views here.
@@ -35,3 +35,9 @@ class StudentsUpdateView(LoginRequiredMixin,UpdateView):
     form_class = StudentForm
     redirect_field_name = 'students/students_detail.html'
     model = Students
+
+
+class StudentPaymentCreateView(LoginRequiredMixin,CreateView):
+    model = StudentPaymentDetail
+    form_class = StudentPaymentDetailForm
+    template_name = 'students/studentpaymentdetail_form.html'

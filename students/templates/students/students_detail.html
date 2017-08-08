@@ -42,6 +42,39 @@
             </div>
         </div>
 
+        <div class = "row">
+
+            <div class="col-sm-8 col-md-9">
+                    <a href="{% url 'students:student_payment' %}">Click here </a><span>for Student complete detail:</span>
+
+                    <div class="panel panel-default">
+                    <div class="panel-body">
+
+                        <h3>{{ students_detail.name }}</h3>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Course Enrolled</th>
+                                <th>Student Paid Amount</th>
+                                <th>Course Actual Amount</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {{ student_payment_form.as_table }}
+                                <tr>
+                                    <td>{{ student_payment_form.student }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
 
 
 {% endblock %}
