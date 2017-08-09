@@ -38,6 +38,7 @@ class StudentsUpdateView(LoginRequiredMixin,UpdateView):
 
 
 class StudentPaymentCreateView(LoginRequiredMixin,CreateView):
+    login_url = 'login'
     model = StudentPaymentDetail
     form_class = StudentPaymentDetailForm
     template_name = 'students/studentpaymentdetail_form.html'
