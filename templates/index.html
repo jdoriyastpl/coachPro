@@ -1,7 +1,71 @@
 {% extends "base.html" %}
 {% load staticfiles %}
   {% block body_block %}
+    <div id="page-wrapper">
+<!--BEGIN TITLE & BREADCRUMB PAGE-->
+             <div class="page-title-breadcrumb option-demo">
+                <div class="page-header">
+                <div class="page-title mrm">Dashboard</div>
+                <div class="page-subtitle"> Overall features available to manage your institute</div>
+                </div>
+                <hr>
+                <ol class="breadcrumb page-breadcrumb">
+                <li>
+                <i class="fa fa-home"></i>
+                <a href="{% url 'home' %}">Home</a>
+                            
+                </ol>
+                <div class="clearfix"> </div>
+            </div>
+<!--END TITLE & BREADCRUMB PAGE-->
 
+<!--BEGIN CONTENT-->
+                <div class="page-content">
+                    <div id="tab-general">
+                        <div id="sum_box" class="row mbl">
+                           
+                         <div class="col-sm-12 col-md-3 col-md-offset-2 col-lg-">
+                                <div class="panel visit db mbm">
+                                    <div class="panel-body">
+                                        <p class="icon">
+                                            <i class="icon fa fa-group"></i>
+                                        </p>
+                                        <h4 class="value">
+                                            <span>128</span></h4>
+                                        <p class="description">
+                                            Total Student Count</p>
+                                        <div class="progress progress-sm mbn">
+                                            <div role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+                                                style="width: 70%;" class="progress-bar progress-bar-warning">
+                                                <span class="sr-only">Total Student Count</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-3 col-md-offset-2">
+                                <div class="panel visit db mbm">
+                                    <div class="panel-body">
+                                        <p class="icon">
+                                            <i class="icon fa fa-group"></i>
+                                        </p>
+                                        <h4 class="value">
+                                            <span>128</span></h4>
+                                        <p class="description">
+                                            Pending Payment</p>
+                                        <div class="progress progress-sm mbn">
+                                            <div role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
+                                                style="width: 70%;" class="progress-bar progress-bar-warning">
+                                                <span class="sr-only">Pending Payment</span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                <!--END CONTENT-->
+
+<!--
                 <div class ="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                       <div id ="page-title" class="page-header"><h2>Dashboard</h2></div>
                       <section id = "feature-content">
@@ -30,6 +94,7 @@
                           </ul>
                       </section>
 
-                  </div>
+                  -->
+        </div>
 
   {% endblock %}

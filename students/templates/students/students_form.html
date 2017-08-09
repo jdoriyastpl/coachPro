@@ -1,12 +1,36 @@
 {% extends 'base.html' %}
-{% load bootstrap3 %}
+{% load crispy_forms_tags %}
 {% block body_block %}
-    <h1>New Student:</h1>
+ <div id="page-wrapper">
+<!--BEGIN TITLE & BREADCRUMB PAGE-->
+             <div class="page-title-breadcrumb option-demo">
+                <div class="page-header">
+                <div class="page-title mrm">New Student</div>
+                <div class="page-subtitle"> Add new student to the institute</div>
+                </div>
+                <hr>
+                <ol class="breadcrumb page-breadcrumb">
+                <li>
+                <i class="fa fa-home"></i>
+                <a href="{% url 'home' %}">Home</a>
+                            
+                </ol>
+                <div class="clearfix"> </div>
+            </div>
+<!--END TITLE & BREADCRUMB PAGE-->
+ <div class="page-content">
+     <div class="panel-heading">Registration form</div>
+                                            <div class="panel-body pan">
+                                                <form method="POST" class="post-form">
+                                                    {% csrf_token %}
+                                                    
+                                                <div class="form-body pal">
+                                                    {% crispy form %}
+                                                     <button type="submit" class="save btn btn-default">Save</button>
+                                                </div>
+                                                </form>
+     </div>
+</div>
 
-    <form method="POST" class="post-form">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    <button type="submit" class="save btn btn-default">Save</button>
-    </form>
-
+</div>
 {% endblock %}

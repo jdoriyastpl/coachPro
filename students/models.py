@@ -20,7 +20,7 @@ class Students(models.Model):
     adhaar_number =models.PositiveIntegerField()
     picture = models.ImageField(null=True,
                                 blank=True,
-                                default='/students/img/default.png',
+                                default='students/img/default.png',
                                 height_field="height_field",
                                 width_field="width_field",
                                 verbose_name="profile picture"
