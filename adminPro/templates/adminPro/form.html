@@ -5,8 +5,25 @@
 
 {% block body_block %}
 
-<div class="container">
-  <h1>Login</h1>
+ <div id="page-wrapper">
+     
+     
+<!--BEGIN TITLE & BREADCRUMB PAGE-->
+             <div class="page-title-breadcrumb option-demo">
+                <div class="page-header">
+                <div class="page-title mrm">{{ title }}</div>
+                </div>
+                <hr>
+                <ol class="breadcrumb page-breadcrumb">
+                <li>
+                <i class="fa fa-home"></i>
+                <a href="{% url 'home' %}">Home</a>
+                </ol>
+                <div class="clearfix"> </div>
+            </div>
+<!--END TITLE & BREADCRUMB PAGE-->
+
+ <div class="page-content">
   <form method="POST">
     {% csrf_token %}
     {% bootstrap_form form %}
@@ -18,8 +35,8 @@
     Have an Account <a href="{% url 'adminPro:login' %}">Login Here.</a>
     {% endif %}
 </form>
-
-
+     </div>
+{% include "footer.html" %}
 </div>
 
 

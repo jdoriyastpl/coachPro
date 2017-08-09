@@ -2,12 +2,23 @@
 {% block title %}Course List{% endblock %}
 
 {% block body_block %}
-        <div class="row">
-            <div class="col-xs-8 col-xs-offset-2 col-md-12 col-md-offset-0 col-lg-12">
-
-                      <div id ="page-title" class="page-header"><h2>All Available Courses</h2></div>
+     <div id="page-wrapper">
+      <!--BEGIN TITLE & BREADCRUMB PAGE-->
+             <div class="page-title-breadcrumb option-demo">
+                <div class="page-header">
+                <div class="page-title mrm">All Enrolled Students</div>
+                </div>
+                <hr>
+                <ol class="breadcrumb page-breadcrumb">
+                <li>
+                <i class="fa fa-home"></i>
+                <a href="{% url 'home' %}">Home</a>
+                            
+                </ol>
+                <div class="clearfix"> </div>
             </div>
-        </div>
+<!--END TITLE & BREADCRUMB PAGE-->
+    <div class="page-content">
         <div class="row" >
         <div class="col-xs-8 col-xs-offset-2 col-md-8 col-md-offset-2">
                         <table class="table table-responsive table-bordered">
@@ -36,6 +47,10 @@
 
                     </div>
                   </div>
+         </div>
+   {% include "footer.html" %}
+        {% include "loadscript.html" %}
+        </div>
 
 
 {% endblock %}

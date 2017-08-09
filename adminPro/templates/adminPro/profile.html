@@ -3,7 +3,24 @@
 {% load bootstrap3 %}
 
 {% block body_block %}
-<hr>
+ <div id="page-wrapper">
+<!--BEGIN TITLE & BREADCRUMB PAGE-->
+             <div class="page-title-breadcrumb option-demo">
+                <div class="page-header">
+                <div class="page-title mrm">New Student</div>
+                <div class="page-subtitle"> Add new student to the institute</div>
+                </div>
+                <hr>
+                <ol class="breadcrumb page-breadcrumb">
+                <li>
+                <i class="fa fa-home"></i>
+                <a href="{% url 'home' %}">Home</a>
+                            
+                </ol>
+                <div class="clearfix"> </div>
+            </div>
+<!--END TITLE & BREADCRUMB PAGE-->
+ <div class="page-content">
     <div class="row">
         <div class="col-sm-10"><h1>{{ user_profile.first_name }} {{ user_profile.last_name }}</h1><hr>
         <b>Email: </b><a href="mailto:#">{{ user_profile.email }}</a><br>
@@ -36,6 +53,9 @@
 
 
 
-
-
+     </div>
+     </div>
+     {% include "footer.html" %}
+        {% include "loadscript.html" %}
+        </div>
 {% endblock %}

@@ -3571,6 +3571,7 @@ body.sidebar-icons #wrapper #page-wrapper {
 .mvn,
 .man {
   margin-bottom: 0px !important;
+
 }
 .mbx,
 .mvx,
@@ -7014,3 +7015,6 @@ ul.chats li.out .message {
   border-radius: 0px !important;
   border: 1px solid #e5e5e5;
 }
+
+.navbar-right{
+	margin-right:5px;
