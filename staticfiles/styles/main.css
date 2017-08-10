@@ -3571,6 +3571,7 @@ body.sidebar-icons #wrapper #page-wrapper {
 .mvn,
 .man {
   margin-bottom: 0px !important;
+
 }
 .mbx,
 .mvx,
@@ -6667,6 +6668,7 @@ label {
   -webkit-border-radius: 0 !important;
   -moz-border-radius: 0 !important;
   border-radius: 0 !important;
+  margin-right: 20px;
 }
 .thumbnail {
   -webkit-border-radius: 0 !important;
@@ -7014,3 +7016,6 @@ ul.chats li.out .message {
   border-radius: 0px !important;
   border: 1px solid #e5e5e5;
 }
+
+.navbar-right{
+	margin-right:5px;
