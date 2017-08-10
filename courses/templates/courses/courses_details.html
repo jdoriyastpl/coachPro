@@ -2,6 +2,25 @@
 {% block title %}Course Detail{% endblock %}
 
 {% block body_block %}
+
+
+   <div id="page-wrapper">
+<!--BEGIN TITLE & BREADCRUMB PAGE-->
+             <div class="page-title-breadcrumb option-demo">
+                <div class="page-header">
+                <div class="page-title mrm">Add new Course</div>
+                </div>
+                <hr>
+                <ol class="breadcrumb page-breadcrumb">
+                <li>
+                <i class="fa fa-home"></i>
+                <a href="{% url 'home' %}">Home</a>
+                            
+                </ol>
+                <div class="clearfix"> </div>
+            </div>
+<!--END TITLE & BREADCRUMB PAGE-->
+        <div class="page-content">
         <div class="row">
             <div class="col-sm-8 col-md-9">
 
@@ -41,7 +60,7 @@
 
             </div>
         </div>
-
-
-
+{% include "footer.html" %}
+        {% include "loadscript.html" %}
+        </div>
 {% endblock %}

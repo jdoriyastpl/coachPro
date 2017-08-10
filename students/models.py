@@ -17,7 +17,7 @@ class Students(models.Model):
     address2 = models.CharField(max_length=255,null=False)
     city = models.CharField(max_length=80,null=False)
     state = models.CharField(max_length=80,null=False)
-    adhaar_number =models.PositiveIntegerField()
+    adhaar_number =models.CharField(max_length=255,null=False)
     picture = models.ImageField(null=True,
                                 blank=True,
                                 default='students/img/default.png',

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load bootstrap3 %}
 {% block body_block %}
    <div id="page-wrapper">
 <!--BEGIN TITLE & BREADCRUMB PAGE-->
@@ -17,17 +18,33 @@
                 <div class="clearfix"> </div>
             </div>
 <!--END TITLE & BREADCRUMB PAGE-->
- <div class="page-content">
-
-    <form method="POST" class="post-form">
-    {% csrf_token %}
-     {{ form|crispy }}
-    <button type="submit" class="save btn btn-default">Save</button>
-    </form>
-       </div>
-     {% include "footer.html" %}
+   <div class="page-content">
+     <div class="row">
+         <div class=" col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+         <div class="panel panel-orange">
+            <div class="panel-heading">
+                All New Course
+            </div>
+             <div class="panel-body pan">
+                <form method="POST" class="post-form">
+                    {% csrf_token %}
+                    <div class="form-body pal">
+                        {% bootstrap_form form %}
+                       
+                          <div class="form-actions text-right pal">
+                    <!--<button type="submit" class="save btn btn-default">Save</button>-->
+                              <button type="submit" class=" save btn btn-primary">
+                                                        Submit</button>
+                        </div>
+                </form>
+             
+             </div>
+        </div>
+        </div>
+     </div>
+     
+</div>
+{% include "footer.html" %}
         {% include "loadscript.html" %}
         </div>
-
-
 {% endblock %}

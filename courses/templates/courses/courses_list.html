@@ -6,7 +6,7 @@
       <!--BEGIN TITLE & BREADCRUMB PAGE-->
              <div class="page-title-breadcrumb option-demo">
                 <div class="page-header">
-                <div class="page-title mrm">All Enrolled Students</div>
+                <div class="page-title mrm">All Available Courses</div>
                 </div>
                 <hr>
                 <ol class="breadcrumb page-breadcrumb">
@@ -18,10 +18,17 @@
                 <div class="clearfix"> </div>
             </div>
 <!--END TITLE & BREADCRUMB PAGE-->
-    <div class="page-content">
+       <div class="page-content">
         <div class="row" >
         <div class="col-xs-8 col-xs-offset-2 col-md-8 col-md-offset-2">
-                        <table class="table table-responsive table-bordered">
+            
+            <div class="panel panel-orange">
+            <div class="panel-heading">
+                Available Courses
+            </div>
+             <div class="panel-body pan">
+            
+                        <table class="table table-hover">
                             <thead>
                             <tr>
                                 <th>Course Name</th>
@@ -43,14 +50,17 @@
                                 </tr>
                                {% endfor %}
                             </tbody>
-                        </table>
+                       </table>
 
                     </div>
                   </div>
-         </div>
-   {% include "footer.html" %}
-        {% include "loadscript.html" %}
+               </div>
         </div>
-
+     </div>
+{% include "footer.html" %}
+{% include "loadscript.html" %}
+     
+</div>
+        
 
 {% endblock %}

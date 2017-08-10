@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load bootstrap3 %}
 {% block title %}Student Payment Detail{% endblock %}
 
 {% block body_block %}
@@ -21,19 +22,43 @@
                 <div class="clearfix"> </div>
             </div>
 <!--END TITLE & BREADCRUMB PAGE-->
-    <div class="page-content">
-<div class="panel-heading">Registration form</div>
+   <div class="page-content">
+    <!-- <div class="panel-heading">Registration form</div>
                                             <div class="panel-body pan">
-          <form method="POST" class="post-form">
-          {% csrf_token %}
-          {% crispy form %}
-          <button type="submit" class="save btn btn-default">Save</button>
-          </form>
-
-
+                                                <form method="POST" class="post-form">
+                                                    {% csrf_token %}
+                                                    
+                                                <div class="form-body pal">
+                                                    {% crispy form %}
+                                                     <button type="submit" class="save btn btn-default">Save</button>
+                                                </div>
+                                                </form>
+     </div>-->
+     
+     <div class="row">
+         <div class=" col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
+         <div class="panel panel-orange">
+            <div class="panel-heading">
+                Enroll New Student
+            </div>
+             <div class="panel-body pan">
+                <form method="POST" class="post-form">
+                    {% csrf_token %}
+                    <div class="form-body pal">
+                        {% bootstrap_form form %}
+                       
+                          <div class="form-actions text-right pal">
+                    <!--<button type="submit" class="save btn btn-default">Save</button>-->
+                              <button type="submit" class=" save btn btn-primary">
+                                                        Submit</button>
+                        </div>
+                </form>
+             
+             </div>
         </div>
-
-
+        </div>
+     </div>
+     
 </div>
 {% include "footer.html" %}
         {% include "loadscript.html" %}
