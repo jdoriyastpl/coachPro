@@ -6668,6 +6668,7 @@ label {
   -webkit-border-radius: 0 !important;
   -moz-border-radius: 0 !important;
   border-radius: 0 !important;
+  margin-right: 20px;
 }
 .thumbnail {
   -webkit-border-radius: 0 !important;
