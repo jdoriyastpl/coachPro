@@ -15,6 +15,11 @@ class StudentForm(forms.ModelForm):
 
 class StudentPaymentDetailForm(forms.ModelForm):
     actual_amount = forms.DecimalField(max_digits=20,decimal_places=2)
+
     class Meta:
         model = StudentPaymentDetail
         fields = ['student','course_name','paid_amount','payment_date']
+
+    def __init__(self, user, *args, **kwargs):
+        super(StudentForm, self).__init__(*args, **kwargs)
+        self.fields['course_name'].queryset = Courses.objects.filter(user=user)
