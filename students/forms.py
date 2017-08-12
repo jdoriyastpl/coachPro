@@ -21,5 +21,5 @@ class StudentPaymentDetailForm(forms.ModelForm):
         fields = ['student','course_name','paid_amount','payment_date']
 
     def __init__(self, user, *args, **kwargs):
-        super(StudentForm, self).__init__(*args, **kwargs)
+        super(StudentPaymentDetailForm, self).__init__(*args, **kwargs)
         self.fields['course_name'].queryset = Courses.objects.filter(user=user)
