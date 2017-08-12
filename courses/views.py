@@ -20,7 +20,7 @@ class CoursesCreateView(LoginRequiredMixin,CreateView):
         return super(CoursesCreateView,self).form_valid(form)
 
 
-class CoursesListView(ListView):
+class CoursesListView(LoginRequiredMixin,ListView):
     model = Courses
 
     def get_queryset(self):

@@ -21,13 +21,7 @@ class StudentsCreateView(LoginRequiredMixin,CreateView):
         return super(StudentsCreateView,self).form_valid(form)
 
 
-    def post(self, request, **kwargs):
-        request.POST = request.POST.copy()
-        request.POST['user'] = request.user
-        return super(StudentsCreateView, self).post(request, **kwargs)
-
-
-class StudentsListView(ListView):
+class StudentsListView(LoginRequiredMixin,ListView):
     model = Students
 
     def get_queryset(self):

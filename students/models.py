@@ -8,7 +8,7 @@ from django.conf import settings
 User = settings.AUTH_USER_MODEL
 class Students(models.Model):
     user = models.ForeignKey(User)
-    course_name = models.ManyToManyField(Courses,related_name="student_course")
+    course_name = models.ForeignKey(Courses,related_name="student_course")
     name = models.CharField(max_length=200)
     created_date = models.DateTimeField(default=timezone.now)
     remark = models.TextField(blank=True, null=True)
