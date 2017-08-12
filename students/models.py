@@ -7,7 +7,7 @@ from django.conf import settings
 # Create your models here.
 User = settings.AUTH_USER_MODEL
 class Students(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
     course_name = models.ForeignKey(Courses,related_name="student_course")
     name = models.CharField(max_length=200)
     created_date = models.DateTimeField(default=timezone.now)
