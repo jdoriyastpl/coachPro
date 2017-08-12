@@ -4,13 +4,33 @@
 
 {% block body_block %}
 
-<h1>Edit Profile</h1>
-<hr>
+<div id="page-wrapper">
+
+
+<!--BEGIN TITLE & BREADCRUMB PAGE-->
+            <div class="page-title-breadcrumb option-demo">
+               <div class="page-header">
+               <div class="page-title mrm">{{ title }}</div>
+               </div>
+               <hr>
+               <ol class="breadcrumb page-breadcrumb">
+               <li>
+               <i class="fa fa-home"></i>
+               <a href="{% url 'home' %}">Home</a>
+               </ol>
+               <div class="clearfix"> </div>
+           </div>
+<!--END TITLE & BREADCRUMB PAGE-->
+<div class="page-content">
+ <form method="POST">
 <form method="POST" action="" enctype='multipart/form-data'>
     {% csrf_token %}
     {% bootstrap_form form %}
     <br>
     <input class="btn btn-success" type="submit" value='{{ title }}'>
 </form>
-
-{% endblock body_block %}
+</div>
+{% include "footer.html" %}
+   {% include "loadscript.html" %}
+   </div>
+{% endblock %}
