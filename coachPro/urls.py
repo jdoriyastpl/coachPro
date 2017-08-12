@@ -18,10 +18,12 @@ from django.conf.urls import url,include
 from django.contrib import admin
 from django.conf.urls.static import static
 from . import views
+from adminPro.views import login_view as init_view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$',views.IndexView.as_view(),name='home'),
+    url(r'^home/$',views.IndexView.as_view(),name='home'),
+    url(r'^$', init_view ,name='login'),
     url(r'adminPro/',include('adminPro.urls',namespace='adminPro')),
     url(r'^student/',include('students.urls',namespace='student')),
     url(r'^course/',include('courses.urls',namespace='course')),

@@ -22,14 +22,14 @@ def login_view(request): # users will login with their Email & Password
             password = form.cleaned_data.get("password")
             # authenticates Email & Password
             user = authenticate(email=email, password=password)
-            
+
             login(request, user)
             return redirect("home")
         context = {"form":form,
                    "title":title
         }
 
-        return render(request, "adminPro/form.html", context)
+        return render(request, "test.html", context)
 
 
 def register_view(request): # Creates a New Account & login New users

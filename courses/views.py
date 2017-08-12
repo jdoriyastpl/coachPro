@@ -14,12 +14,17 @@ class CoursesCreateView(LoginRequiredMixin,CreateView):
     form_class = CoursesForm
     redirect_field_name = 'courses/courses_list.html'
     model = Courses
+    # valid the form from using mixins and add user to course
+    def form_valid(self,form):
+        form.instance.user = self.request.user
+        return super(CoursesCreateView,self).form_valid(form)
+
 
 class CoursesListView(ListView):
     model = Courses
 
     def get_queryset(self):
-        return Courses.objects.order_by('name')
+        return Courses.objects.filter(user=self.request.user).order_by('name')
 
 class CoursesDetailView(LoginRequiredMixin,DetailView):
     context_object_name = 'courses_details'

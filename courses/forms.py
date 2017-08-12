@@ -6,4 +6,4 @@ class CoursesForm(forms.ModelForm):
 
     class Meta:
         model = Courses
-        fields ={'name','monthly_fee','quarterly_fee','yearly_fee'}
+        fields =['name','monthly_fee','quarterly_fee','yearly_fee']

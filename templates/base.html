@@ -3,9 +3,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    
+
     <title>{% block title %}Coaching Name{% endblock %}</title>
-   
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{% static 'images/icons/favicon.ico' %}">
@@ -19,7 +19,7 @@
 <!--   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
 
     {# Custom CSS#}
-    
+
     <link href="{% static 'css/bootstrap3/bootstrap.min.css' %}" rel='stylesheet' type='text/css'>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
@@ -36,10 +36,10 @@
     <link type="text/css" rel="stylesheet" href="{% static 'styles/zabuto_calendar.min.css' %}">
     <link type="text/css" rel="stylesheet" href="{% static 'styles/pace.css'%}">
     <link type="text/css" rel="stylesheet" href="{% static 'styles/jquery.news-ticker.css'%}">
-	
-	
 
-	
+
+
+
 </head>
 <body>
     <div id="header-topbar-option-demo" class="page-header-topbar">
@@ -48,11 +48,11 @@
                 <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
                 <a id="logo" href="#" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">Administrator</span><span style="display: none" class="logo-text-icon">µ</span></a></div>
             <div class="topbar-main"><a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
-              
+
                 <ul class="nav navbar navbar-top-links navbar-right mbn">
                     {% if user.is_authenticated %}
-                                        
-                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="" class="dropdown-toggle">
+
+                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle">
                         <img src="{{ request.user.picture.url }}" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs">{{request.user.username}}
                         </span>&nbsp;<span class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-user pull-right">
@@ -102,15 +102,15 @@
                     </div>
                 </div>
     </div>
-    
+
     </div>
     <div id="wrapper">
          {% include "navigation.html" %}
-  
+
         {% block body_block %}
 
         {% endblock %}
-  
+
     </div>
 </body>
 </html>

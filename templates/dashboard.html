@@ -13,7 +13,7 @@
                 <li>
                 <i class="fa fa-home"></i>
                 <a href="{% url 'home' %}">Home</a>
-                            
+
                 </ol>
                 <div class="clearfix"> </div>
             </div>
@@ -23,7 +23,7 @@
                 <div class="page-content">
                     <div id="tab-general">
                         <div id="sum_box" class="row mbl">
-                           
+
                          <div class="col-sm-12 col-md-3 col-md-offset-2">
                                 <div class="panel visit db mbm">
                                     <div class="panel-body">
@@ -31,7 +31,7 @@
                                             <i class="icon fa fa-group"></i>
                                         </p>
                                         <h4 class="value">
-                                            <span>128</span></h4>
+                                            <span>{{Enrolled_students}}</span></h4>
                                         <p class="description">
                                             Total Student Count</p>
                                         <div class="progress progress-sm mbn">
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                  </div>
-      
+
         {% include "footer.html" %}
         {% include "loadscript.html" %}
         </div>

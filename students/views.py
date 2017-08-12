@@ -16,12 +16,22 @@ class StudentsCreateView(LoginRequiredMixin,CreateView):
     redirect_field_name = 'students/students_list.html'
     model = Students
 
+    def form_valid(self,form):
+        form.instance.user = self.request.user
+        return super(StudentsCreateView,self).form_valid(form)
+
+
+    def post(self, request, **kwargs):
+        request.POST = request.POST.copy()
+        request.POST['user'] = request.user
+        return super(StudentsCreateView, self).post(request, **kwargs)
+
 
 class StudentsListView(ListView):
     model = Students
 
     def get_queryset(self):
-        return Students.objects.filter(created_date__lte=timezone.now()).order_by('-created_date')
+        return Students.objects.filter(created_date__lte=timezone.now()).filter(user = self.request.user).order_by('-created_date')
 
 class StudentsDetailView(LoginRequiredMixin,DetailView):
     context_object_name = 'students_details'
@@ -35,6 +45,9 @@ class StudentsUpdateView(LoginRequiredMixin,UpdateView):
     form_class = StudentForm
     redirect_field_name = 'students/students_detail.html'
     model = Students
+    def post(self, request, **kwargs):
+        request.POST['user'] = request.user
+        return super(StudentsUpdateView, self).post(request, **kwargs)
 
 
 class StudentPaymentCreateView(LoginRequiredMixin,CreateView):
