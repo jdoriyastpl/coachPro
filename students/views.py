@@ -18,6 +18,7 @@ class StudentsCreateView(LoginRequiredMixin,CreateView):
 
     def form_valid(self,form):
         form.instance.user = self.request.user
+        form.save()
         return super(StudentsCreateView,self).form_valid(form)
     def get_form_kwargs(self):
         kwargs = super(StudentsCreateView, self).get_form_kwargs()
@@ -29,6 +30,7 @@ class StudentsListView(LoginRequiredMixin,ListView):
 
     def get_queryset(self):
         return Students.objects.filter(created_date__lte=timezone.now()).filter(user = self.request.user).order_by('-created_date')
+
 
 class StudentsDetailView(LoginRequiredMixin,DetailView):
     context_object_name = 'students_details'
@@ -42,6 +44,10 @@ class StudentsUpdateView(LoginRequiredMixin,UpdateView):
     form_class = StudentForm
     redirect_field_name = 'students/students_detail.html'
     model = Students
+    def get_form_kwargs(self):
+            kwargs = super(StudentsUpdateView, self).get_form_kwargs()
+            kwargs['user'] = self.request.user
+            return kwargs
     def post(self, request, **kwargs):
         request.POST['user'] = request.user
         return super(StudentsUpdateView, self).post(request, **kwargs)
@@ -52,11 +58,26 @@ class StudentPaymentCreateView(LoginRequiredMixin,CreateView):
     model = StudentPaymentDetail
     form_class = StudentPaymentDetailForm
     template_name = 'students/studentpaymentdetail_form.html'
+    redirect_field_name = 'students/paymentHistoryList_form.html'
+    # def form_valid(self,form):
+    #     form.instance.user = self.request.user
+    #     return super(StudentPaymentCreateView,self).form_valid(form)
+    # def get_form_kwargs(self):
+    #     kwargs = super(StudentPaymentCreateView, self).get_form_kwargs()
+    #     kwargs['user'] = self.request.user
+    #     return kwargs
 
-    def form_valid(self,form):
-        form.instance.user = self.request.user
-        return super(StudentPaymentCreateView,self).form_valid(form)
+class StudentPaymentHistoryListView(LoginRequiredMixin,ListView):
+    login_url = 'login'
+    model = StudentPaymentDetail
+    form_class = StudentPaymentDetailForm
+    template_name = 'students/paymentHistoryList_form.html'
+
+    def get_queryset(self):
+        return StudentPaymentDetail.objects.filter(student =self.request.student).filter(user = self.request.user).order_by('-payment_date')
+    #
     def get_form_kwargs(self):
         kwargs = super(StudentPaymentCreateView, self).get_form_kwargs()
         kwargs['user'] = self.request.user
+        kwargs['student'] =self.request.student
         return kwargs

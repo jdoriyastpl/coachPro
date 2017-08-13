@@ -3,7 +3,7 @@
 
 {% block body_block %}
  <div id="page-wrapper">
-             
+
  <!--BEGIN TITLE & BREADCRUMB PAGE-->
              <div class="page-title-breadcrumb option-demo">
                 <div class="page-header">
@@ -14,7 +14,7 @@
                 <li>
                 <i class="fa fa-home"></i>
                 <a href="{% url 'home' %}">Home</a>
-                            
+
                 </ol>
                 <div class="clearfix"> </div>
             </div>
@@ -43,7 +43,8 @@
                             <tbody>
                                 <tr>
                                     <td>{{ students_details.name }}</td>
-                                    <td><a href="{% url 'courses:course_detail' pk=students_details.course_name.all.0.pk %}">{{students_details.course_name.all.0.name}}</a></td>
+                                    <td><a href="{% url 'courses:course_detail' pk=students_details.course_name.pk %}">{{students_details.course_name}}</a></td>
+                                    {# <td>{{ students_details.course_name.pk }}</td>#}
                                     <td>{{ students_details.subject }}</td>
                                     <td>{{ students_details.remark }}</td>
                                     <td><a class="btn btn-primary" href="{% url 'students:student_edit' pk=students_details.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>

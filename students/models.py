@@ -38,8 +38,11 @@ class Students(models.Model):
 
 
 class StudentPaymentDetail(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    # user = models.ForeignKey(User,on_delete=models.CASCADE)
     student = models.OneToOneField(Students,related_name='student_name')
     course_name = models.ForeignKey(Courses,related_name='course_name')
     paid_amount = models.DecimalField(max_digits=20,decimal_places=2,null=False)
     payment_date = models.DateTimeField(default=timezone.now)
+
+    def get_absolute_url(self):
+        return reverse("students:student_payment_history",kwargs={'pk':self.pk})

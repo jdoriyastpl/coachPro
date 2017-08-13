@@ -5,7 +5,7 @@
 
 {% block body_block %}
  <div id="page-wrapper">
-     
+
  <!--BEGIN TITLE & BREADCRUMB PAGE-->
              <div class="page-title-breadcrumb option-demo">
                 <div class="page-header">
@@ -17,7 +17,7 @@
                 <li>
                 <i class="fa fa-home"></i>
                 <a href="{% url 'home' %}">Home</a>
-                            
+
                 </ol>
                 <div class="clearfix"> </div>
             </div>
@@ -27,14 +27,14 @@
                                             <div class="panel-body pan">
                                                 <form method="POST" class="post-form">
                                                     {% csrf_token %}
-                                                    
+
                                                 <div class="form-body pal">
                                                     {% crispy form %}
                                                      <button type="submit" class="save btn btn-default">Save</button>
                                                 </div>
                                                 </form>
      </div>-->
-     
+
      <div class="row">
          <div class=" col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
          <div class="panel panel-orange">
@@ -46,19 +46,18 @@
                     {% csrf_token %}
                     <div class="form-body pal">
                         {% bootstrap_form form %}
-                       
+
                           <div class="form-actions text-right pal">
                     <!--<button type="submit" class="save btn btn-default">Save</button>-->
-                              <button type="submit" class=" save btn btn-primary">
-                                                        Submit</button>
+                              <button type="submit" class=" save btn btn-primary">Submit</button>
                         </div>
                 </form>
-             
+
              </div>
         </div>
         </div>
      </div>
-     
+
 </div>
 {% include "footer.html" %}
         {% include "loadscript.html" %}

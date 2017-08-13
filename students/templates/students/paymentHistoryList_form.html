@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
-{% block title %}Student List{% endblock %}
+{% block title %}Student Payment History{% endblock %}
 
 {% block body_block %}
  <div id="page-wrapper">
       <!--BEGIN TITLE & BREADCRUMB PAGE-->
              <div class="page-title-breadcrumb option-demo">
                 <div class="page-header">
-                <div class="page-title mrm">All Enrolled Students</div>
+                <div class="page-title mrm">Student Payment History</div>
                 </div>
                 <hr>
                 <ol class="breadcrumb page-breadcrumb">
@@ -33,21 +33,17 @@
                             <tr>
                                 <th>Student Name</th>
                                 <th>Course Enrolled</th>
-                                <th>Student Subject</th>
-                                <th>Remark</th>
-                                <th>Update Profile</th>
+                                <th>Paid Amount</th>
+                                <th>Payment Date</th>
                             </tr>
                             </thead>
                             <tbody>
-                              {% for student in students_list %}
+                              {% for studentRecords in objects_list %}
                                 <tr>
-                                  {# {{student.course_name.all.0.name}}#}
-                                    <td><a href="{% url 'students:detail' pk=student.pk %}">{{ student.name }}</a></td>
-                                    {# <td>{{student.course_name.all.0}}</td>#}
-                                    <td>{{student.course_name}}</td>
-                                    <td>{{ student.subject }}</td>
-                                    <td>{{ student.remark }}</td>
-                                    <td><a class="btn btn-primary" href="{% url 'students:student_edit' pk=student.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                                    <td>{{ studentRecords.student }}</td>
+                                    <td>{{studentRecords.course_name.all.0}}</td>
+                                    <td>{{ studentRecords.paid_amount }}</td>
+                                    <td>{{ studentRecords.payment_date }}</td>
                                 </tr>
                                {% endfor %}
                             </tbody>
