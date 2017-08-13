@@ -74,10 +74,13 @@ class StudentPaymentHistoryListView(LoginRequiredMixin,ListView):
     template_name = 'students/paymentHistoryList_form.html'
 
     def get_queryset(self):
-        return StudentPaymentDetail.objects.filter(student =self.request.student).filter(user = self.request.user).order_by('-payment_date')
+        filter =self.kwargs['student']
+        #debugging url param
+        print(self.kwargs['student'])
+        return StudentPaymentDetail.objects.filter(student=filter).order_by('-payment_date')
     #
-    def get_form_kwargs(self):
-        kwargs = super(StudentPaymentCreateView, self).get_form_kwargs()
-        kwargs['user'] = self.request.user
-        kwargs['student'] =self.request.student
-        return kwargs
+    # def get_context_data(self, **kwargs):
+    #     context = super(StudentPaymentHistoryListView, self).get_context_data(**kwargs)
+    #     q = self.request.GET.get("student")
+    #     context['student'] = q
+    #     return context

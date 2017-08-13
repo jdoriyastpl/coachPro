@@ -44,5 +44,8 @@ class StudentPaymentDetail(models.Model):
     paid_amount = models.DecimalField(max_digits=20,decimal_places=2,null=False)
     payment_date = models.DateTimeField(default=timezone.now)
 
+    def __str__(self):
+        return self.student
+
     def get_absolute_url(self):
-        return reverse("students:student_payment_history",kwargs={'pk':self.pk})
+       return reverse("students:student_payment_history",kwargs={'student':self.student.name})
