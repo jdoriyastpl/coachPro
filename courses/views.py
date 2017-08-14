@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from courses.forms import CoursesForm
 from django.utils import timezone
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import (TemplateView,ListView,
                                   DetailView,CreateView,
                                   UpdateView,DeleteView)
@@ -22,7 +23,7 @@ class CoursesCreateView(LoginRequiredMixin,CreateView):
 
 class CoursesListView(LoginRequiredMixin,ListView):
     model = Courses
-
+    paginate_by = 10
     def get_queryset(self):
         return Courses.objects.filter(user=self.request.user).order_by('name')
 

@@ -15,7 +15,7 @@
                 <li>
                 <i class="fa fa-home"></i>
                 <a href="{% url 'home' %}">Home</a>
-                            
+
                 </ol>
                 <div class="clearfix"> </div>
             </div>
@@ -24,9 +24,7 @@
     <div class="row">
         <div class="col-sm-10"><h1>{{ user_profile.first_name }} {{ user_profile.last_name }}</h1><hr>
         <b>Email: </b><a href="mailto:#">{{ user_profile.email }}</a><br>
-        {% if user_profile.birth_date %}
-        <small><b>Date of Birth:</b> {{ user_profile.birth_date }}</small><br>
-        {% endif %}
+      
         {% if request.user.username == user_profile.username %}
         <br>
         <a class="btn btn-success btn-sm" href="{{user_profile.get_absolute_url}}edit/" role="button">Edit</a>

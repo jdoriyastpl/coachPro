@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from students.forms import StudentForm,StudentPaymentDetailForm
 from django.utils import timezone
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import (View,TemplateView,ListView,
                                   DetailView,CreateView,
                                   UpdateView,DeleteView)
@@ -27,7 +28,7 @@ class StudentsCreateView(LoginRequiredMixin,CreateView):
 
 class StudentsListView(LoginRequiredMixin,ListView):
     model = Students
-
+    paginate_by = 15
     def get_queryset(self):
         return Students.objects.filter(created_date__lte=timezone.now()).filter(user = self.request.user).order_by('-created_date')
 
@@ -72,7 +73,7 @@ class StudentPaymentHistoryListView(LoginRequiredMixin,ListView):
     model = StudentPaymentDetail
     form_class = StudentPaymentDetailForm
     template_name = 'students/paymentHistoryList_form.html'
-
+    paginate_by = 4
     def get_queryset(self):
         filter =self.kwargs['student']
         #debugging url param
