@@ -41,7 +41,7 @@
                               {% for studentRecords in object_list %}
                                 <tr>
                                     <td>{{ studentRecords.student }}</td>
-                                    <td>{{studentRecords.course_name.all.0}}</td>
+                                    <td>{{studentRecords.course_name}}</td>
                                     <td>{{ studentRecords.paid_amount }}</td>
                                     <td>{{ studentRecords.payment_date }}</td>
                                 </tr>

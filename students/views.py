@@ -76,8 +76,8 @@ class StudentPaymentHistoryListView(LoginRequiredMixin,ListView):
     def get_queryset(self):
         filter =self.kwargs['student']
         #debugging url param
-        print(self.kwargs['student'])
-        return StudentPaymentDetail.objects.filter(student=filter).order_by('-payment_date')
+        print(filter)
+        return StudentPaymentDetail.objects.filter(student__name=filter).order_by('-payment_date')
     #
     # def get_context_data(self, **kwargs):
     #     context = super(StudentPaymentHistoryListView, self).get_context_data(**kwargs)
