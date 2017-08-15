@@ -67,8 +67,10 @@ class StudentPaymentCreateView(LoginRequiredMixin,CreateView):
         next_payment_date = form.cleaned_data.get('next_payment_date')
         print(next_payment_date)
         print(datetime.now())
-        if datetime.now() != next_payment_date:
-            pending_payment.send(sender=None,student=student)
+        form.save()
+        if datetime.now() >=next_payment_date:
+            print("yes we are passed")
+            pending_payment.send(sender=StudentPaymentDetail,student=student)
         return super(StudentPaymentCreateView,self).form_valid(form)
     # def get_form_kwargs(self):
     #     kwargs = super(StudentPaymentCreateView, self).get_form_kwargs()
