@@ -34,7 +34,9 @@
                                 <th>Student Name</th>
                                 <th>Course Enrolled</th>
                                 <th>Paid Amount</th>
+                                <th>Pay By</th>
                                 <th>Payment Date</th>
+                                <th>Next Payment Date</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -43,7 +45,9 @@
                                     <td>{{ studentRecords.student }}</td>
                                     <td>{{studentRecords.course_name}}</td>
                                     <td>{{ studentRecords.paid_amount }}</td>
+                                    <td>{{studentRecords.fee_by}}</td>
                                     <td>{{ studentRecords.payment_date }}</td>
+                                    <td>{{ studentRecords.next_payment_date}}</td>
                                 </tr>
                                {% endfor %}
                             </tbody>

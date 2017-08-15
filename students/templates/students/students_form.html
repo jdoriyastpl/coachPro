@@ -27,7 +27,7 @@
                 Enroll New Student
             </div>
              <div class="panel-body pan">
-                <form method="POST" class="post-form">
+                <form method="POST" class="post-form" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-body pal">
                         {% bootstrap_form form %}

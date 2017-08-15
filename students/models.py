@@ -6,6 +6,7 @@ from django.core.validators import MaxValueValidator
 from django.conf import settings
 # Create your models here.
 User = settings.AUTH_USER_MODEL
+
 class Students(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     course_name = models.ForeignKey(Courses,related_name="student_course")
@@ -39,10 +40,17 @@ class Students(models.Model):
 
 class StudentPaymentDetail(models.Model):
     # user = models.ForeignKey(User,on_delete=models.CASCADE)
+    FEE = (
+        ('monthly_fee','Monthly'),
+        ('quarterly_fee','Quarterly'),
+        ('yearly_fee','YEARLY')
+    )
+    fee_by = models.CharField(max_length=15, choices=FEE,blank=True)
     student = models.ForeignKey(Students,related_name='student_name')
     course_name = models.ForeignKey(Courses,related_name='course_name')
     paid_amount = models.DecimalField(max_digits=20,decimal_places=2,null=False)
     payment_date = models.DateTimeField(default=timezone.now)
+    next_payment_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.student

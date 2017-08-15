@@ -1,8 +1,8 @@
 from django import forms
 from students.models import Students,StudentPaymentDetail
 from courses.models import Courses
-
-
+from django.utils import timezone
+from django.conf import settings
 
 class StudentForm(forms.ModelForm):
     class Meta:
@@ -18,8 +18,9 @@ class StudentPaymentDetailForm(forms.ModelForm):
 
     class Meta:
         model = StudentPaymentDetail
-        fields = ['student','course_name','paid_amount','payment_date']
+        fields = ['student','course_name','paid_amount','fee_by','payment_date','next_payment_date']
 
-    # def __init__(self, student, *args, **kwargs):
-    #     super(StudentPaymentDetailForm, self).__init__(*args, **kwargs)
-    #     self.fields['student'].queryset = Students.objects.filter(student=student)
+    # # def __init__(self, *args, **kwargs):
+    #         super(StudentPaymentDetailForm, self).__init__(*args, **kwargs)
+    #         self.fields["payment_date"]= DateField(input_formats=settings.DATE_INPUT_FORMATS)
+    #         self.fields["next_payment_date"]= DateField(input_formats=settings.DATE_INPUT_FORMATS)

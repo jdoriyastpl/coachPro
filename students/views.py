@@ -19,7 +19,6 @@ class StudentsCreateView(LoginRequiredMixin,CreateView):
 
     def form_valid(self,form):
         form.instance.user = self.request.user
-        form.save()
         return super(StudentsCreateView,self).form_valid(form)
     def get_form_kwargs(self):
         kwargs = super(StudentsCreateView, self).get_form_kwargs()
@@ -37,7 +36,7 @@ class StudentsDetailView(LoginRequiredMixin,DetailView):
     context_object_name = 'students_details'
     login_url = 'login'
     model = Students
-    template_name = 'students/students_detail.html'
+    template_name = 'students/profile.html'
 
 class StudentsUpdateView(LoginRequiredMixin,UpdateView):
     login_url = 'login'
@@ -49,9 +48,9 @@ class StudentsUpdateView(LoginRequiredMixin,UpdateView):
             kwargs = super(StudentsUpdateView, self).get_form_kwargs()
             kwargs['user'] = self.request.user
             return kwargs
-    def post(self, request, **kwargs):
-        request.POST['user'] = request.user
-        return super(StudentsUpdateView, self).post(request, **kwargs)
+    # def post(self, request, **kwargs):
+    #     request.POST['user'] = request.user
+    #     return super(StudentsUpdateView, self).post(request, **kwargs)
 
 
 class StudentPaymentCreateView(LoginRequiredMixin,CreateView):
