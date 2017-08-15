@@ -4,6 +4,8 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from students.forms import StudentForm,StudentPaymentDetailForm
 from django.utils import timezone
+from datetime import datetime
+from students.signals import pending_payment
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import (View,TemplateView,ListView,
                                   DetailView,CreateView,
@@ -59,9 +61,17 @@ class StudentPaymentCreateView(LoginRequiredMixin,CreateView):
     form_class = StudentPaymentDetailForm
     template_name = 'students/studentpaymentdetail_form.html'
     redirect_field_name = 'students/paymentHistoryList_form.html'
-    # def form_valid(self,form):
-    #     form.instance.user = self.request.user
-    #     return super(StudentPaymentCreateView,self).form_valid(form)
+
+    def form_valid(self,form):
+        student = form.cleaned_data.get('student')
+        next_payment_date = form.cleaned_data.get('next_payment_date')
+        print(next_payment_date)
+        print(datetime.now())
+        form.save()
+        if datetime.now() >=next_payment_date:
+            print("yes we are passed")
+            pending_payment.send(sender=StudentPaymentDetail,student=student)
+        return super(StudentPaymentCreateView,self).form_valid(form)
     # def get_form_kwargs(self):
     #     kwargs = super(StudentPaymentCreateView, self).get_form_kwargs()
     #     kwargs['user'] = self.request.user
