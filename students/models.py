@@ -53,7 +53,15 @@ class StudentPaymentDetail(models.Model):
     next_payment_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.student
+        return self.student.name
 
     def get_absolute_url(self):
        return reverse("students:student_payment_history",kwargs={'student':self.student.name})
+
+
+class SendNotification(models.Model):
+    student = models.ForeignKey(Students)
+    is_payment_pending = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.student.name
