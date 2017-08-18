@@ -51,6 +51,7 @@ class StudentPaymentDetail(models.Model):
     paid_amount = models.DecimalField(max_digits=20,decimal_places=2,null=False)
     payment_date = models.DateTimeField(default=timezone.now)
     next_payment_date = models.DateTimeField(default=timezone.now)
+    created_date = models.DateTimeField(default=timezone.now,blank=False)
 
     def __str__(self):
         return self.student.name
