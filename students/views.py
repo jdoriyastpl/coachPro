@@ -64,13 +64,25 @@ class StudentPaymentCreateView(LoginRequiredMixin,CreateView):
 
     def form_valid(self,form):
         student = form.cleaned_data.get('student')
-        next_payment_date = form.cleaned_data.get('next_payment_date')
-        print(next_payment_date)
-        print(datetime.now())
+        # next_payment_date = form.cleaned_data.get('next_payment_date')
+        # print(next_payment_date)
+        # print(datetime.now())
         form.save()
-        if datetime.now() >=next_payment_date:
-            print("yes we are passed")
-            pending_payment.send(sender=StudentPaymentDetail,student=student)
+        last_expected_payment_dates = StudentPaymentDetail.objects.values_list("next_payment_date", flat=True).filter(student=student).order_by("-pk")
+        print(len(last_expected_payment_dates))
+        print(last_expected_payment_dates)
+        if len(last_expected_payment_dates)==0:
+            pass
+        elif len(last_expected_payment_dates)>1:
+            last_expected_payment_date = last_expected_payment_dates[1]
+            if datetime.now() >=last_expected_payment_date:
+                print("Student Payment is pending")
+                pending_payment.send(sender=StudentPaymentDetail,student=student)
+        # print(last_expected_payment_date)
+
+        # if datetime.now() >=next_payment_date:
+        #     print("yes we are passed")
+        #     pending_payment.send(sender=StudentPaymentDetail,student=student)
         return super(StudentPaymentCreateView,self).form_valid(form)
     # def get_form_kwargs(self):
     #     kwargs = super(StudentPaymentCreateView, self).get_form_kwargs()
@@ -82,7 +94,7 @@ class StudentPaymentHistoryListView(LoginRequiredMixin,ListView):
     model = StudentPaymentDetail
     form_class = StudentPaymentDetailForm
     template_name = 'students/paymentHistoryList_form.html'
-    paginate_by = 4
+    paginate_by = 15
     def get_queryset(self):
         filter =self.kwargs['student']
         #debugging url param

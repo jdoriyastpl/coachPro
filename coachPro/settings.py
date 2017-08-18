@@ -70,11 +70,12 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'students.context_processors.pending_payment_count',
             ],
         },
     },
 ]
-
+# TEMPLATES[0]['OPTIONS']['context_processors'].append("students.context_processors.pending_payment_count")
 WSGI_APPLICATION = 'coachPro.wsgi.application'
 
 
