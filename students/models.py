@@ -77,6 +77,7 @@ def update_student_name(sender,created,**kwargs):
 
 
 class SendNotification(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
     student = models.ForeignKey(Students)
     is_payment_pending = models.BooleanField(default=False)
 
