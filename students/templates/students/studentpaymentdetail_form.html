@@ -34,14 +34,16 @@
                                                 </div>
                                                 </form>
      </div>-->
-
+{% include "messages.html" %}
      <div class="row">
          <div class=" col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
          <div class="panel panel-orange">
             <div class="panel-heading">
                 Enroll New Student
             </div>
+
              <div class="panel-body pan">
+
                 <form method="POST" class="post-form">
                     {% csrf_token %}
                     <div class="form-body pal">

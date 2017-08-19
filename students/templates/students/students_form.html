@@ -27,6 +27,7 @@
                 Enroll New Student
             </div>
              <div class="panel-body pan">
+               {% include "messages.html" %}
                 <form method="POST" class="post-form" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-body pal">

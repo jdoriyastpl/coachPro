@@ -1,6 +1,7 @@
 # In receivers.py
 from django.dispatch import receiver
 from .signals import *
+from students.models import StudentPaymentDetail,Students
 
 @receiver(pending_payment)
 def create_pending_payment_record(sender, **kwargs):

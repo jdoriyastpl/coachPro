@@ -1,16 +1,22 @@
 from django.db import models
 from django.utils import timezone
+from datetime import datetime
+import random,string
 from django.core.urlresolvers import reverse
 from courses.models import Courses
 from django.core.validators import MaxValueValidator
 from django.conf import settings
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+
 # Create your models here.
 User = settings.AUTH_USER_MODEL
-
+d = datetime.today()
 class Students(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     course_name = models.ForeignKey(Courses,related_name="student_course")
     name = models.CharField(max_length=200)
+    student_Id = models.CharField(max_length=200,default="STU"+str(d.year)+str(d.month)+''.join(random.choices(string.ascii_uppercase + string.digits, k=6)))
     created_date = models.DateTimeField(default=timezone.now)
     remark = models.TextField(blank=True, null=True)
     subject = models.CharField(max_length=150)
@@ -45,19 +51,29 @@ class StudentPaymentDetail(models.Model):
         ('quarterly_fee','Quarterly'),
         ('yearly_fee','YEARLY')
     )
-    fee_by = models.CharField(max_length=15, choices=FEE,blank=True)
-    student = models.ForeignKey(Students,related_name='student_name')
+    fee_by = models.CharField(max_length=15, choices=FEE,blank=True,verbose_name="Choose fee options",default=FEE[0][0])
+    student = models.CharField(max_length=200,blank=True)
+    Student_Enrol_id = models.CharField(max_length=200)
     course_name = models.ForeignKey(Courses,related_name='course_name')
     paid_amount = models.DecimalField(max_digits=20,decimal_places=2,null=False)
     payment_date = models.DateTimeField(default=timezone.now)
     next_payment_date = models.DateTimeField(default=timezone.now)
-    created_date = models.DateTimeField(default=timezone.now,blank=False)
+    created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.student.name
+        return self.Student_Enrol_id
 
     def get_absolute_url(self):
-       return reverse("students:student_payment_history",kwargs={'student':self.student.name})
+       return reverse("students:student_payment_history",kwargs={'Student_Enrol_id':self.Student_Enrol_id})
+
+@receiver(post_save,sender=StudentPaymentDetail)
+def update_student_name(sender,created,**kwargs):
+    id = kwargs.get('instance')
+    print("inside post_save signal"+str(id))
+    student_name = Students.objects.values_list("name", flat=True).filter(student_Id=id)
+    print(student_name[0])
+    if created:
+        StudentPaymentDetail.objects.filter(Student_Enrol_id=id).update(student=student_name[0])
 
 
 class SendNotification(models.Model):

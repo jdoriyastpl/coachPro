@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from students.forms import StudentForm,StudentPaymentDetailForm
 from django.utils import timezone
+from django.contrib import messages
 from datetime import datetime
 from students.signals import pending_payment
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -42,7 +43,7 @@ class StudentsDetailView(LoginRequiredMixin,DetailView):
 
 class StudentsUpdateView(LoginRequiredMixin,UpdateView):
     login_url = 'login'
-    # redirect_field_name = 'students/students_list.html'
+    redirect_field_name = 'students/students_list.html'
     form_class = StudentForm
     redirect_field_name = 'students/students_detail.html'
     model = Students
@@ -63,21 +64,24 @@ class StudentPaymentCreateView(LoginRequiredMixin,CreateView):
     redirect_field_name = 'students/paymentHistoryList_form.html'
 
     def form_valid(self,form):
-        student = form.cleaned_data.get('student')
-        # next_payment_date = form.cleaned_data.get('next_payment_date')
-        # print(next_payment_date)
-        # print(datetime.now())
-        form.save()
-        last_expected_payment_dates = StudentPaymentDetail.objects.values_list("next_payment_date", flat=True).filter(student=student).order_by("-pk")
-        print(len(last_expected_payment_dates))
-        print(last_expected_payment_dates)
-        if len(last_expected_payment_dates)==0:
-            pass
-        elif len(last_expected_payment_dates)>1:
-            last_expected_payment_date = last_expected_payment_dates[1]
-            if datetime.now() >=last_expected_payment_date:
-                print("Student Payment is pending")
-                pending_payment.send(sender=StudentPaymentDetail,student=student)
+        student = form.cleaned_data.get('Student_Enrol_id')
+        try:
+            student_name = Students.objects.get(student_Id=student)
+        except:
+            messages.error(self.request,"Student Id is not matching with our records, Please search for verification")
+            return self.form_invalid(form)
+        # Intial Garbage code during debugging, will be removed in screening
+        # form.save()
+        # last_expected_payment_dates = StudentPaymentDetail.objects.values_list("next_payment_date", flat=True).filter(student=student_name).order_by("-pk")
+        # print(len(last_expected_payment_dates))
+        # print(last_expected_payment_dates)
+        # if len(last_expected_payment_dates)==0:
+        #     pass
+        # elif len(last_expected_payment_dates)>1:
+        #     last_expected_payment_date = last_expected_payment_dates[1]
+        #     if datetime.now() >=last_expected_payment_date:
+        #         print("Student Payment is pending")
+        #         pending_payment.send(sender=StudentPaymentDetail,student=student)
         # print(last_expected_payment_date)
 
         # if datetime.now() >=next_payment_date:
@@ -95,11 +99,12 @@ class StudentPaymentHistoryListView(LoginRequiredMixin,ListView):
     form_class = StudentPaymentDetailForm
     template_name = 'students/paymentHistoryList_form.html'
     paginate_by = 15
+
     def get_queryset(self):
-        filter =self.kwargs['student']
+        filter =self.kwargs['Student_Enrol_id']
         #debugging url param
-        print(filter)
-        return StudentPaymentDetail.objects.filter(student__name=filter).order_by('-payment_date')
+        # print(filter)
+        return StudentPaymentDetail.objects.filter(Student_Enrol_id=filter).order_by('-payment_date')
     #
     # def get_context_data(self, **kwargs):
     #     context = super(StudentPaymentHistoryListView, self).get_context_data(**kwargs)
