@@ -18,7 +18,7 @@ class StudentPaymentDetailForm(forms.ModelForm):
 
     class Meta:
         model = StudentPaymentDetail
-        fields = ['student','course_name','paid_amount','fee_by','payment_date','next_payment_date']
+        fields = ['Student_Enrol_id','course_name','paid_amount','fee_by','payment_date','next_payment_date']
 
     # # def __init__(self, *args, **kwargs):
     #         super(StudentPaymentDetailForm, self).__init__(*args, **kwargs)

@@ -45,11 +45,11 @@
                                         <tbody>
                                             <tr>
                                                 <td>Address</td>
-                                                <td>{{ students_details.address1 }} {{ students_details.address2 }} {{ students_details.city }} {{ students_details.state }}</td>
+                                                <td> {{ students_details.address1 }} {{ students_details.address2 }} {{ students_details.city }} {{ students_details.state }}</td>
                                             </tr>
                                             <tr>
-                                                <td>Status</td>
-                                                <td><span class="label label-success">Active</span></td>
+                                                <td>Student Id</td>
+                                                <td><span class="label label-success">{{ students_details.student_Id }}</span></td>
                                             </tr>
                                             <tr>
                                                 <td>User Rating</td>
@@ -65,7 +65,7 @@
                                 <div class="col-md-9">
                                     <ul class="nav nav-tabs">
                                         <li class="active"><a href="{% url 'students:student_edit' pk=students_details.pk %}">Edit Profile</a></li>
-                                        <li><a href="{% url 'students:student_payment_history' student=students_details.name %}" >Payment History</a></li>
+                                        <li><a href="{% url 'students:student_payment_history' Student_Enrol_id=students_details.student_Id %}" >Payment History</a></li>
 
                                     </ul>
                                     <div id="generalTabContent" class="tab-content">
