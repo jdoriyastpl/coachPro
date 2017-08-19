@@ -25,7 +25,7 @@ def pending_payment_count(request):
                         try:
                             SendNotification.objects.get(student=student[0])
                         except SendNotification.DoesNotExist:
-                            pending_payment.send(sender=StudentPaymentDetail,student=student[0])
+                            pending_payment.send(sender=StudentPaymentDetail,student=student[0],user=user)
                             Pending_students = SendNotification.objects.filter(is_payment_pending=True).count()
                             return {'Pending_students': Pending_students}
         # not_viewed = SendNotification.objects.filter(user=user, viewed=False).count()

@@ -12,5 +12,5 @@ class IndexView(LoginRequiredMixin,TemplateView):
         context = super(IndexView, self).get_context_data(**kwargs)
         # Add in a QuerySet of all the books
         context['Enrolled_students'] = Students.objects.filter(user=self.request.user).count()
-        context['Pending_students'] = SendNotification.objects.filter(is_payment_pending=True).count()
+        context['Pending_students'] = SendNotification.objects.filter(is_payment_pending=True).filter(user=self.request.user).count()
         return context
