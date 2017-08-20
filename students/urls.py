@@ -9,6 +9,7 @@ urlpatterns =[
     url(r'^new/$', views.StudentsCreateView.as_view(), name='student_new'),
     url(r'^(?P<pk>\d+)/$',views.StudentsDetailView.as_view(),name='detail'),
     url(r'^(?P<pk>\d+)/edit/$', views.StudentsUpdateView.as_view(), name='student_edit'),
+    url(r'^(?P<pk>\d+)/remove/$', views.StudentDeleteView.as_view(), name='student_remove'),
     url(r'^payment/$',views.StudentPaymentCreateView.as_view(),name='student_payment'),
     url(r'^payment/history/(?P<Student_Enrol_id>.+?)/$', views.StudentPaymentHistoryListView.as_view(),name='student_payment_history'),
     # url(r'^history/(?P<student>\w+)$', views.StudentPaymentHistoryListView.as_view(),name='student_payment_history'),

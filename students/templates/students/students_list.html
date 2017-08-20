@@ -36,6 +36,7 @@
                                 <th>Student Subject</th>
                                 <th>Remark</th>
                                 <th>Update Profile</th>
+                                <th>Delete Student Record</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -48,6 +49,7 @@
                                     <td>{{ student.subject }}</td>
                                     <td>{{ student.remark }}</td>
                                     <td><a class="btn btn-primary" href="{% url 'students:student_edit' pk=student.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                                    <td><a class="btn btn-primary" href="{% url 'students:student_remove' pk=student.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
                                 </tr>
                                {% endfor %}
                             </tbody>

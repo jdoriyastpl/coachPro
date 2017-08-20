@@ -55,6 +55,14 @@ class StudentsUpdateView(LoginRequiredMixin,UpdateView):
     #     request.POST['user'] = request.user
     #     return super(StudentsUpdateView, self).post(request, **kwargs)
 
+class StudentDeleteView(LoginRequiredMixin,DeleteView):
+    login_url= 'login'
+    success_message = "Deleted Successfully"
+    success_url = reverse_lazy('students:student_list')
+
+    def get_queryset(self):
+        return Students.objects.filter(created_date__lte=timezone.now()).filter(user = self.request.user).order_by('-created_date')
+
 
 class StudentPaymentCreateView(LoginRequiredMixin,CreateView):
     login_url = 'login'
@@ -66,9 +74,9 @@ class StudentPaymentCreateView(LoginRequiredMixin,CreateView):
     def form_valid(self,form):
         student = form.cleaned_data.get('Student_Enrol_id')
         try:
-            student_name = Students.objects.get(student_Id=student)
+            student_name = Students.objects.get(student_Id=student).filter(user=self.request.user)
         except:
-            messages.error(self.request,"Student Id is not matching with our records, Please search for verification")
+            messages.error(self.request,"Student Id is not matching with our records, Please verify again")
             return self.form_invalid(form)
         # Intial Garbage code during debugging, will be removed in screening
         # form.save()
@@ -111,3 +119,14 @@ class StudentPaymentHistoryListView(LoginRequiredMixin,ListView):
     #     q = self.request.GET.get("student")
     #     context['student'] = q
     #     return context
+class MessageMixin(object):
+    """
+    Make it easy to display notification messages when using Class Based Views.
+    """
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super(MessageMixin, self).delete(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        messages.success(self.request, self.success_message)
+        return super(MessageMixin, self).form_valid(form)
