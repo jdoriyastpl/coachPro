@@ -13,7 +13,7 @@
                 <li>
                 <i class="fa fa-home"></i>
                 <a href="{% url 'home' %}">Home</a>
-                            
+
                 </ol>
                 <div class="clearfix"> </div>
             </div>
@@ -30,21 +30,22 @@
                     {% csrf_token %}
                     <div class="form-body pal">
                         {% bootstrap_form form %}
-                       
+
                           <div class="form-actions text-right pal">
                     <!--<button type="submit" class="save btn btn-default">Save</button>-->
                               <button type="submit" class=" save btn btn-primary">
                                                         Submit</button>
                         </div>
                 </form>
-             
+
              </div>
         </div>
         </div>
      </div>
-     
-</div>
+
+
 {% include "footer.html" %}
+</div>
         {% include "loadscript.html" %}
         </div>
 {% endblock %}

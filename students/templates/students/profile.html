@@ -59,6 +59,9 @@
                                                 <td>Member Since</td>
                                                 <td>{{students_details.created_date}}</td>
                                             </tr>
+                                            <tr>
+                                                <td>Delete Record</td>
+                                                <td><a class="btn btn-primary" href="{% url 'students:student_remove' pk=students_details.pk %}">Delete</a></td>
                                         </tbody>
                                     </table>
                                 </div>
@@ -261,10 +264,12 @@
                 </div>
             </div>
         </div>
-    </div>
+
 
     <!--END CONTENT-->
-    {% include "footer.html" %} {% include "loadscript.html" %}
+    {% include "footer.html" %}
+    </div>
+    {% include "loadscript.html" %}
 
 </div>
 

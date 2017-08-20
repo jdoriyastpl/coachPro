@@ -1,43 +1,38 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load crispy_forms_tags %}
-{% block title %}{{ title }}{% endblock %}
 {% load bootstrap3 %}
-
 {% block body_block %}
-
  <div id="page-wrapper">
-
-
 <!--BEGIN TITLE & BREADCRUMB PAGE-->
              <div class="page-title-breadcrumb option-demo">
                 <div class="page-header">
-                <div class="page-title mrm">{{ title }}</div>
+                <div class="page-title mrm">Delete Student</div>
                 </div>
                 <hr>
                 <ol class="breadcrumb page-breadcrumb">
                 <li>
                 <i class="fa fa-home"></i>
                 <a href="{% url 'home' %}">Home</a>
+
                 </ol>
                 <div class="clearfix"> </div>
             </div>
 <!--END TITLE & BREADCRUMB PAGE-->
-
  <div class="page-content">
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    <br>
-	<input class="btn btn-success" type="submit" value='{{ title }}'>&nbsp; &nbsp;
-    {% if request.path == "/adminPro/login/" %}
-    Don't Have an Account <a href="{% url 'adminPro:register' %}">Register Here.</a>
-    {% else %}
-    Have an Account <a href="{% url 'adminPro:login' %}">Login Here.</a>
-    {% endif %}
-</form>
+     <div class="row">
+       {% include "messages.html" %}
+       <div class =" col-md-offset-4 col-md-8 col-lg-offset-2 col-lg-12">
+       <form action="" method="post">{% csrf_token %}
+        <p>Are you sure you want to delete "{{ object }}"?</p>
+        <input class='btn btn-danger' type="submit" value="Confirm" />
+        </form>
+        </div>
+     </div>
+  </div>
 
-     {% include "footer.html" %}
-      </div>
+
+{% include "footer.html" %}
+</div>
         {% include "loadscript.html" %}
         </div>
 {% endblock %}

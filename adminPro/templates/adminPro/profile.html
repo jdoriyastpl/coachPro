@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-sm-10"><h1>{{ user_profile.first_name }} {{ user_profile.last_name }}</h1><hr>
         <b>Email: </b><a href="mailto:#">{{ user_profile.email }}</a><br>
-      
+
         {% if request.user.username == user_profile.username %}
         <br>
         <a class="btn btn-success btn-sm" href="{{user_profile.get_absolute_url}}edit/" role="button">Edit</a>
@@ -52,8 +52,9 @@
 
 
      </div>
-     </div>
+
      {% include "footer.html" %}
+          </div>
         {% include "loadscript.html" %}
         </div>
 {% endblock %}
