@@ -22,8 +22,8 @@
            </div>
 <!--END TITLE & BREADCRUMB PAGE-->
 <div class="page-content">
- <form method="POST">
-<form method="POST" action="" enctype='multipart/form-data'>
+
+<form method="POST" action="" enctype="multipart/form-data" >
     {% csrf_token %}
     {% bootstrap_form form %}
     <br>
