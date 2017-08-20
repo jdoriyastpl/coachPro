@@ -1,7 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from datetime import datetime
-import random,string
+import random as stdlib_random
+import string
 from django.core.urlresolvers import reverse
 from courses.models import Courses
 from django.core.validators import MaxValueValidator
@@ -16,7 +17,7 @@ class Students(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     course_name = models.ForeignKey(Courses,related_name="student_course")
     name = models.CharField(max_length=200)
-    student_Id = models.CharField(max_length=200,default="STU"+str(d.year)+str(d.month)+''.join(random.choices(string.ascii_uppercase + string.digits, k=6)))
+    student_Id = models.CharField(max_length=200,default="STU"+str(d.year)+str(d.month)+''.join(stdlib_random.choices(string.ascii_uppercase + string.digits, k=6)))
     created_date = models.DateTimeField(default=timezone.now)
     remark = models.TextField(blank=True, null=True)
     subject = models.CharField(max_length=150)
