@@ -17,7 +17,7 @@ class Students(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     course_name = models.ForeignKey(Courses,related_name="student_course")
     name = models.CharField(max_length=200)
-    student_Id = models.CharField(max_length=200,default="STU"+str(d.year)+str(d.month)+''.join(stdlib_random.choices(string.ascii_uppercase + string.digits, k=6)))
+    student_Id = models.CharField(max_length=200,default="STU"+str(d.year)+str(d.month)+''.join(stdlib_random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(6)))
     created_date = models.DateTimeField(default=timezone.now)
     remark = models.TextField(blank=True, null=True)
     subject = models.CharField(max_length=150)
