@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from students.forms import StudentForm,StudentPaymentDetailForm
 from django.utils import timezone
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from students.signals import pending_payment
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -33,6 +34,7 @@ class StudentsListView(LoginRequiredMixin,ListView):
     paginate_by = 15
     def get_queryset(self):
         return Students.objects.filter(created_date__lte=timezone.now()).filter(user = self.request.user).order_by('-created_date')
+
 
 
 class StudentsDetailView(LoginRequiredMixin,DetailView):
@@ -130,3 +132,14 @@ class MessageMixin(object):
     def form_valid(self, form):
         messages.success(self.request, self.success_message)
         return super(MessageMixin, self).form_valid(form)
+
+@login_required()
+def search_student(request):
+    queryset= Students.objects.filter(user = request.user)
+    query = request.GET.get("q")
+    if query:
+        queryset = queryset.filter(
+            Q(name__icontains=query)|
+            Q(Student_Enrol_id__icontains=query)
+            )
+    return render(request,'students/ajax_search.html',{'students':queryset})

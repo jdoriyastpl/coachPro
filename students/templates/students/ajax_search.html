@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Student List{% endblock %}
+
+{% block body_block %}
+ <div id="page-wrapper">
+      <!--BEGIN TITLE & BREADCRUMB PAGE-->
+             <div class="page-title-breadcrumb option-demo">
+                <div class="page-header">
+                <div class="page-title mrm">All Enrolled Students</div>
+                </div>
+                <hr>
+                <ol class="breadcrumb page-breadcrumb">
+                <li>
+                <i class="fa fa-home"></i>
+                <a href="{% url 'home' %}">Home</a>
+
+                </ol>
+                <div class="clearfix"> </div>
+            </div>
+<!--END TITLE & BREADCRUMB PAGE-->
+    <div class="page-content">
+        <div class="row" >
+        <div class="col-xs-8 col-xs-offset-2 col-md-8 col-md-offset-2">
+          {% if request.GET.q %}
+
+          <p>showing search results for "{{ request.GET.q }}"</p><br>
+
+          {% endif %}
+          {% if students.count > 0 %}
+           {% for student in students  %}
+            <li><a href="{% url 'students:detail' pk=student.pk %}">{{ student.name }}</li>
+           {% endfor %}
+
+          {% endif %}
+
+               </div>
+        </div>
+
+{% include "footer.html" %}
+   </div>
+        {% include "loadscript.html" %}
+
+</div>
+
+
+{% endblock %}

@@ -7,6 +7,7 @@ app_name = 'students'
 urlpatterns =[
     url(r'^$',views.StudentsListView.as_view(),name='student_list'),
     url(r'^new/$', views.StudentsCreateView.as_view(), name='student_new'),
+    url(r'^search/$',views.search_student,name='student_search_result'),
     url(r'^(?P<pk>\d+)/$',views.StudentsDetailView.as_view(),name='detail'),
     url(r'^(?P<pk>\d+)/edit/$', views.StudentsUpdateView.as_view(), name='student_edit'),
     url(r'^(?P<pk>\d+)/remove/$', views.StudentDeleteView.as_view(), name='student_remove'),
