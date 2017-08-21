@@ -361,3 +361,10 @@ $(function(){
 function searchSuccess (data,textStatus,jqXHR){
     $('#search-results').html(data);
 }
+ $(function () {
+                                        $("#q").keyup(function (event) {
+                                            if (event.which === 13) {
+                                                location.href = "/search/";
+                                            }
+                                        }
+                                    });
