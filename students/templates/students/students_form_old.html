@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
-{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+{% load bootstrap3 %}
 {% block body_block %}
-   <div id="page-wrapper">
+ <div id="page-wrapper">
 <!--BEGIN TITLE & BREADCRUMB PAGE-->
              <div class="page-title-breadcrumb option-demo">
                 <div class="page-header">
-                <div class="page-title mrm">Add new Course</div>
+                <div class="page-title mrm">New Student</div>
+                <div class="page-subtitle"> Add new student to the institute</div>
                 </div>
                 <hr>
                 <ol class="breadcrumb page-breadcrumb">
@@ -17,43 +19,19 @@
                 <div class="clearfix"> </div>
             </div>
 <!--END TITLE & BREADCRUMB PAGE-->
-   <div class="page-content">
+ <div class="page-content">
      <div class="row">
          <div class=" col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
          <div class="panel panel-orange">
             <div class="panel-heading">
-                All New Course
+                Enroll New Student
             </div>
              <div class="panel-body pan">
-                <form method="POST" class="post-form">
+               {% include "messages.html" %}
+                <form method="POST" class="post-form" enctype="multipart/form-data">
                     {% csrf_token %}
-                   {% csrf_token %}
                     <div class="form-body pal">
-
-
-
-                        {% for hidden in form.hidden_fields %}
-                          {{ hidden }}
-                        {% endfor %}
-                            {% if form.non_field_errors %}
-                                <div class="alert alert-danger" role="alert">
-                                  {% for error in form.non_field_errors %}
-                                    {{ error }}
-                                  {% endfor %}
-                                </div>
-                              {% endif %}
-                        {% for field in form.visible_fields %}
-                          <div class="form-group">
-                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                            {% render_field field class="form-control" placeholder=field.name %}
-                            {% for error in field.errors %}
-                              <span class="help-block">{{ error }}</span>
-                            {% endfor %}
-                          </div>
-                        {% endfor %}
-
-
-
+                        {% bootstrap_form form %}
 
                           <div class="form-actions text-right pal">
                     <!--<button type="submit" class="save btn btn-default">Save</button>-->
@@ -67,9 +45,7 @@
         </div>
      </div>
 
-
 {% include "footer.html" %}
-</div>
         {% include "loadscript.html" %}
         </div>
 {% endblock %}

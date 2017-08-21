@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'bootstrap3',
     #Third party apps
     'crispy_forms',
-    'bootstrap3_datetime',
+    # 'bootstrap3_datetime',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

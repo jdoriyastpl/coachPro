@@ -19,22 +19,25 @@
             </div>
 <!--END TITLE & BREADCRUMB PAGE-->
     <div class="page-content">
-        <div class="row" >
-        <div class="col-xs-8 col-xs-offset-2 col-md-8 col-md-offset-2">
-          {% if request.GET.q %}
+        {% if request.GET.q %}
 
-          <p>showing search results for "{{ request.GET.q }}"</p><br>
+
 
           {% endif %}
           {% if students.count > 0 %}
+            <h2>Showing search results for "{{ request.GET.q }}"</h2><br>
            {% for student in students  %}
-            <li><a href="{% url 'students:detail' pk=student.pk %}">{{ student.name }}</li>
+                 <div class="list-group">
+
+                    <a href="{% url 'students:detail' pk=student.pk %}" class="list-group-item "><h4 class="list-group-item-heading">{{ student.name }}</h4>
+                     <p class="list-group-item-text">Course Enrolled:{{ student.course_name }} ,  Student Age:{{ student.age }},   Student's Father Name:{{ student.father_name }}</p></a>
+                </div>
            {% endfor %}
 
           {% endif %}
 
-               </div>
-        </div>
+
+
 
 {% include "footer.html" %}
    </div>

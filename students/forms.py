@@ -13,6 +13,14 @@ class StudentForm(forms.ModelForm):
         super(StudentForm, self).__init__(*args, **kwargs)
         self.fields['course_name'].queryset = Courses.objects.filter(user=user)
 
+    # def clean(self):
+    #     cleaned_data = super(StudentForm, self).clean()
+    #     student_name = cleaned_data.get('name')
+    #
+    #     if Students.objects.filter(name=student_name).filter(self.request.user).count() > 0:
+    #         raise forms.ValidationError('This Student is already added into system')
+    #     return cleaned_data
+
 class StudentPaymentDetailForm(forms.ModelForm):
     actual_amount = forms.DecimalField(max_digits=20,decimal_places=2)
 
