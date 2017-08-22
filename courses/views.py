@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from courses.forms import CoursesForm
 from django.utils import timezone
+from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import (TemplateView,ListView,
                                   DetailView,CreateView,
@@ -18,7 +19,12 @@ class CoursesCreateView(LoginRequiredMixin,CreateView):
     # valid the form from using mixins and add user to course
     def form_valid(self,form):
         form.instance.user = self.request.user
-        return super(CoursesCreateView,self).form_valid(form)
+        name = form.cleaned_data['name']
+        if Courses.objects.filter(name=name).filter(user=form.instance.user).count() > 0:
+            messages.error(self.request,'This Course is already added into system')
+            return super(CoursesCreateView, self).form_invalid(form)
+        else:
+            return super(CoursesCreateView,self).form_valid(form)
 
 
 class CoursesListView(LoginRequiredMixin,ListView):

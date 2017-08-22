@@ -19,12 +19,15 @@
 <!--END TITLE & BREADCRUMB PAGE-->
    <div class="page-content">
      <div class="row">
+         {% include "messages.html" %}
          <div class=" col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
          <div class="panel panel-orange">
             <div class="panel-heading">
                 All New Course
             </div>
+
              <div class="panel-body pan">
+
                 <form method="POST" class="post-form">
                     {% csrf_token %}
                    {% csrf_token %}
