@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block title %}Student Payment Preview{% endblock %}
+
+{% block body_block %}
+ <div id="page-wrapper">
+      <!--BEGIN TITLE & BREADCRUMB PAGE-->
+             <div class="page-title-breadcrumb option-demo">
+                <div class="page-header">
+                <div class="page-title mrm">Student Payment Preview</div>
+                </div>
+                <hr>
+                <ol class="breadcrumb page-breadcrumb">
+                <li>
+                <i class="fa fa-home"></i>
+                <a href="{% url 'home' %}">Home</a>
+
+                </ol>
+                <div class="clearfix"> </div>
+            </div>
+<!--END TITLE & BREADCRUMB PAGE-->
+    <div class="page-content">
+        <div class="row" >
+        <div class="col-xs-8 col-xs-offset-2 col-md-8 col-md-offset-2">
+
+            <div class="panel panel-orange">
+            <div class="panel-heading">
+                {{ student_payment_details.student }} Payment Preview:
+            </div>
+             <div class="panel-body pan">
+
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Course Enrolled</th>
+                                <th>Paid Amount</th>
+                                <th>Pay By</th>
+                                <th>Payment Date</th>
+                                <th>Next Payment Date</th>
+                                <th>Update</th>
+                                <th>Pdf file</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{ student_payment_details.Student_Enrol_id }}</td>
+                                    <td>{{student_payment_details.course_name}}</td>
+                                    <td>{{ student_payment_details.paid_amount }}</td>
+                                    <td>{{student_payment_details.fee_by}}</td>
+                                    <td>{{ student_payment_details.payment_date }}</td>
+                                    <td>{{ student_payment_details.next_payment_date}}</td>
+                                    <td><a class="btn btn-primary" href="{% url 'students:payment_update' pk=student_payment_details.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                                    <td>Pdf file</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+
+                  {% if is_paginated %}
+                      <ul class="pagination pull-right">
+                        {% if page_obj.has_previous %}
+                          <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                        {% else %}
+                          <li class="disabled"><span>&laquo;</span></li>
+                        {% endif %}
+                        {% for i in paginator.page_range %}
+                          {% if page_obj.number == i %}
+                            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                          {% else %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                          {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                          <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                        {% else %}
+                          <li class="disabled"><span>&raquo;</span></li>
+                        {% endif %}
+                      </ul>
+                    {% endif %}
+                        </div>
+                    </div>
+               </div>
+        </div>
+
+{% include "footer.html" %}
+     </div>
+        {% include "loadscript.html" %}
+
+</div>
+
+
+{% endblock %}

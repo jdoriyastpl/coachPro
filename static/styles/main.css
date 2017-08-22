@@ -7071,3 +7071,13 @@ ul.chats li.out .message {
 	*/
 	#no-more-tables td:before { content: attr(data-title); }
 }
+
+/*Message css style*/
+div.messages {
+    border: 1px solid #adb4bc;
+    padding: 0.5em 1em;
+}
+div.error, tr.error {
+    color: #a30000;
+    background-color: #FFCCCC;
+}

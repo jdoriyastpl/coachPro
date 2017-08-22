@@ -65,7 +65,8 @@ class StudentPaymentDetail(models.Model):
         return self.Student_Enrol_id
 
     def get_absolute_url(self):
-       return reverse("students:student_payment_history",kwargs={'Student_Enrol_id':self.Student_Enrol_id})
+       return reverse("students:payment_preview",kwargs={'pk':self.pk})
+       # return reverse("students:student_payment_history",kwargs={'Student_Enrol_id':self.Student_Enrol_id})
 
 @receiver(post_save,sender=StudentPaymentDetail)
 def update_student_name(sender,created,**kwargs):

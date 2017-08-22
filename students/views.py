@@ -75,9 +75,10 @@ class StudentPaymentCreateView(LoginRequiredMixin,CreateView):
 
     def form_valid(self,form):
         student = form.cleaned_data.get('Student_Enrol_id')
-        try:
-            student_name = Students.objects.get(student_Id=student).filter(user=self.request.user)
-        except:
+        print("My student id is"+student)
+        if Students.objects.filter(student_Id=student).filter(user=self.request.user).count() > 0:
+            pass
+        else:
             messages.error(self.request,"Student Id is not matching with our records, Please verify again")
             return self.form_invalid(form)
         # Intial Garbage code during debugging, will be removed in screening
@@ -102,6 +103,28 @@ class StudentPaymentCreateView(LoginRequiredMixin,CreateView):
     #     kwargs = super(StudentPaymentCreateView, self).get_form_kwargs()
     #     kwargs['user'] = self.request.user
     #     return kwargs
+class StudentPaymentDetailView(LoginRequiredMixin,DetailView):
+    context_object_name = 'student_payment_details'
+    login_url = 'login'
+    model = StudentPaymentDetail
+    template_name = 'students/payment_preview.html'
+
+
+
+class StudentPaymentUpdateView(LoginRequiredMixin,UpdateView):
+    login_url = 'login'
+    form_class = StudentPaymentDetailForm
+    redirect_field_name = 'students/paymentHistoryList_form.html'
+    model = StudentPaymentDetail
+    # def form_valid(self,form):
+    #     student = form.cleaned_data.get('Student_Enrol_id')
+    #     try:
+    #         student_name = Students.objects.get(student_Id=student).filter(user=self.request.user)
+    #     except:
+    #         messages.error(self.request,"Student Id is not matching with our records, Please verify again")
+    #         return self.form_invalid(form)
+
+
 
 class StudentPaymentHistoryListView(LoginRequiredMixin,ListView):
     login_url = 'login'
@@ -121,17 +144,7 @@ class StudentPaymentHistoryListView(LoginRequiredMixin,ListView):
     #     q = self.request.GET.get("student")
     #     context['student'] = q
     #     return context
-class MessageMixin(object):
-    """
-    Make it easy to display notification messages when using Class Based Views.
-    """
-    def delete(self, request, *args, **kwargs):
-        messages.success(self.request, self.success_message)
-        return super(MessageMixin, self).delete(request, *args, **kwargs)
 
-    def form_valid(self, form):
-        messages.success(self.request, self.success_message)
-        return super(MessageMixin, self).form_valid(form)
 
 @login_required()
 def search_student(request):
