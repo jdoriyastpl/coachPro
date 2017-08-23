@@ -7,6 +7,7 @@ from django.utils import timezone
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
+from courses.models import  Courses
 from students.signals import pending_payment
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import (View,TemplateView,ListView,
@@ -109,7 +110,23 @@ class StudentPaymentDetailView(LoginRequiredMixin,DetailView):
     model = StudentPaymentDetail
     template_name = 'students/payment_preview.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(StudentPaymentDetailView, self).get_context_data(**kwargs)
+        fee_by = StudentPaymentDetail.objects.filter(pk=self.kwargs['pk']).all()
+        # course = StudentPaymentDetail.objects.filter(pk=self.kwargs['pk'])
+        print(fee_by[0])
+        # if fee_by == "monthly_fee":
+        #     context['actual_amount'] = Courses.objects.filter(name =course[0]).values_list('monthly_fee',flat=True)
+        # elif fee_by == "yearly_fee":
+        #     context['actual_amount'] = Courses.objects.filter(name=course[0]).values_list('yearly_fee', flat=True)
+        # else:
+        #     context['actual_amount'] = Courses.objects.filter(name=course[0]).values_list('quarterly_fee', flat=True)
 
+        return context
+    # def get_queryset(self):
+    #         fee_by = StudentPaymentDetail.objects.filter(pk=self.kwargs['pk']).values_list('fee_by',flat=True)
+    #         print(fee_by)
+    #         return fee_by[0]
 
 class StudentPaymentUpdateView(LoginRequiredMixin,UpdateView):
     login_url = 'login'

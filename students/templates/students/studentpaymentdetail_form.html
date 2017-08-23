@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
-{% load bootstrap3 %}
+{% load widget_tweaks %}
 {% block title %}Student Payment Detail{% endblock %}
 
 {% block body_block %}
@@ -9,8 +8,7 @@
  <!--BEGIN TITLE & BREADCRUMB PAGE-->
              <div class="page-title-breadcrumb option-demo">
                 <div class="page-header">
-                <div class="page-title mrm">New Student</div>
-                <div class="page-subtitle"> Add new student to the institute</div>
+                <div class="page-title mrm">Student Payment Entry</div>
                 </div>
                 <hr>
                 <ol class="breadcrumb page-breadcrumb">
@@ -22,47 +20,88 @@
                 <div class="clearfix"> </div>
             </div>
 <!--END TITLE & BREADCRUMB PAGE-->
-   <div class="page-content">
-    <!-- <div class="panel-heading">Registration form</div>
-                                            <div class="panel-body pan">
-                                                <form method="POST" class="post-form">
-                                                    {% csrf_token %}
-
-                                                <div class="form-body pal">
-                                                    {% crispy form %}
-                                                     <button type="submit" class="save btn btn-default">Save</button>
-                                                </div>
-                                                </form>
-     </div>-->
-{% include "messages.html" %}
-     <div class="row">
-         <div class=" col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
-         <div class="panel panel-orange">
-            <div class="panel-heading">
-                Enroll New Student
-            </div>
-
-             <div class="panel-body pan">
-
-                <form method="POST" class="post-form">
-                    {% csrf_token %}
+    <div class="page-content">
+         {% include "messages.html" %}
+         <div class="module-wrapper masonry-item col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        
+             <section class="module">
+					<div class="module-inner">
+						<div class="module-heading">
+							<h3 class="module-title" style="text-align: center;font-weight: bold">Add student payment here.</h3>
+							<ul class="actions list-inline">
+								
+								<li><a class="collapse-module" data-toggle="collapse" href="#content-4" aria-expanded="false" aria-controls="content-4"><span aria-hidden="true" class="icon arrow_carrot-up"></span></a></li>
+								<li><a class="close-module" href="#"><span aria-hidden="true" class="icon icon_close"></span></a></li>
+							</ul>
+						</div>
+						<div class="module-content collapse in" id="content-4">
+							<div class="module-content-inner no-padding-bottom">
+								
+                    <form method="POST" class="post-form form-horizontal">
+                   {% csrf_token %}
                     <div class="form-body pal">
-                        {% bootstrap_form form %}
-                        {# {% form|bootstrap_horizontal %}#}
-                          <div class="form-actions text-right pal">
+
+
+
+                        {% for hidden in form.hidden_fields %}
+                          {{ hidden }}
+                        {% endfor %}
+                            {% if form.non_field_errors %}
+                                <div class="alert alert-danger" role="alert">
+                                  {% for error in form.non_field_errors %}
+                                    {{ error }}
+                                  {% endfor %}
+                                </div>
+                              {% endif %}
+                        {% for field in form.visible_fields %}
+                          <div class="form-group">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {% render_field field class="form-control" placeholder=field.name %}
+                            {% for error in field.errors %}
+                              <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                          </div>
+                        {% endfor %}
+
+
+
+
                     <!--<button type="submit" class="save btn btn-default">Save</button>-->
-                              <button type="submit" class=" save btn btn-primary">Submit</button>
-                        </div>
-                </form>
+                              <button type="submit" class=" save btn btn-primary">
+                                                        Submit</button>
+                        </form>
+							</div>
+						</div>
+					</div>
+                 </div>
+                 
+				</section>
+             
+             
+             
+             
+             
+             
+         </div>
+         
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+            
 
-             </div>
-        </div>
-        </div>
-     </div>
-
-
-{% include "footer.html" %}
 </div>
+{% include "footer.html" %}
+       
         {% include "loadscript.html" %}
         </div>
 {% endblock %}
+
+

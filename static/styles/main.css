@@ -7081,3 +7081,20 @@ div.error, tr.error {
     color: #a30000;
     background-color: #FFCCCC;
 }
+
+.content-panel {
+    background: #ffffff;
+    box-shadow: 0px 3px 2px #aab2bd;
+    padding-top: 15px;
+    padding-bottom: 5px;
+}
+.module {
+    border: 1px solid #f3f3f3;
+    border-bottom-width: 2px;
+    background: #fff;
+    margin-bottom: 30px;
+    position: relative;
+    border-radius: 4px;
+    background-clip: padding-box;
+}
+

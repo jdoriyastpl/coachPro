@@ -19,16 +19,16 @@
             </div>
 <!--END TITLE & BREADCRUMB PAGE-->
     <div class="page-content">
-        <div class="row" >
-        <div class="col-xs-8 col-xs-offset-2 col-md-8 col-md-offset-2">
-            <div class="panel panel-orange">
-            <div class="panel-heading">
+        
+        <div class="col-lg-12">
+             {% if students_list %}
+            <div class="content-panel">
+            <h4 style="text-align: center; font-weight: bold">
                 Student lists
-            </div>
-             <div class="panel-body pan">
-
-                        <table class="table table-hover">
-                            <thead>
+            </h4>
+                    <section id ='no-more-tables'>
+                        <table class="table table-bordered table-striped table-condensed cf">
+                            <thead class='cf'>
                             <tr>
                                 <th>Student Name</th>
                                 <th>Course Enrolled</th>
@@ -42,17 +42,18 @@
                               {% for student in students_list %}
                                 <tr>
                                   {# {{student.course_name.all.0.name}}#}
-                                    <td><a href="{% url 'students:detail' pk=student.pk %}">{{ student.name }}</a></td>
+                                    <td data-title='Student Name'><a href="{% url 'students:detail' pk=student.pk %}">{{ student.name }}</a></td>
                                     {# <td>{{student.course_name.all.0}}</td>#}
-                                    <td>{{student.course_name}}</td>
-                                    <td>{{ student.subject }}</td>
-                                    <td>{{ student.remark }}</td>
-                                    <td><a class="btn btn-primary" href="{% url 'students:student_edit' pk=student.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
-                                    <td><a class="btn btn-primary" href="{% url 'students:student_remove' pk=student.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
+                                    <td data-title='Course Enrolled'>{{student.course_name}}</td>
+                                    <td data-title='Student Subject'>{{ student.subject }}</td>
+                                    <td data-title='Remark'>{{ student.remark }}</td>
+                                    <td data-title='Update Profile'><a class="btn btn-primary" href="{% url 'students:student_edit' pk=student.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                                    <td data-title='Delete Student Record'><a class="btn btn-primary" href="{% url 'students:student_remove' pk=student.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
                                 </tr>
                                {% endfor %}
                             </tbody>
                         </table>
+                        </section>
                         {% if is_paginated %}
                             <ul class="pagination">
                               {% if page_obj.has_previous %}
@@ -74,10 +75,11 @@
                               {% endif %}
                             </ul>
                           {% endif %}
-                    </div>
                   </div>
+                {% else %}
+                <h4 style="text-align: center; font-weight: bold" > No Record found yet!</h4>
+                 {% endif %}
                </div>
-        </div>
      </div>
 {% include "footer.html" %}
         {% include "loadscript.html" %}

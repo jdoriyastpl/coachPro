@@ -7080,3 +7080,12 @@ div.error, tr.error {
     color: #a30000;
     background-color: #FFCCCC;
 }
+.module {
+    border: 1px solid #f3f3f3;
+    border-bottom-width: 2px;
+    background: #fff;
+    margin-bottom: 30px;
+    position: relative;
+    border-radius: 4px;
+    background-clip: padding-box;
+}

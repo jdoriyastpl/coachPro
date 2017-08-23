@@ -19,17 +19,17 @@
             </div>
 <!--END TITLE & BREADCRUMB PAGE-->
        <div class="page-content">
-        <div class="row" >
-        <div class="col-xs-8 col-xs-offset-2 col-md-8 col-md-offset-2">
+         <div class="col-lg-12">
+             {% if object_list %}
+            <div class="content-panel">
 
-            <div class="panel panel-orange">
-            <div class="panel-heading">
+            <h4 style="text-align: center; font-weight: bold">
                 Available Courses
-            </div>
-             <div class="panel-body pan">
+            </h4>
+            <section id ='no-more-tables'>
 
-                        <table class="table table-hover">
-                            <thead>
+                        <table class="table table-bordered table-striped table-condensed cf">
+                            <thead class='cf'>
                             <tr>
                                 <th>Course Name</th>
                                 <th>Course Monthly Fee</th>
@@ -42,19 +42,21 @@
                               {% for course in object_list %}
                                 <tr>
 
-                                    <td><a href="{% url 'courses:course_detail' pk=course.pk %}">{{ course.name }}</a></td>
-                                    <td>{{ course.monthly_fee }}</td>
-                                    <td>{{ course.quarterly_fee }}</td>
-                                    <td>{{course.yearly_fee}}</td>
-                                    <td><a class="btn btn-primary" href="{% url 'courses:course_edit' pk=course.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                                    <td data-title='Course Name'><a href="{% url 'courses:course_detail' pk=course.pk %}">{{ course.name }}</a></td>
+                                    <td data-title='Course Monthly Fee'>{{ course.monthly_fee }}</td>
+                                    <td data-title='Course Quarterly Fee'>{{ course.quarterly_fee }}</td>
+                                    <td data-title='Course Yearly Fee'>{{course.yearly_fee}}</td>
+                                    <td data-title='Edit Course'><a class="btn btn-primary" href="{% url 'courses:course_edit' pk=course.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
                                 </tr>
                                {% endfor %}
                             </tbody>
                        </table>
 
-                    </div>
-                  </div>
+                    </section>
                </div>
+               {% else %}
+                <h4 style="text-align: center; font-weight: bold" > No Record found yet!</h4>
+                 {% endif %}
         </div>
 
 {% include "footer.html" %}

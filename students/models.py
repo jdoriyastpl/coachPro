@@ -55,7 +55,7 @@ class StudentPaymentDetail(models.Model):
     fee_by = models.CharField(max_length=15, choices=FEE,blank=True,verbose_name="Choose fee options",default=FEE[0][0])
     student = models.CharField(max_length=200,blank=True)
     Student_Enrol_id = models.CharField(max_length=200)
-    course_name = models.ForeignKey(Courses,related_name='course_name')
+    course_name = models.ForeignKey(Courses,related_name='course')
     paid_amount = models.DecimalField(max_digits=20,decimal_places=2,null=False)
     payment_date = models.DateTimeField(default=timezone.now)
     next_payment_date = models.DateTimeField(default=timezone.now)
