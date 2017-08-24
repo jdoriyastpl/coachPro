@@ -26,7 +26,7 @@
                 {{ student_payment_details.student }} Payment Preview:
             </h4>
             <section id ='no-more-tables'>
-           
+
 
                         <table class="table table-bordered table-striped table-condensed cf">
                              <thead class='cf'>
@@ -38,7 +38,7 @@
                                 <th>Payment Date</th>
                                 <th>Next Payment Date</th>
                                 <th>Update</th>
-                                <th>Pdf file</th>
+                                <th>Payment Receipt</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -50,7 +50,7 @@
                                     <td data-title='Payment Date'>{{ student_payment_details.payment_date }}</td>
                                     <td data-title='Next Payment Date'>{{ student_payment_details.next_payment_date}}</td>
                                     <td data-title='Update'><a class="btn btn-primary" href="{% url 'students:payment_update' pk=student_payment_details.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
-                                    <td><a href="{% url 'students:display_pdf' pk=student_payment_details.pk %}" target="_blank">Pdf file</a></td>
+                                    <td><a href="{% url 'students:display_pdf' pk=student_payment_details.pk %}" target="_blank">Receipt</a></td>
                                     <!--  <td> Receipt.pdf</td>
                                   https://stackoverflow.com/questions/26805920/retrieve-related-objects-in-detailview-->
                                     <!--<td>{{object.course_name.monthly_fee}}</td>-->

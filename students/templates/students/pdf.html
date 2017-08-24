@@ -2,105 +2,119 @@
 
 <head>
     <title>
-        <style type="text/css">
-            body {
-                font-family: Helvetica, sans-serif;
-                color: #222;
-                line-height: 1.5;
-            }
-            
-            table {
-                width: 100%;
-                border-spacing: 0;
-                border-collapse: collapse;
-                margin: 20px 0;
-            }
-            
-            table th,
-            table td {
-                text-align: left;
-                font-size: 14px;
-                padding: 10px;
-                margin: 0;
-            }
-            
-            tbody tr:nth-child(odd) {
-                background: #efefef;
-            }
-            
-            thead th,
-            tbody tr.total {
-                background: #5993bb;
-                color: #fff;
-                font-weight: bold;
-            }
-            
-            h1 {
-                margin: 0;
-            }
-            
-            .secondary {
-                color: #bbb;
-                margin-bottom: 20px;
-            }
-            
-            .num {
-                text-align: right;
-            }
-            
-            .paid,
-            .pending {
-                color: #1bae37;
-                border: 4px solid #1bae37;
-                text-transform: uppercase;
-                font-weight: bold;
-                font-size: 22px;
-                padding: 12px;
-                float: right;
-                transform: rotate(-15deg);
-                margin-right: 40px;
-            }
-            
-            .pending {
-                color: #a82d2d;
-                border: 4px solid #a82d2d;
-            }
-        </style>
+
     </title>
+    <style type="text/css">
+        body {
+            font-family: Helvetica, sans-serif;
+            color: #222;
+            line-height: 1.5;
+        }
+
+        table {
+            width: 100%;
+            border-spacing: 0;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th,
+        table td {
+            text-align: left;
+            font-size: 14px;
+            padding: 10px;
+            margin: 0;
+        }
+
+        tbody tr:nth-child(odd) {
+            background: #efefef;
+        }
+
+        thead th,
+        tbody tr.total {
+            background: #5993bb;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .secondary {
+            color: #bbb;
+            margin-bottom: 20px;
+        }
+
+        .num {
+            text-align: right;
+        }
+
+        .table {
+          border: 1px solid;
+           margin: 0 auto;
+           width: 70%;
+          }
+
+        .table-bordered {
+              border: 1px solid #ddd;
+          }
+
+        .paid {
+            color: #1bae37;
+            border: 4px solid #1bae37;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 22px;
+            padding: 12px;
+            float: right;
+            transform: rotate(-15deg);
+            margin-right: 40px;
+        }
+
+        .pending {
+            color: #a82d2d;
+            border: 4px solid #a82d2d;
+        }
+    </style>
 </head>
 
 <body>
     <h1>My Shop</h1>
-    <p> Invoice nr. {{ student_detail.Student_Enrol_id }}</br> <span class="secondary">{{ order.created|date:"M d, Y" }}</span> </p>
-    <h3>Bill to</h3>
-    <p> {{ student_detail.student }}
-        <br> {{ order.email }}
-        <br> {{ order.address }}
-        <br> {{ order.postal_code }}, {{ order.city }} </p>
-    <h3>Items bought</h3>
-    <table>
+    <p>Student ID. {{ student_detail.Student_Enrol_id }}</br> <span class="secondary">Billing Date:{{ student_detail.created_date|date:"M d, Y" }}</span> </p>
+
+    <h3>Detail</h3>
+    <table class='table table-bordered'>
         <thead>
             <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Cost</th>
+                <th>Course Enrolled</th>
+                <th>Fee By</th>
+                <th>Amount Paid</th>
+                <th>Payment Date</th>
+                <th>Next Payment Date</th>
             </tr>
         </thead>
-        <tbody> {% for item in order.items.all %}
+        <tbody>
             <tr class="row{% cycle " 1 " "2 " %}">
-                <td>{{ item.product.name }}</td>
-                <td class="num">${{ item.price }}</td>
-                <td class="num">{{ item.quantity }}</td>
-                <td class="num">${{ item.get_cost }}</td>
-            </tr> {% endfor %}
+                <td>{{ student_detail.course_name }}</td>
+                <td class="num">{{ student_detail.fee_by }}</td>
+                <td class="num">Rs{{ student_detail.paid_amount }}</td>
+                <td class="num">{{ student_detail.created_date|date:"M d, Y"   }}</td>
+                <td>{{student_detail.next_payment_date|date:"M d, Y" }}</td>
+            </tr>
             <tr class="total">
-                <td colspan="3">Total</td>
-                <td class="num">${{ total_paid_amount }}</td>
+                <td colspan="3">Total Paid</td>
+                <td class="num">Rs{{ total_paid_amount.paid_amount__sum }}</td>
+            </tr>
+            <tr class="total">
+                <td colspan="3">Actual Course Amount ({{ student_detail.fee_by }})</td>
+                <td class="num">Rs{{ student_detail.course_name.monthly_fee }}</td>
+                <td colspan="3">Due Amount</td>
+                <td class="num">Rs{{ student_detail.course_name.monthly_fee }}-{{ total_paid_amount.paid_amount__sum }}</td>
             </tr>
         </tbody>
-    </table> <span class="{% if order.paid %}paid{% else %}pending{% endif %}">
-        {% if order.paid %}Paid{% else %}Pending payment{% endif %}
+    </table> <span class="paid">
+      Paid
     </span> </body>
 
 </html>
