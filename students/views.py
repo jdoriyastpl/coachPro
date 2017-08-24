@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from students.models import Students,StudentPaymentDetail
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy,reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from students.forms import StudentForm,StudentPaymentDetailForm
 from django.utils import timezone
@@ -118,6 +118,11 @@ class StudentPaymentDetailView(LoginRequiredMixin,DetailView):
     model = StudentPaymentDetail
     template_name = 'students/payment_preview.html'
 
+    def get_form_kwargs(self):
+        kwargs = super(StudentPaymentDetailView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super(StudentPaymentDetailView, self).get_context_data(**kwargs)
         fee_by = StudentPaymentDetail.objects.filter(pk=self.kwargs['pk']).all()
@@ -149,7 +154,10 @@ class StudentPaymentUpdateView(LoginRequiredMixin,UpdateView):
     #         messages.error(self.request,"Student Id is not matching with our records, Please verify again")
     #         return self.form_invalid(form)
 
-
+    def get_form_kwargs(self):
+        kwargs = super(StudentPaymentUpdateView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
 class StudentPaymentHistoryListView(LoginRequiredMixin,ListView):
     login_url = 'login'
@@ -184,11 +192,17 @@ def search_student(request):
 
 @login_required()
 def generate_payment_receipt(request,pk):
-    student_detail = get_object_or_404(StudentPaymentDetail,Student_Enrol_id=pk)
+    student_detail = get_object_or_404(StudentPaymentDetail,pk=pk)
     total_paid_amount = StudentPaymentDetail.objects.filter(pk=pk).aggregate(Sum('paid_amount'))
     print(total_paid_amount)
-    html = render_to_string('students/pdf.html', {'student_detail': student_detail,'total_paid_amount':total_paid_amount})
+    html = render_to_string('students/pdf.html', {'student_detail':student_detail,'total_paid_amount':total_paid_amount})
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'filename="order_{}.pdf"'.format(student_detail)
+    response['Content-Disposition'] = 'filename="mypdf.pdf"'
     weasyprint.HTML(string=html).write_pdf(response)
     return response
+
+
+def display_pdf(request,pk):
+    generate_payment_receipt(request,pk)
+    # return  redirect('students:payment_preview', pk=pk)
+    return '<a href="{}">PDF</a>'.format(reverse('students:payment_preview', args=pk))
