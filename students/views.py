@@ -5,9 +5,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from students.forms import StudentForm,StudentPaymentDetailForm
 from django.utils import timezone
 from django.contrib import messages
+from django.template.loader import render_to_string
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from courses.models import  Courses
+from django.db.models import Sum
+import weasyprint
+from django.conf import settings
+from django.http import HttpResponse
 from students.signals import pending_payment
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import (View,TemplateView,ListView,
@@ -74,7 +79,13 @@ class StudentPaymentCreateView(LoginRequiredMixin,CreateView):
     template_name = 'students/studentpaymentdetail_form.html'
     redirect_field_name = 'students/paymentHistoryList_form.html'
 
+    def get_form_kwargs(self):
+        kwargs = super(StudentPaymentCreateView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
     def form_valid(self,form):
+        form.instance.user = self.request.user
         student = form.cleaned_data.get('Student_Enrol_id')
         print("My student id is"+student)
         if Students.objects.filter(student_Id=student).filter(user=self.request.user).count() > 0:
@@ -100,10 +111,7 @@ class StudentPaymentCreateView(LoginRequiredMixin,CreateView):
         #     print("yes we are passed")
         #     pending_payment.send(sender=StudentPaymentDetail,student=student)
         return super(StudentPaymentCreateView,self).form_valid(form)
-    # def get_form_kwargs(self):
-    #     kwargs = super(StudentPaymentCreateView, self).get_form_kwargs()
-    #     kwargs['user'] = self.request.user
-    #     return kwargs
+
 class StudentPaymentDetailView(LoginRequiredMixin,DetailView):
     context_object_name = 'student_payment_details'
     login_url = 'login'
@@ -173,3 +181,14 @@ def search_student(request):
             Q(Student_Enrol_id__icontains=query)
             )
     return render(request,'students/ajax_search.html',{'students':queryset})
+
+@login_required()
+def generate_payment_receipt(request,pk):
+    student_detail = get_object_or_404(StudentPaymentDetail,Student_Enrol_id=pk)
+    total_paid_amount = StudentPaymentDetail.objects.filter(pk=pk).aggregate(Sum('paid_amount'))
+    print(total_paid_amount)
+    html = render_to_string('students/pdf.html', {'student_detail': student_detail,'total_paid_amount':total_paid_amount})
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="order_{}.pdf"'.format(student_detail)
+    weasyprint.HTML(string=html).write_pdf(response)
+    return response

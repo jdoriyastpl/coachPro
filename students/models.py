@@ -46,7 +46,7 @@ class Students(models.Model):
 
 
 class StudentPaymentDetail(models.Model):
-    # user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
     FEE = (
         ('monthly_fee','Monthly'),
         ('quarterly_fee','Quarterly'),
@@ -66,7 +66,7 @@ class StudentPaymentDetail(models.Model):
 
     def get_absolute_url(self):
        return reverse("students:payment_preview",kwargs={'pk':self.pk})
-       # return reverse("students:student_payment_history",kwargs={'Student_Enrol_id':self.Student_Enrol_id})
+    #    return reverse("students:student_payment_history",kwargs={'Student_Enrol_id':self.Student_Enrol_id})
 
 @receiver(post_save,sender=StudentPaymentDetail)
 def update_student_name(sender,created,**kwargs):

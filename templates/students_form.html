@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+<!--{% load crispy_forms_tags %}
+{% load bootstrap3 %}-->
+{% block body_block %}
+ <div id="page-wrapper">
+<!--BEGIN TITLE & BREADCRUMB PAGE-->
+             <div class="page-title-breadcrumb option-demo">
+                <div class="page-header">
+                <div class="page-title mrm">New Student</div>
+                <div class="page-subtitle"> Add new student to the institute</div>
+                </div>
+                <hr>
+                <ol class="breadcrumb page-breadcrumb">
+                <li>
+                <i class="fa fa-home"></i>
+                <a href="{% url 'home' %}">Home</a>
+
+                </ol>
+                <div class="clearfix"> </div>
+            </div>
+<!--END TITLE & BREADCRUMB PAGE-->
+ <div class="page-content">
+     <div class="row">
+         {% include "messages.html" %}
+         <div class="module-wrapper masonry-item col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        
+             <section class="module">
+					<div class="module-inner">
+						<div class="module-heading">
+							<h3 class="module-title" style="text-align: center;font-weight: bold">Add new student to the institute here.</h3>
+							<ul class="actions list-inline">
+								
+								<li><a class="collapse-module" data-toggle="collapse" href="#content-4" aria-expanded="false" aria-controls="content-4"><span aria-hidden="true" class="icon arrow_carrot-up"></span></a></li>
+								<li><a class="close-module" href="#"><span aria-hidden="true" class="icon icon_close"></span></a></li>
+							</ul>
+						</div>
+						<div class="module-content collapse in" id="content-4">
+							<div class="module-content-inner no-padding-bottom">
+								
+                    <form method="POST" class="post-form form-horizontal">
+                   {% csrf_token %}
+                    <div class="form-body pal">
+
+
+
+                        {% for hidden in form.hidden_fields %}
+                          {{ hidden }}
+                        {% endfor %}
+                            {% if form.non_field_errors %}
+                                <div class="alert alert-danger" role="alert">
+                                  {% for error in form.non_field_errors %}
+                                    {{ error }}
+                                  {% endfor %}
+                                </div>
+                              {% endif %}
+                        {% for field in form.visible_fields %}
+                          <div class="form-group">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {% render_field field class="form-control" placeholder=field.name %}
+                            {% for error in field.errors %}
+                              <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                          </div>
+                        {% endfor %}
+
+
+
+
+                    <!--<button type="submit" class="save btn btn-default">Save</button>-->
+                              <button type="submit" class=" save btn btn-primary">
+                                                        Submit</button>
+                        </form>
+							</div>
+						</div>
+					</div>
+                 </div>
+                 
+				</section>
+             
+             
+             
+             
+             
+             
+         </div>
+         
+             
+             
+             
+             
+             
+             
+             
+             
+             
+             
+        </div>     
+             
+            
+
+</div>
+{% include "footer.html" %}
+       
+        {% include "loadscript.html" %}
+        </div>
+{% endblock %}

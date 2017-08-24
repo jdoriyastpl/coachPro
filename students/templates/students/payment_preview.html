@@ -19,17 +19,17 @@
             </div>
 <!--END TITLE & BREADCRUMB PAGE-->
     <div class="page-content">
-            <div class="col-lg-12">
-            <div class="content-panel">
+        <div class="row" >
+        <div class="col-xs-8 col-xs-offset-2 col-md-8 col-md-offset-2">
 
-            <h4 style="text-align: center; font-weight: bold">
+            <div class="panel panel-orange">
+            <div class="panel-heading">
                 {{ student_payment_details.student }} Payment Preview:
-            </h4>
-            <section id ='no-more-tables'>
-           
+            </div>
+             <div class="panel-body pan">
 
-                        <table class="table table-bordered table-striped table-condensed cf">
-                             <thead class='cf'>
+                        <table class="table table-hover">
+                            <thead>
                             <tr>
                                 <th>Student Name</th>
                                 <th>Course Enrolled</th>
@@ -43,17 +43,21 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td data-title='Student Name'>{{ student_payment_details.Student_Enrol_id }}</td>
-                                    <td data-title='Course Enrolled'>{{student_payment_details.course_name}}</td>
-                                    <td data-title='Paid Amount'>{{ student_payment_details.paid_amount }}</td>
-                                    <td data-title='Pay By'>{{student_payment_details.fee_by}}</td>
-                                    <td data-title='Payment Date'>{{ student_payment_details.payment_date }}</td>
-                                    <td data-title='Next Payment Date'>{{ student_payment_details.next_payment_date}}</td>
-                                    <td data-title='Update'><a class="btn btn-primary" href="{% url 'students:payment_update' pk=student_payment_details.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
-                                    <td data-title='Pdf file'>{{actual_amount}}</td>
+                                    <td>{{ student_payment_details.Student_Enrol_id }}</td>
+                                    <td>{{student_payment_details.course_name}}</td>
+                                    <td>{{ student_payment_details.paid_amount }}</td>
+                                    <td>{{student_payment_details.fee_by}}</td>
+                                    <td>{{ student_payment_details.payment_date }}</td>
+                                    <td>{{ student_payment_details.next_payment_date}}</td>
+                                    <td><a class="btn btn-primary" href="{% url 'students:payment_update' pk=student_payment_details.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                                    <td>Pdf file</td>
+                                    <!--  <td> Receipt.pdf</td>
+                                  https://stackoverflow.com/questions/26805920/retrieve-related-objects-in-detailview-->
+                                    <!--<td>{{object.course_name.monthly_fee}}</td>-->
                                 </tr>
                             </tbody>
                         </table>
+                 <a class="btn btn-primary" href="{% url 'students:generate_receipt' pk=student_payment_details.pk %}">Generate PDF</a>
 
 
 
@@ -80,6 +84,8 @@
                     {% endif %}
                         </div>
                     </div>
+               </div>
+        </div>
 
 {% include "footer.html" %}
      </div>

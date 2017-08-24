@@ -28,6 +28,9 @@ class StudentPaymentDetailForm(forms.ModelForm):
         model = StudentPaymentDetail
         fields = ['Student_Enrol_id','course_name','paid_amount','fee_by','payment_date','next_payment_date']
 
+    def __init__(self, user, *args, **kwargs):
+        super(StudentPaymentDetailForm, self).__init__(*args, **kwargs)
+        self.fields['course_name'].queryset = Courses.objects.filter(user=user)
     # # def __init__(self, *args, **kwargs):
     #         super(StudentPaymentDetailForm, self).__init__(*args, **kwargs)
     #         self.fields["payment_date"]= DateField(input_formats=settings.DATE_INPUT_FORMATS)
