@@ -6,36 +6,36 @@
         #main {
             padding: 12px;
         }
-        
+
         .offset-margin {
             margin-top: -10px;
         }
-        
+
         td {
             padding-left: 10px;
         }
-        
+
         .description {
             min-height: 120px;
             margin-bottom: 90px;
         }
-        
+
         .blank {
             border-top: solid 1px #eee;
             border-left: solid 1px #eee;
             min-height: 120px;
             padding: 0px !important;
         }
-        
+
         .panel-body {
             padding-bottom: 0 !important;
         }
-        
+
         .content {
             margin-top: 40px;
             padding-bottom: 20px !important;
         }
-        
+
         .table {
             margin-bottom: 0px !important;
         }
@@ -120,17 +120,17 @@
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <label>Total Amount Paid:</label><span class="pull-right">Rs{{ total_paid_amount.paid_amount__sum }}</span></td>
+                                                            <label>Total Amount Paid:</label><span class="pull-right">Rs{{ total_paid_amount }}</span></td>
                                                     </tr>
                                                     <tr style="background-color:#eee;">
                                                         <td>
-                                                            <label>Amount Due:</label><span class="pull-left">Rs{{ student_detail.course_name.monthly_fee }}-{{ total_paid_amount.paid_amount__sum }}</span></td>
+                                                            <label>Amount Due:</label><span class="pull-left">Rs{{ due_amount }}</span></td>
                                                     </tr>
                                                 </tbody>
-                                            </table> 
+                                            </table>
                                             <span class="paid">
                                                   Paid
-                                            </span> 
+                                            </span>
                                         </div>
                                     </div>
                                     <!--row-->

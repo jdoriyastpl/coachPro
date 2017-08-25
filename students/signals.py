@@ -13,6 +13,6 @@ from django.dispatch import Signal
 
 # # In signals.py
 
-pending_payment = Signal(providing_args=["student","user"])
+pending_payment = Signal(providing_args=["student","user","due_amount","due_amount_date"])
 #
 #

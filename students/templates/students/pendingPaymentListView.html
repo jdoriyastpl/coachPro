@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block title %}Defaulter Students{% endblock %}
+
+{% block body_block %}
+ <div id="page-wrapper">
+      <!--BEGIN TITLE & BREADCRUMB PAGE-->
+             <div class="page-title-breadcrumb option-demo">
+                <div class="page-header">
+                <div class="page-title mrm">Defaulter Students</div>
+                </div>
+                <hr>
+                <ol class="breadcrumb page-breadcrumb">
+                <li>
+                <i class="fa fa-home"></i>
+                <a href="{% url 'home' %}">Home</a>
+
+                </ol>
+                <div class="clearfix"> </div>
+            </div>
+<!--END TITLE & BREADCRUMB PAGE-->
+    <div class="page-content">
+    <div class="col-lg-12">
+         {% if object_list %}
+            <div class="content-panel">
+
+            <h4 style="text-align: center; font-weight: bold">
+                Default List:
+            </h4>
+            <section id ='no-more-tables'>
+
+
+                        <table class="table table-bordered table-striped table-condensed cf">
+                             <thead class='cf'>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Due Amount</th>
+                                <th>Due Amount Date</th>
+                            </thead>
+                            <tbody>
+                              {% for studentRecords in object_list %}
+                                <tr>
+                                    <td data-title='Student Name'>{{ studentRecords.student }}</td>
+                                    <td data-title='Paid Amount'>{{ studentRecords.due_amount }}</td>
+                                    <td data-title='Course Enrolled'>{{ studentRecords.next_payment_date }}</td>
+                                </tr>
+                               {% endfor %}
+                            </tbody>
+                        </table>
+
+
+
+                  {% if is_paginated %}
+                      <ul class="pagination pull-right">
+                        {% if page_obj.has_previous %}
+                          <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                        {% else %}
+                          <li class="disabled"><span>&laquo;</span></li>
+                        {% endif %}
+                        {% for i in paginator.page_range %}
+                          {% if page_obj.number == i %}
+                            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                          {% else %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                          {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                          <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                        {% else %}
+                          <li class="disabled"><span>&raquo;</span></li>
+                        {% endif %}
+                      </ul>
+                    {% endif %}
+                        </div>
+                {% else %}
+                <h4 style="text-align: center; font-weight: bold" > No Record found yet!</h4>
+                 {% endif %}
+                    </div>
+{% include "footer.html" %}
+     </div>
+        {% include "loadscript.html" %}
+
+</div>
+
+
+{% endblock %}

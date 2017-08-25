@@ -81,7 +81,11 @@ def update_student_name(sender,created,**kwargs):
 class SendNotification(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     student = models.ForeignKey(Students)
+    # course = models.ForeignKey(Courses)
     is_payment_pending = models.BooleanField(default=False)
+    due_amount = models.DecimalField(max_digits=20,decimal_places=2,null=False)
+    created_date = models.DateTimeField(default=timezone.now)
+    next_payment_date = models.DateTimeField()
 
     def __str__(self):
         return self.student.name

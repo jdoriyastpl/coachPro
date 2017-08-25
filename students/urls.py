@@ -18,4 +18,5 @@ urlpatterns =[
     url(r'^payment/history/(?P<Student_Enrol_id>.+?)/$', views.StudentPaymentHistoryListView.as_view(),name='student_payment_history'),
     # url(r'^history/(?P<student>\w+)$', views.StudentPaymentHistoryListView.as_view(),name='student_payment_history'),
     url(r'^course/',include('courses.urls',namespace='course')),
+    url(r'^defaulter/lists/$',views.PendingStudentListView.as_view(),name='defaulters'),
 ]

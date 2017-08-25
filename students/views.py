@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from students.models import Students,StudentPaymentDetail
+from students.models import Students,StudentPaymentDetail,SendNotification
 from django.urls import reverse_lazy,reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from students.forms import StudentForm,StudentPaymentDetailForm
@@ -194,15 +194,15 @@ def search_student(request):
 def generate_payment_receipt(request,pk):
     student_detail = StudentPaymentDetail.objects.get(pk=pk)
     print(student_detail)
-    total_paid_amount = StudentPaymentDetail.objects.filter(Student_Enrol_id=student_detail.Student_Enrol_id).aggregate(Sum('paid_amount'))
-    print(total_paid_amount.get('paid_amount__sum')[0])
+    total_paid_amount = StudentPaymentDetail.objects.filter(Student_Enrol_id=student_detail.Student_Enrol_id).aggregate(Sum('paid_amount')).get('paid_amount__sum',0.00)
+    print(total_paid_amount)
     # total_paid_amount = StudentPaymentDetail.objects.filter(student=student[0]).aggregate(Sum('paid_amount'))
     actual_course_amount = Courses.objects.filter(name=student_detail.course_name).values_list('monthly_fee',flat=True)
-    print("asdsadsad")
-    print(actual_course_amount)
-    dueAmount = actual_course_amount - total_paid_amount.get('paid_amount__sum')[0].value()
+    print("actual amount is below")
+    print(actual_course_amount[0])
+    dueAmount = actual_course_amount[0] - total_paid_amount
 
-    html = render_to_string('students/pdf.html', {'student_detail':student_detail,'total_paid_amount':total_paid_amount})
+    html = render_to_string('students/pdf.html', {'student_detail':student_detail,'total_paid_amount':total_paid_amount,'due_amount':dueAmount})
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'filename="mypdf.pdf"'
     weasyprint.HTML(string=html).write_pdf(response)
@@ -222,5 +222,9 @@ def display_pdf(request,pk):
 # I encourage you to try it if you have to automate receipts generation for orders, it does not take a lot of resources to generate a file, and depending on your template complexity, it's really fast.
     return '<a href="{}">PDF</a>'.format(reverse('students:payment_preview', args=pk))
 
-# class PendingStudentListView(LoginRequiredMixin,ListView):
-
+class PendingStudentListView(LoginRequiredMixin,ListView):
+    template_name ='students/pendingPaymentListView.html'
+    model = SendNotification
+    paginate_by = 15
+    def get_queryset(self):
+        return SendNotification.objects.filter(created_date__lte=timezone.now()).filter(user = self.request.user).order_by('-created_date')
