@@ -195,7 +195,13 @@ def generate_payment_receipt(request,pk):
     student_detail = StudentPaymentDetail.objects.get(pk=pk)
     print(student_detail)
     total_paid_amount = StudentPaymentDetail.objects.filter(Student_Enrol_id=student_detail.Student_Enrol_id).aggregate(Sum('paid_amount'))
-    print(total_paid_amount)
+    print(total_paid_amount.get('paid_amount__sum')[0])
+    # total_paid_amount = StudentPaymentDetail.objects.filter(student=student[0]).aggregate(Sum('paid_amount'))
+    actual_course_amount = Courses.objects.filter(name=student_detail.course_name).values_list('monthly_fee',flat=True)
+    print("asdsadsad")
+    print(actual_course_amount)
+    dueAmount = actual_course_amount - total_paid_amount.get('paid_amount__sum')[0].value()
+
     html = render_to_string('students/pdf.html', {'student_detail':student_detail,'total_paid_amount':total_paid_amount})
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'filename="mypdf.pdf"'
@@ -215,3 +221,6 @@ def display_pdf(request,pk):
 # In order to not have to keep generating the PDF each time the user access the page, you will now store it in the database.
 # I encourage you to try it if you have to automate receipts generation for orders, it does not take a lot of resources to generate a file, and depending on your template complexity, it's really fast.
     return '<a href="{}">PDF</a>'.format(reverse('students:payment_preview', args=pk))
+
+# class PendingStudentListView(LoginRequiredMixin,ListView):
+

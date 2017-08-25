@@ -1,65 +1,44 @@
 <html>
 
 <head>
-    <title>
-
-    </title>
+    <title> </title>
     <style type="text/css">
-        body {
-            font-family: Helvetica, sans-serif;
-            color: #222;
-            line-height: 1.5;
+        #main {
+            padding: 12px;
         }
-
-        table {
-            width: 100%;
-            border-spacing: 0;
-            border-collapse: collapse;
-            margin: 20px 0;
+        
+        .offset-margin {
+            margin-top: -10px;
         }
-
-        table th,
-        table td {
-            text-align: left;
-            font-size: 14px;
-            padding: 10px;
-            margin: 0;
+        
+        td {
+            padding-left: 10px;
         }
-
-        tbody tr:nth-child(odd) {
-            background: #efefef;
+        
+        .description {
+            min-height: 120px;
+            margin-bottom: 90px;
         }
-
-        thead th,
-        tbody tr.total {
-            background: #5993bb;
-            color: #fff;
-            font-weight: bold;
+        
+        .blank {
+            border-top: solid 1px #eee;
+            border-left: solid 1px #eee;
+            min-height: 120px;
+            padding: 0px !important;
         }
-
-        h1 {
-            margin: 0;
+        
+        .panel-body {
+            padding-bottom: 0 !important;
         }
-
-        .secondary {
-            color: #bbb;
-            margin-bottom: 20px;
+        
+        .content {
+            margin-top: 40px;
+            padding-bottom: 20px !important;
         }
-
-        .num {
-            text-align: right;
-        }
-
+        
         .table {
-          border: 1px solid;
-           margin: 0 auto;
-           width: 70%;
-          }
-
-        .table-bordered {
-              border: 1px solid #ddd;
-          }
-
+            margin-bottom: 0px !important;
+        }
         .paid {
             color: #1bae37;
             border: 4px solid #1bae37;
@@ -71,50 +50,97 @@
             transform: rotate(-15deg);
             margin-right: 40px;
         }
-
-        .pending {
-            color: #a82d2d;
-            border: 4px solid #a82d2d;
-        }
     </style>
 </head>
 
 <body>
-    <h1>My Shop</h1>
-    <p>Student ID. {{ student_detail.Student_Enrol_id }}</br> <span class="secondary">Billing Date:{{ student_detail.created_date|date:"M d, Y" }}</span> </p>
-
-    <h3>Detail</h3>
-    <table class='table table-bordered'>
-        <thead>
-            <tr>
-                <th>Course Enrolled</th>
-                <th>Fee By</th>
-                <th>Amount Paid</th>
-                <th>Payment Date</th>
-                <th>Next Payment Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="row{% cycle " 1 " "2 " %}">
-                <td>{{ student_detail.course_name }}</td>
-                <td class="num">{{ student_detail.fee_by }}</td>
-                <td class="num">Rs{{ student_detail.paid_amount }}</td>
-                <td class="num">{{ student_detail.created_date|date:"M d, Y"   }}</td>
-                <td>{{student_detail.next_payment_date|date:"M d, Y" }}</td>
-            </tr>
-            <tr class="total">
-                <td colspan="3">Total Paid</td>
-                <td class="num">Rs{{ total_paid_amount.paid_amount__sum }}</td>
-            </tr>
-            <tr class="total">
-                <td colspan="3">Actual Course Amount ({{ student_detail.fee_by }})</td>
-                <td class="num">Rs{{ student_detail.course_name.monthly_fee }}</td>
-                <td colspan="3">Due Amount</td>
-                <td class="num">Rs{{ student_detail.course_name.monthly_fee }}-{{ total_paid_amount.paid_amount__sum }}</td>
-            </tr>
-        </tbody>
-    </table> <span class="paid">
-      Paid
-    </span> </body>
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8 col-lg-offset-2">
+            <div class="panel panel-default main">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <h3>From</h3>
+                            <p>John Doe</p>
+                            <p class="offset-margin">713 Crescent Dr</p>
+                            <p class="offset-margin">Suite 9-2136</p>
+                            <p class="offset-margin">Los Angeles CA 90210</p>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <h1>Invoice</h1> </div>
+                    </div>
+                    <!--row-->
+                    <hr>
+                    <div class="row">
+                        <div class="col-lg-9 col-md-9 col-sm-9">
+                            <h3>To</h3>
+                            <p>Student ID. {{ student_detail.Student_Enrol_id }}</p>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <p>
+                                <label>Invoice#:</label> 00013</p>
+                            <p>
+                                <label>Invoice Date:</label> {{ student_detail.created_date|date:"M d, Y" }}</p>
+                            <p>
+                                <label>Due Date:</label> {{student_detail.next_payment_date|date:"M d, Y" }}</p>
+                        </div>
+                    </div>
+                    <!--row-->
+                    <div class="row">
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 content">
+                            <div class="panel panel-default">
+                                <!--<div class="panel-heading">-->
+                                <!--    <h1 class="panel-title">Invoice Details</h1>-->
+                                <!--</div>-->
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class=" col-lg-12 col-md-12 col-sm-12 description">
+                                            <table class="table table bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Course Enrolled</th>
+                                                        <th>Actual Course Amount ({{ student_detail.fee_by }})</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td> {{ student_detail.course_name }}</td>
+                                                        <td>Rs{{ student_detail.course_name.monthly_fee }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-lg-8 pull-left" style="border-top:solid #ddd 1px;"></div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 pull-right blank">
+                                            <table class="table table bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <label>Total:</label><span class="pull-right">Rs{{ student_detail.paid_amount }}</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label>Total Amount Paid:</label><span class="pull-right">Rs{{ total_paid_amount.paid_amount__sum }}</span></td>
+                                                    </tr>
+                                                    <tr style="background-color:#eee;">
+                                                        <td>
+                                                            <label>Amount Due:</label><span class="pull-left">Rs{{ student_detail.course_name.monthly_fee }}-{{ total_paid_amount.paid_amount__sum }}</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table> 
+                                            <span class="paid">
+                                                  Paid
+                                            </span> 
+                                        </div>
+                                    </div>
+                                    <!--row-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </html>

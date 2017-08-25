@@ -22,7 +22,7 @@ class StudentForm(forms.ModelForm):
     #     return cleaned_data
 
 class StudentPaymentDetailForm(forms.ModelForm):
-    actual_amount = forms.DecimalField(max_digits=20,decimal_places=2)
+    # actual_amount = forms.DecimalField(max_digits=20,decimal_places=2)
 
     class Meta:
         model = StudentPaymentDetail
