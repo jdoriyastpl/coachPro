@@ -24,13 +24,13 @@ class ChartData(APIView):
     permission_classes = []
 
     def get(self, request, format=None):
-        courses = Courses.objects.values_list('name',flat=True)
+        courses = Courses.objects.values_list('name',flat=True).filter(user=self.request.user)
         # print(courses[0].)
         # print(len(courses))
 
         no_students = []
         for item in range(len(courses)):
-            no_std = Courses.objects.filter(name=courses[item]).annotate(student_count=Count('student_course'))
+            no_std = Courses.objects.filter(name=courses[item]).filter(user=self.request.user).annotate(student_count=Count('student_course'))
             print("asdasdsad")
             print(no_std[0].student_count)
             no_students.append(no_std[0].student_count)
