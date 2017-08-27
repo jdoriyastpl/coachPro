@@ -23,7 +23,7 @@
 
     <link href="{% static 'css/bootstrap3/bootstrap.min.css' %}" rel='stylesheet' type='text/css'>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js'></script>
 
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
     <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
@@ -37,11 +37,8 @@
     <link type="text/css" rel="stylesheet" href="{% static 'styles/zabuto_calendar.min.css' %}">
     <link type="text/css" rel="stylesheet" href="{% static 'styles/pace.css'%}">
     <link type="text/css" rel="stylesheet" href="{% static 'styles/jquery.news-ticker.css'%}">
-
-
-
-
-</head>
+  
+  </head>
 
 <body>
     <div id="header-topbar-option-demo" class="page-header-topbar">
@@ -112,6 +109,7 @@
         {% include "navigation.html" %} {% block body_block %} {% endblock %}
 
     </div>
+
 </body>
 
 </html>

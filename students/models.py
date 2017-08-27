@@ -9,7 +9,9 @@ from django.core.validators import MaxValueValidator
 from django.conf import settings
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.core.validators import RegexValidator
 
+PHONE_REGEX ='^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$'
 # Create your models here.
 User = settings.AUTH_USER_MODEL
 d = datetime.today()
@@ -19,15 +21,22 @@ class Students(models.Model):
     name = models.CharField(max_length=200)
     student_Id = models.CharField(max_length=200,default="STU"+str(d.year)+str(d.month)+''.join(stdlib_random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(6)))
     created_date = models.DateTimeField(default=timezone.now)
-    remark = models.TextField(blank=True, null=True)
+    # remark = models.TextField(blank=True, null=True)
     subject = models.CharField(max_length=150)
+    phone_number = models.PositiveIntegerField(
+                validators=[
+                RegexValidator(
+                regex = PHONE_REGEX,
+                message = 'Phone Number should be valid of 10 digits only',
+                code='invalid_phone_number'
+                )])
     age = models.PositiveIntegerField(null= False,verbose_name="Student Age")
     father_name = models.CharField(max_length=200)
     address1 = models.CharField(max_length=255,null=False)
     address2 = models.CharField(max_length=255,null=False)
     city = models.CharField(max_length=80,null=False)
     state = models.CharField(max_length=80,null=False)
-    adhaar_number =models.CharField(max_length=255,null=False)
+    adhaar_number =models.CharField(max_length=255,null=False,blank=True)
     picture = models.ImageField(null=True,
                                 blank=True,
                                 default='students/img/default.png',

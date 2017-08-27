@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     # 'bootstrap3_datetime',
     'widget_tweaks',
+    'phonenumber_field',
+    'datetimewidget',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

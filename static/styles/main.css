@@ -7077,7 +7077,7 @@ div.messages {
     border: 1px solid #adb4bc;
     padding: 0.5em 1em;
 }
-div.error, tr.error {
+div.error, tr.error .error{
     color: #a30000;
     background-color: #FFCCCC;
 }

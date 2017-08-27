@@ -3,11 +3,16 @@ from students.models import Students,StudentPaymentDetail
 from courses.models import Courses
 from django.utils import timezone
 from django.conf import settings
-
+from datetimewidget.widgets import DateTimeWidget
+dateTimeOptions = {
+'format': 'dd/mm/yyyy HH:ii P',
+'autoclose': True,
+'showMeridian' : True
+}
 class StudentForm(forms.ModelForm):
     class Meta:
         model = Students
-        fields = ['name','course_name','subject','remark','picture','age','father_name','address1','address2','city','state','adhaar_number']
+        fields = ['name','course_name','subject','phone_number','picture','age','father_name','address1','address2','city','state','adhaar_number']
 
     def __init__(self, user, *args, **kwargs):
         super(StudentForm, self).__init__(*args, **kwargs)
@@ -28,6 +33,10 @@ class StudentPaymentDetailForm(forms.ModelForm):
         model = StudentPaymentDetail
         fields = ['Student_Enrol_id','course_name','paid_amount','fee_by','payment_date','next_payment_date']
 
+        # widgets = {
+        #     'payment_date': forms.DateInput(attrs={'class':'datepicker'}),
+        #     'next_payment_date': forms.DateInput(attrs={'class':'datepicker'}),
+        # }
     def __init__(self, user, *args, **kwargs):
         super(StudentPaymentDetailForm, self).__init__(*args, **kwargs)
         self.fields['course_name'].queryset = Courses.objects.filter(user=user)

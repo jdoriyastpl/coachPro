@@ -187,7 +187,7 @@ def search_student(request):
         queryset = queryset.filter(
             Q(name__icontains=query)|
             Q(Student_Enrol_id__icontains=query)
-            )
+            ).distinct()
     return render(request,'students/ajax_search.html',{'students':queryset})
 
 @login_required()

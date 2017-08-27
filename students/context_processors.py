@@ -18,19 +18,34 @@ def pending_payment_count(request):
                 # student_detail = StudentPaymentDetail.objects.get(student=student[0])
                 print("ffsdfgddgdf")
                 # print(student_detail)
-                total_paid_amount = StudentPaymentDetail.objects.filter(student=student[0]).aggregate(Sum('paid_amount')).get('paid_amount__sum',0.00)
-                actual_course_amount = Courses.objects.filter(name=student[0].course_name).values_list('monthly_fee',flat=True)
+
                 course =student[0].course_name
                 print(course)
-                due_amount = actual_course_amount[0] - total_paid_amount
+
                 print(len(last_expected_payment_dates))
                 print(last_expected_payment_dates)
                 if len(last_expected_payment_dates)==0:
                     pass
+                elif len(last_expected_payment_dates)==1:
+                    last_expected_payment_date = last_expected_payment_dates[0]
+                    if datetime.now() >=last_expected_payment_date:
+                        print("Student Payment is pending")
+                        total_paid_amount = StudentPaymentDetail.objects.filter(student=student[0]).aggregate(Sum('paid_amount')).get('paid_amount__sum',0.00)
+                        actual_course_amount = Courses.objects.filter(name=student[0].course_name).values_list('monthly_fee',flat=True)
+                        due_amount = actual_course_amount[0] - total_paid_amount
+                        try:
+                            SendNotification.objects.get(student=student[0])
+                        except SendNotification.DoesNotExist:
+                            pending_payment.send(sender=StudentPaymentDetail,student=student[0],user=user,due_amount=due_amount,due_amount_date=last_expected_payment_date)
+                            Pending_students = SendNotification.objects.filter(is_payment_pending=True).count()
+                            return {'Pending_students': Pending_students}
                 elif len(last_expected_payment_dates)>1:
                     last_expected_payment_date = last_expected_payment_dates[1]
                     if datetime.now() >=last_expected_payment_date:
                         print("Student Payment is pending")
+                        total_paid_amount = StudentPaymentDetail.objects.filter(student=student[0]).aggregate(Sum('paid_amount')).get('paid_amount__sum',0.00)
+                        actual_course_amount = Courses.objects.filter(name=student[0].course_name).values_list('monthly_fee',flat=True)
+                        due_amount = actual_course_amount[0] - total_paid_amount
                         try:
                             SendNotification.objects.get(student=student[0])
                         except SendNotification.DoesNotExist:

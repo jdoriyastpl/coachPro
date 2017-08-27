@@ -24,20 +24,20 @@
      <div class="row">
          {% include "messages.html" %}
          <div class="module-wrapper masonry-item col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        
+
              <section class="module">
 					<div class="module-inner">
 						<div class="module-heading">
 							<h3 class="module-title" style="text-align: center;font-weight: bold">Add new student to the institute here.</h3>
 							<ul class="actions list-inline">
-								
+
 								<li><a class="collapse-module" data-toggle="collapse" href="#content-4" aria-expanded="false" aria-controls="content-4"><span aria-hidden="true" class="icon arrow_carrot-up"></span></a></li>
 								<li><a class="close-module" href="#"><span aria-hidden="true" class="icon icon_close"></span></a></li>
 							</ul>
 						</div>
 						<div class="module-content collapse in" id="content-4">
 							<div class="module-content-inner no-padding-bottom">
-								
+
                     <form method="POST" class="post-form form-horizontal">
                    {% csrf_token %}
                     <div class="form-body pal">
@@ -59,7 +59,7 @@
                             <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                             {% render_field field class="form-control" placeholder=field.name %}
                             {% for error in field.errors %}
-                              <span class="help-block">{{ error }}</span>
+                              <span class="help-block error">{{ error }}</span>
                             {% endfor %}
                           </div>
                         {% endfor %}
@@ -75,33 +75,33 @@
 						</div>
 					</div>
                  </div>
-                 
+
 				</section>
-             
-             
-             
-             
-             
-             
+
+
+
+
+
+
          </div>
-         
-             
-             
-             
-             
-             
-             
-             
-             
-             
-             
-        </div>     
-             
-            
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+
 
 </div>
 {% include "footer.html" %}
-       
+
         {% include "loadscript.html" %}
         </div>
 {% endblock %}
