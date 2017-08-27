@@ -10,9 +10,9 @@ $(function () {
             $('div.sidebar-collapse').removeClass('collapse');
             $('div.sidebar-collapse').css('height', 'auto');
         }
-        if($('body').hasClass('sidebar-icons')){
+        if ($('body').hasClass('sidebar-icons')) {
             $('#menu-toggle').hide();
-        } else{
+        } else {
             $('#menu-toggle').show();
         }
     });
@@ -26,7 +26,7 @@ $(function () {
     //END TOPBAR DROPDOWN
 
     //BEGIN CHECKBOX & RADIO
-    if($('#demo-checkbox-radio').length <= 0){
+    if ($('#demo-checkbox-radio').length <= 0) {
         $('input[type="checkbox"]:not(".switch")').iCheck({
             checkboxClass: 'icheckbox_minimal-grey',
             increaseArea: '20%' // optional
@@ -47,8 +47,8 @@ $(function () {
     //END POPOVER
 
     //BEGIN THEME SETTING
-    $('#theme-setting > a.btn-theme-setting').click(function(){
-        if($('#theme-setting').css('right') < '0'){
+    $('#theme-setting > a.btn-theme-setting').click(function () {
+        if ($('#theme-setting').css('right') < '0') {
             $('#theme-setting').css('right', '0');
         } else {
             $('#theme-setting').css('right', '-250px');
@@ -60,37 +60,37 @@ $(function () {
     var list_color = $('#theme-setting > .content-theme-setting > ul#list-color > li');
     // FUNCTION CHANGE URL STYLE ON HEAD TAG
     var setTheme = function (style, color) {
-        $.cookie('style',style);
-        $.cookie('color',color);
-        $('#theme-change').attr('href', 'css/themes/'+ style + '/' + color + '.css');
+        $.cookie('style', style);
+        $.cookie('color', color);
+        $('#theme-change').attr('href', 'css/themes/' + style + '/' + color + '.css');
     }
     // INITIALIZE THEME FROM COOKIE
     // HAVE TO SET VALUE FOR STYLE&COLOR BEFORE AND AFTER ACTIVE THEME
     if ($.cookie('style')) {
-        list_style.find('option').each(function(){
-            if($(this).attr('value') == $.cookie('style')) {
+        list_style.find('option').each(function () {
+            if ($(this).attr('value') == $.cookie('style')) {
                 $(this).attr('selected', 'selected');
             }
         });
         list_color.removeClass("active");
-        list_color.each(function(){
-            if($(this).attr('data-color') == $.cookie('color')){
+        list_color.each(function () {
+            if ($(this).attr('data-color') == $.cookie('color')) {
                 $(this).addClass('active');
             }
         });
         setTheme($.cookie('style'), $.cookie('color'));
     };
     // SELECT EVENT
-    list_style.on('change', function() {
-        list_color.each(function() {
-            if($(this).hasClass('active')){
-                color_active  = $(this).attr('data-color');
+    list_style.on('change', function () {
+        list_color.each(function () {
+            if ($(this).hasClass('active')) {
+                color_active = $(this).attr('data-color');
             }
         });
         setTheme($(this).val(), color_active);
     });
     // LI CLICK EVENT
-    list_color.on('click', function() {
+    list_color.on('click', function () {
         list_color.removeClass('active');
         $(this).addClass('active');
         setTheme(list_style.val(), $(this).attr('data-color'));
@@ -99,10 +99,10 @@ $(function () {
     //END THEME SETTING
 
     //BEGIN FULL SCREEN
-    $('.btn-fullscreen').click(function() {
+    $('.btn-fullscreen').click(function () {
 
-        if (!document.fullscreenElement &&    // alternative standard method
-            !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {  // current working methods
+        if (!document.fullscreenElement && // alternative standard method
+            !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) { // current working methods
             if (document.documentElement.requestFullscreen) {
                 document.documentElement.requestFullscreen();
             } else if (document.documentElement.msRequestFullscreen) {
@@ -128,29 +128,29 @@ $(function () {
 
     // BEGIN FORM CHAT
     $('.btn-chat').click(function () {
-        if($('#chat-box').is(':visible')){
+        if ($('#chat-box').is(':visible')) {
             $('#chat-form').toggle('slide', {
                 direction: 'right'
             }, 500);
             $('#chat-box').hide();
-        } else{
+        } else {
             $('#chat-form').toggle('slide', {
                 direction: 'right'
             }, 500);
         }
     });
-    $('.chat-box-close').click(function(){
+    $('.chat-box-close').click(function () {
         $('#chat-box').hide();
         $('#chat-form .chat-group a').removeClass('active');
     });
-    $('.chat-form-close').click(function(){
+    $('.chat-form-close').click(function () {
         $('#chat-form').toggle('slide', {
             direction: 'right'
         }, 500);
         $('#chat-box').hide();
     });
 
-    $('#chat-form .chat-group a').unbind('*').click(function(){
+    $('#chat-form .chat-group a').unbind('*').click(function () {
         $('#chat-box').hide();
         $('#chat-form .chat-group a').removeClass('active');
         $(this).addClass('active');
@@ -160,13 +160,13 @@ $(function () {
         $('#chat-box > .chat-box-header > span.user-status').removeClass().addClass(userStatus);
         var chatBoxStatus = $('span.user-status', '#chat-box');
         var chatBoxStatusShow = $('#chat-box > .chat-box-header > small');
-        if(chatBoxStatus.hasClass('is-online')){
+        if (chatBoxStatus.hasClass('is-online')) {
             chatBoxStatusShow.html('Online');
-        } else if(chatBoxStatus.hasClass('is-offline')){
+        } else if (chatBoxStatus.hasClass('is-offline')) {
             chatBoxStatusShow.html('Offline');
-        } else if(chatBoxStatus.hasClass('is-busy')){
+        } else if (chatBoxStatus.hasClass('is-busy')) {
             chatBoxStatusShow.html('Busy');
-        } else if(chatBoxStatus.hasClass('is-idle')){
+        } else if (chatBoxStatus.hasClass('is-idle')) {
             chatBoxStatusShow.html('Idle');
         }
 
@@ -176,14 +176,16 @@ $(function () {
         var h_title = $("#chat-box > .chat-box-header").height();
         var top = ($('#chat-box').is(':visible') ? (offset.top - h_title - 40) : (offset.top + h_title - 20));
 
-        if((top + $('#chat-box').height()) > h_main){
-            top = h_main - 	$('#chat-box').height();
+        if ((top + $('#chat-box').height()) > h_main) {
+            top = h_main - $('#chat-box').height();
         }
 
-        $('#chat-box').css({'top': top});
+        $('#chat-box').css({
+            'top': top
+        });
 
-        if(!$('#chat-box').is(':visible')){
-            $('#chat-box').toggle('slide',{
+        if (!$('#chat-box').is(':visible')) {
+            $('#chat-box').toggle('slide', {
                 direction: 'right'
             }, 500);
         }
@@ -192,7 +194,7 @@ $(function () {
         $("#chat-box .chat-textarea input").focus();
     });
     // Add content to form
-    $('.chat-textarea input').on("keypress", function(e){
+    $('.chat-textarea input').on("keypress", function (e) {
 
         var $obj = $(this);
         var $me = $obj.parent().parent().find('ul.chat-box-body');
@@ -208,40 +210,40 @@ $(function () {
                 if (m < 10) m = "0" + m;
                 $obj.val(""); // CLEAR TEXT ON TEXTAREA
 
-                var $element = ""; 
+                var $element = "";
                 $element += "<li>";
                 $element += "<p>";
-                $element += "<img class='avt' src='"+$my_avt+"'>";
+                $element += "<img class='avt' src='" + $my_avt + "'>";
                 $element += "<span class='user'>John Doe</span>";
                 $element += "<span class='time'>" + h + ":" + m + "</span>";
                 $element += "</p>";
-                $element = $element + "<p>" + $content +  "</p>";
+                $element = $element + "<p>" + $content + "</p>";
                 $element += "</li>";
-                
+
                 $me.append($element);
                 var height = 0;
-                $me.find('li').each(function(i, value){
+                $me.find('li').each(function (i, value) {
                     height += parseInt($(this).height());
                 });
 
                 height += '';
                 //alert(height);
-                $me.scrollTop(height);  // add more 400px for #chat-box position      
+                $me.scrollTop(height); // add more 400px for #chat-box position      
 
                 // RANDOM RESPOND CHAT
 
                 var $res = "";
                 $res += "<li class='odd'>";
                 $res += "<p>";
-                $res += "<img class='avt' src='"+$your_avt+"'>";
+                $res += "<img class='avt' src='" + $your_avt + "'>";
                 $res += "<span class='user'>Swlabs</span>";
                 $res += "<span class='time'>" + h + ":" + m + "</span>";
                 $res += "</p>";
                 $res = $res + "<p>" + "Yep! It's so funny :)" + "</p>";
                 $res += "</li>";
-                setTimeout(function(){
+                setTimeout(function () {
                     $me.append($res);
-                    $me.scrollTop(height+100); // add more 500px for #chat-box position             
+                    $me.scrollTop(height + 100); // add more 500px for #chat-box position             
                 }, 1000);
             }
         }
@@ -249,30 +251,26 @@ $(function () {
     // END FORM CHAT
 
     //BEGIN PORTLET
-    $(".portlet").each(function(index, element) {
+    $(".portlet").each(function (index, element) {
         var me = $(this);
-        $(">.portlet-header>.tools>i", me).click(function(e){
-            if($(this).hasClass('fa-chevron-up')){
+        $(">.portlet-header>.tools>i", me).click(function (e) {
+            if ($(this).hasClass('fa-chevron-up')) {
                 $(">.portlet-body", me).slideUp('fast');
                 $(this).removeClass('fa-chevron-up').addClass('fa-chevron-down');
-            }
-            else if($(this).hasClass('fa-chevron-down')){
+            } else if ($(this).hasClass('fa-chevron-down')) {
                 $(">.portlet-body", me).slideDown('fast');
                 $(this).removeClass('fa-chevron-down').addClass('fa-chevron-up');
-            }
-            else if($(this).hasClass('fa-cog')){
+            } else if ($(this).hasClass('fa-cog')) {
                 //Show modal
-            }
-            else if($(this).hasClass('fa-refresh')){
+            } else if ($(this).hasClass('fa-refresh')) {
                 //$(">.portlet-body", me).hide();
                 $(">.portlet-body", me).addClass('wait');
 
-                setTimeout(function(){
+                setTimeout(function () {
                     //$(">.portlet-body>div", me).show();
                     $(">.portlet-body", me).removeClass('wait');
                 }, 1000);
-            }
-            else if($(this).hasClass('fa-times')){
+            } else if ($(this).hasClass('fa-times')) {
                 me.remove();
             }
         });
@@ -280,21 +278,23 @@ $(function () {
     //END PORTLET
 
     //BEGIN BACK TO TOP
-    $(window).scroll(function(){
+    $(window).scroll(function () {
         if ($(this).scrollTop() < 200) {
-            $('#totop') .fadeOut();
+            $('#totop').fadeOut();
         } else {
-            $('#totop') .fadeIn();
+            $('#totop').fadeIn();
         }
     });
-    $('#totop').on('click', function(){
-        $('html, body').animate({scrollTop:0}, 'fast');
+    $('#totop').on('click', function () {
+        $('html, body').animate({
+            scrollTop: 0
+        }, 'fast');
         return false;
     });
     //END BACK TO TOP
 
     //BEGIN CHECKBOX TABLE
-    $('.checkall').on('ifChecked ifUnchecked', function(event) {
+    $('.checkall').on('ifChecked ifUnchecked', function (event) {
         if (event.type == 'ifChecked') {
             $(this).closest('table').find('input[type=checkbox]').iCheck('check');
         } else {
@@ -310,22 +310,22 @@ $(function () {
     });
     //END JQUERY NEWS UPDATE
 
-    $('.option-demo').hover(function() {
+    $('.option-demo').hover(function () {
         $(this).append("<div class='demo-layout animated fadeInUp'><i class='fa fa-magic mrs'></i>Demo</div>");
-    }, function() {
+    }, function () {
         $('.demo-layout').remove();
     });
-    $('#header-topbar-page .demo-layout').live('click', function() {
+    $('#header-topbar-page .demo-layout').live('click', function () {
         var HtmlOption = $(this).parent().detach();
-        $('#header-topbar-option-demo').html(HtmlOption).addClass('animated flash').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+        $('#header-topbar-option-demo').html(HtmlOption).addClass('animated flash').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
             $(this).removeClass('animated flash');
         });
         $('#header-topbar-option-demo').find('.demo-layout').remove();
         return false;
     });
-    $('#title-breadcrumb-page .demo-layout').live('click', function() {
+    $('#title-breadcrumb-page .demo-layout').live('click', function () {
         var HtmlOption = $(this).parent().html();
-        $('#title-breadcrumb-option-demo').html(HtmlOption).addClass('animated flash').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+        $('#title-breadcrumb-option-demo').html(HtmlOption).addClass('animated flash').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
             $(this).removeClass('animated flash');
         });
         $('#title-breadcrumb-option-demo').find('.demo-layout').remove();
@@ -335,36 +335,3 @@ $(function () {
     fakewaffle.responsiveTabs(['xs', 'sm']);
 
 });
-
-
-// Ajax Search by Mike Hibbert Youtube tuts
-
-$(function(){
-  
-  $('#topbar-search').keyup(function(){
-    
-    $.ajax({
-        
-        type: "POST",
-        url:"/students/search/",
-        data:{
-            'search_text': $('#topbar-search').val(),
-            'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val()
-        },
-        success: searchSuccess,
-        dataType:'html'
-    });
-});
-  
-  });
-
-function searchSuccess (data,textStatus,jqXHR){
-    $('#search-results').html(data);
-}
- $(function () {
-                                        $("#q").keyup(function (event) {
-                                            if (event.which === 13) {
-                                                location.href = "/search/";
-                                            }
-                                        }
-                                    });
