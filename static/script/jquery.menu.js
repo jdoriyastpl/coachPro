@@ -71,6 +71,7 @@ $(function () {
             setChart()
         },
         error: function (error_data) {
+            $("#chart-data").hide();
             console.log("error")
             //                console.log(error_data)
         }
@@ -144,8 +145,10 @@ $(function () {
             setChart()
         },
         error: function (error_data) {
+            $("#chart-data").hide();
             console.log("error")
-            //                console.log(error_data)
+            console.log(error_data)
+            
         }
     })
 

@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.db.models import Count,Sum
+from rest_framework.permissions import IsAuthenticated
 
 class IndexView(LoginRequiredMixin,TemplateView):
     login_url = 'login'
@@ -21,7 +22,7 @@ class IndexView(LoginRequiredMixin,TemplateView):
 
 class ChartData(APIView,LoginRequiredMixin):
     authentication_classes = []
-    permission_classes = []
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
         print(request.user)
@@ -48,7 +49,7 @@ class ChartData(APIView,LoginRequiredMixin):
 
 class getRevenueData(APIView):
         authentication_classes = []
-        permission_classes = []
+        permission_classes = [IsAuthenticated]
 
         def get(self, request, format=None):
             print(request.user)
