@@ -19,18 +19,19 @@ class IndexView(LoginRequiredMixin,TemplateView):
         return context
 
 
-class ChartData(APIView):
+class ChartData(APIView,LoginRequiredMixin):
     authentication_classes = []
     permission_classes = []
 
     def get(self, request, format=None):
-        courses = Courses.objects.values_list('name',flat=True).filter(user=self.request.user)
+        print(request.user)
+        courses = Courses.objects.values_list('name',flat=True)
         # print(courses[0].)
         # print(len(courses))
 
         no_students = []
         for item in range(len(courses)):
-            no_std = Courses.objects.filter(name=courses[item]).filter(user=self.request.user).annotate(student_count=Count('student_course'))
+            no_std = Courses.objects.filter(name=courses[item]).annotate(student_count=Count('student_course'))
             print("asdasdsad")
             print(no_std[0].student_count)
             no_students.append(no_std[0].student_count)
