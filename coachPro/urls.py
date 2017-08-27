@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^home/$',views.IndexView.as_view(),name='home'),
     url(r'^$', init_view ,name='login'),
     url(r'^api/courses/data/$', views.ChartData.as_view(),name='api-data'),
+    url(r'^api/course/revenue/data/$', views.getRevenueData.as_view(),name='api-course-revenue-data'),
     url(r'adminPro/',include('adminPro.urls',namespace='adminPro')),
     url(r'^student/',include('students.urls',namespace='student')),
     url(r'^course/',include('courses.urls',namespace='course')),
