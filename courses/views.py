@@ -28,6 +28,7 @@ class CoursesCreateView(LoginRequiredMixin,CreateView):
 
 
 class CoursesListView(LoginRequiredMixin,ListView):
+    login_url = 'login'
     model = Courses
     paginate_by = 10
     def get_queryset(self):

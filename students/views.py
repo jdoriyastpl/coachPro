@@ -36,6 +36,7 @@ class StudentsCreateView(LoginRequiredMixin,CreateView):
         return kwargs
 
 class StudentsListView(LoginRequiredMixin,ListView):
+    login_url = 'login'
     model = Students
     paginate_by = 15
     def get_queryset(self):
@@ -223,6 +224,7 @@ def display_pdf(request,pk):
     return '<a href="{}">PDF</a>'.format(reverse('students:payment_preview', args=pk))
 
 class PendingStudentListView(LoginRequiredMixin,ListView):
+    login_url = 'login'
     template_name ='students/pendingPaymentListView.html'
     model = SendNotification
     paginate_by = 15
