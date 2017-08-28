@@ -1,7 +1,6 @@
 {% extends "base.html" %}
-{% load crispy_forms_tags %}
+{% load widget_tweaks %}
 {% block title %}{{ title }}{% endblock %}
-{% load bootstrap3 %}
 
 {% block body_block %}
 
@@ -24,17 +23,45 @@
 <!--END TITLE & BREADCRUMB PAGE-->
 
  <div class="page-content">
-  <form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    <br>
-	<input class="btn btn-success" type="submit" value='{{ title }}'>&nbsp; &nbsp;
-    {% if request.path == "/adminPro/login/" %}
-    Don't Have an Account <a href="{% url 'adminPro:register' %}">Register Here.</a>
-    {% else %}
-    Have an Account <a href="{% url 'adminPro:login' %}">Login Here.</a>
-    {% endif %}
-</form>
+ {% include "messages.html" %}
+   <form method="POST" class="post-form form-horizontal" enctype="multipart/form-data">
+  {% csrf_token %}
+   <div class="form-body pal">
+
+
+
+       {% for hidden in form.hidden_fields %}
+         {{ hidden }}
+       {% endfor %}
+           {% if form.non_field_errors %}
+               <div class="alert alert-danger" role="alert">
+                 {% for error in form.non_field_errors %}
+                   {{ error }}
+                 {% endfor %}
+               </div>
+             {% endif %}
+       {% for field in form.visible_fields %}
+         <div class="form-group">
+           <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+           {% render_field field class="form-control" placeholder=field.name %}
+           {% for error in field.errors %}
+             <span class="help-block">{{ error }}</span>
+           {% endfor %}
+         </div>
+       {% endfor %}
+
+
+
+
+   <!--<button type="submit" class="save btn btn-default">Save</button>-->
+   <input class="btn btn-success" type="submit" value='{{ title }}'>&nbsp; &nbsp;
+     {% if request.path == "/adminPro/login/" %}
+     Don't Have an Account <a href="{% url 'adminPro:register' %}">Register Here.</a>
+     {% else %}
+     Have an Account <a href="{% url 'adminPro:login' %}">Login Here.</a>
+     {% endif %}
+       </form>
+
 
      {% include "footer.html" %}
       </div>

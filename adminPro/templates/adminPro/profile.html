@@ -21,6 +21,7 @@
             </div>
 <!--END TITLE & BREADCRUMB PAGE-->
  <div class="page-content">
+    {% include "messages.html" %}
     <div class="row">
         <div class="col-sm-10"><h1>{{ user_profile.first_name }} {{ user_profile.last_name }}</h1><hr>
         <b>Email: </b><a href="mailto:#">{{ user_profile.email }}</a><br>

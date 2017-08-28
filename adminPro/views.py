@@ -45,6 +45,7 @@ def register_view(request): # Creates a New Account & login New users
             user.save()
             new_user = authenticate(email=user.email, password=password)
             login(request, new_user)
+            messages.success(request, 'You are registered successfully, now manage with ease!')
             return redirect("home")
 
         context = {"title":title, "form":form}

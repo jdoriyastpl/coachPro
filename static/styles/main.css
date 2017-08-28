@@ -7077,6 +7077,11 @@ div.messages {
     border: 1px solid #adb4bc;
     padding: 0.5em 1em;
 }
+div.success, tr.success .success{
+    color: #ffffff;
+    background-color: #5cb85c;
+}
+
 div.error, tr.error .error{
     color: #a30000;
     background-color: #FFCCCC;
