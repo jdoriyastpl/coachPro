@@ -10,7 +10,7 @@
 <!--BEGIN TITLE & BREADCRUMB PAGE-->
             <div class="page-title-breadcrumb option-demo">
                <div class="page-header">
-               <div class="page-title mrm">{{ title }}</div>
+               <div class="page-title mrm">{{ title|title  }} Admin profile</div>
                </div>
                <hr>
                <ol class="breadcrumb page-breadcrumb">
@@ -31,7 +31,7 @@
 </form>
 
 {% include "footer.html" %}
-</div>
+     </div>
    {% include "loadscript.html" %}
    </div>
 {% endblock %}

@@ -20,7 +20,7 @@ def pending_payment_count(request):
                 # print(student_detail)
 
                 course =student[0].course_name
-                print(course)
+                # print(course)
 
                 print(len(last_expected_payment_dates))
                 print(last_expected_payment_dates)
@@ -29,29 +29,33 @@ def pending_payment_count(request):
                 elif len(last_expected_payment_dates)==1:
                     last_expected_payment_date = last_expected_payment_dates[0]
                     if datetime.now() >=last_expected_payment_date:
-                        print("Student Payment is pending")
+                        print("line 32")
                         total_paid_amount = StudentPaymentDetail.objects.filter(student=student[0]).aggregate(Sum('paid_amount')).get('paid_amount__sum',0.00)
                         actual_course_amount = Courses.objects.filter(name=student[0].course_name).values_list('monthly_fee',flat=True)
                         due_amount = actual_course_amount[0] - total_paid_amount
                         try:
                             SendNotification.objects.get(student=student[0])
+                            print("line 38")
                         except SendNotification.DoesNotExist:
+                            print("line 40")
                             pending_payment.send(sender=StudentPaymentDetail,student=student[0],user=user,due_amount=due_amount,due_amount_date=last_expected_payment_date)
                             Pending_students = SendNotification.objects.filter(is_payment_pending=True).count()
                             return {'Pending_students': Pending_students}
                 elif len(last_expected_payment_dates)>1:
                     last_expected_payment_date = last_expected_payment_dates[1]
                     if datetime.now() >=last_expected_payment_date:
-                        print("Student Payment is pending")
+                        print("line 45")
                         total_paid_amount = StudentPaymentDetail.objects.filter(student=student[0]).aggregate(Sum('paid_amount')).get('paid_amount__sum',0.00)
                         actual_course_amount = Courses.objects.filter(name=student[0].course_name).values_list('monthly_fee',flat=True)
                         due_amount = actual_course_amount[0] - total_paid_amount
-                        try:
-                            SendNotification.objects.get(student=student[0])
-                        except SendNotification.DoesNotExist:
-                            pending_payment.send(sender=StudentPaymentDetail,student=student[0],user=user,due_amount=due_amount,due_amount_date=last_expected_payment_date)
-                            Pending_students = SendNotification.objects.filter(is_payment_pending=True).count()
-                            return {'Pending_students': Pending_students}
+                        # try:
+                        #     print("line 50")
+                        #     SendNotification.objects.get(student=student[0])
+                        # except SendNotification.DoesNotExist:
+                        print("line 53")
+                        pending_payment.send(sender=StudentPaymentDetail,student=student[0],user=user,due_amount=due_amount,due_amount_date=last_expected_payment_dates[0])
+                        Pending_students = SendNotification.objects.filter(is_payment_pending=True).count()
+                        return {'Pending_students': Pending_students}
         # not_viewed = SendNotification.objects.filter(user=user, viewed=False).count()
         # Pending_students = SendNotification.objects.filter(is_payment_pending=True).count()
 

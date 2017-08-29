@@ -47,14 +47,11 @@
                 <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
                 <a id="logo" href="#" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">Administrator</span><span style="display: none" class="logo-text-icon">µ</span></a></div>
             <div class="topbar-main"><a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
-                <form id="topbar-search" action="" method="GET" class="hidden-sm hidden-xs">
+                <form id="topbar-search" action="{% url 'students:student_search_result' %}" method="GET" class="hidden-sm hidden-xs" accept-charset="utf-8">
 
                     <div class="input-icon right text-white"><a href="{% url 'students:student_search_result' %}"><i class="fa fa-search"></i></a>
-                    <input type="text" id="q" placeholder="Search" name='q' class="form-control text-white" />
+                    <input type="text" id="qa" placeholder="Search" name='q' class="form-control text-white" />
 
-                                <script>
-
-                                </script>
                   </div>
                 </form>
                 <ul class="nav navbar navbar-top-links navbar-right mbn">

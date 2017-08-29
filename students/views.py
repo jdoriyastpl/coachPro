@@ -11,6 +11,7 @@ from datetime import datetime
 from courses.models import  Courses
 from django.db.models import Sum
 import weasyprint
+from django.db.models import Q
 from django.conf import settings
 from django.http import HttpResponse
 from students.signals import pending_payment
@@ -29,7 +30,13 @@ class StudentsCreateView(LoginRequiredMixin,CreateView):
 
     def form_valid(self,form):
         form.instance.user = self.request.user
-        return super(StudentsCreateView,self).form_valid(form)
+        phone = form.cleaned_data['phone_number']
+        if Students.objects.filter(phone_number=phone).filter(user=form.instance.user).count() > 0:
+            messages.error(self.request,'This Student is already added into system, Please search box')
+            return super(StudentsCreateView, self).form_invalid(form)
+        else:
+            return super(StudentsCreateView,self).form_valid(form)
+        # return super(StudentsCreateView,self).form_valid(form)
     def get_form_kwargs(self):
         kwargs = super(StudentsCreateView, self).get_form_kwargs()
         kwargs['user'] = self.request.user
@@ -184,11 +191,10 @@ class StudentPaymentHistoryListView(LoginRequiredMixin,ListView):
 def search_student(request):
     queryset= Students.objects.filter(user = request.user)
     query = request.GET.get("q")
+    print("line 193")
+    print(query)
     if query:
-        queryset = queryset.filter(
-            Q(name__icontains=query)|
-            Q(Student_Enrol_id__icontains=query)
-            ).distinct()
+        queryset = queryset.filter(Q(name__icontains=query)| Q(student_Id__icontains=query))
     return render(request,'students/ajax_search.html',{'students':queryset})
 
 @login_required()
