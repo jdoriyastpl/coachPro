@@ -229,4 +229,9 @@ class PendingStudentListView(LoginRequiredMixin,ListView):
     model = SendNotification
     paginate_by = 15
     def get_queryset(self):
-        return SendNotification.objects.filter(created_date__lte=timezone.now()).filter(user = self.request.user).order_by('-created_date')
+        return SendNotification.objects.filter(created_date__lte=timezone.now()).filter(user = self.request.user).filter(is_payment_pending=True).order_by('-created_date')
+
+def remove_pending_status(request,pk):
+    pending_status = get_object_or_404(SendNotification,pk=pk)
+    pending_status.remove_pending_status()
+    return redirect('students:defaulters')

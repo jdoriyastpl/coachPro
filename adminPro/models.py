@@ -7,7 +7,7 @@ from django.urls import reverse
 # Create your models here.
 USERNAME_REGEX = '^[a-zA-Z0-9.+-]*$'
 NAME_REGEX = '^[a-zA-Z]*$'
-
+PHONE_REGEX ='^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$'
 
 class User(AbstractUser):
     username = models.CharField(max_length=256, unique=True, blank=False,
@@ -43,6 +43,8 @@ class User(AbstractUser):
                                 width_field="width_field",
                                 verbose_name="profile picture"
                                 )
+    institute_name = models.CharField(max_length=256,blank=False)
+    address = models.CharField(max_length=256,blank=True)
     height_field = models.IntegerField(default=600, null=True)
     width_field = models.IntegerField(default=600, null=True)
     USERNAME_FIELD = 'email' # use email to log in

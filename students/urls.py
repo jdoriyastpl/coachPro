@@ -19,4 +19,5 @@ urlpatterns =[
     # url(r'^history/(?P<student>\w+)$', views.StudentPaymentHistoryListView.as_view(),name='student_payment_history'),
     url(r'^course/',include('courses.urls',namespace='course')),
     url(r'^defaulter/lists/$',views.PendingStudentListView.as_view(),name='defaulters'),
+    url(r'^defaulter/(?P<pk>\d+)/$',views.remove_pending_status,name='remove_pending_status')
 ]

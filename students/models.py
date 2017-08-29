@@ -98,3 +98,9 @@ class SendNotification(models.Model):
 
     def __str__(self):
         return self.student.name
+
+    def remove_pending_status(self):
+        self.is_payment_pending=False
+        self.save()
+
+    

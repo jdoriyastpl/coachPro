@@ -35,6 +35,7 @@
                                 <th>Student Name</th>
                                 <th>Due Amount</th>
                                 <th>Due Amount Date</th>
+                                <th>Remove Student</th>
                             </thead>
                             <tbody>
                               {% for studentRecords in object_list %}
@@ -42,6 +43,7 @@
                                     <td data-title='Student Name'>{{ studentRecords.student }}</td>
                                     <td data-title='Paid Amount'>{{ studentRecords.due_amount }}</td>
                                     <td data-title='Course Enrolled'>{{ studentRecords.next_payment_date }}</td>
+                                    <td data-title='Remove Status'><a href="{% url 'students:remove_pending_status' pk=studentRecords.pk %}">Remove</a></td>
                                 </tr>
                                {% endfor %}
                             </tbody>
