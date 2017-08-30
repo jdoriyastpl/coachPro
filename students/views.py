@@ -11,6 +11,7 @@ from datetime import datetime
 from courses.models import  Courses
 from django.db.models import Sum
 import weasyprint
+from adminPro.models import User
 from django.db.models import Q
 from django.conf import settings
 from django.http import HttpResponse
@@ -45,7 +46,7 @@ class StudentsCreateView(LoginRequiredMixin,CreateView):
 class StudentsListView(LoginRequiredMixin,ListView):
     login_url = 'login'
     model = Students
-    paginate_by = 15
+    paginate_by = 18
     def get_queryset(self):
         return Students.objects.filter(created_date__lte=timezone.now()).filter(user = self.request.user).order_by('-created_date')
 
@@ -172,7 +173,7 @@ class StudentPaymentHistoryListView(LoginRequiredMixin,ListView):
     model = StudentPaymentDetail
     form_class = StudentPaymentDetailForm
     template_name = 'students/paymentHistoryList_form.html'
-    paginate_by = 15
+    paginate_by = 10
 
     def get_queryset(self):
         filter =self.kwargs['Student_Enrol_id']
@@ -208,7 +209,6 @@ def generate_payment_receipt(request,pk):
     print("actual amount is below")
     print(actual_course_amount[0])
     dueAmount = actual_course_amount[0] - total_paid_amount
-
     html = render_to_string('students/pdf.html', {'student_detail':student_detail,'total_paid_amount':total_paid_amount,'due_amount':dueAmount})
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'filename="mypdf.pdf"'
@@ -233,7 +233,7 @@ class PendingStudentListView(LoginRequiredMixin,ListView):
     login_url = 'login'
     template_name ='students/pendingPaymentListView.html'
     model = SendNotification
-    paginate_by = 15
+    paginate_by = 10
     def get_queryset(self):
         return SendNotification.objects.filter(created_date__lte=timezone.now()).filter(user = self.request.user).filter(is_payment_pending=True).order_by('-created_date')
 

@@ -33,7 +33,7 @@
                                 <th>Student Name</th>
                                 <th>Course Enrolled</th>
                                 <th>Student Subject</th>
-                                <th>Remark</th>
+                                <th>Phone Number</th>
                                 <th>Update Profile</th>
                                 <th>Delete Student Record</th>
                             </tr>
@@ -46,7 +46,7 @@
                                     {# <td>{{student.course_name.all.0}}</td>#}
                                     <td data-title='Course Enrolled'>{{student.course_name}}</td>
                                     <td data-title='Student Subject'>{{ student.subject }}</td>
-                                    <td data-title='Remark'>{{ student.remark }}</td>
+                                    <td data-title='Phone Number'>{{ student.phone_number }}</td>
                                     <td data-title='Update Profile'><a class="btn btn-primary" href="{% url 'students:student_edit' pk=student.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></td>
                                     <td data-title='Delete Student Record'><a class="btn btn-primary" href="{% url 'students:student_remove' pk=student.pk %}"><span class="glyphicon glyphicon-remove"></span></a></td>
                                 </tr>

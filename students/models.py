@@ -23,13 +23,7 @@ class Students(models.Model):
     created_date = models.DateTimeField(default=timezone.now)
     # remark = models.TextField(blank=True, null=True)
     subject = models.CharField(max_length=150)
-    phone_number = models.PositiveIntegerField(
-                validators=[
-                RegexValidator(
-                regex = PHONE_REGEX,
-                message = 'Phone Number should be valid of 10 digits only',
-                code='invalid_phone_number'
-                )])
+    phone_number =models.CharField(max_length=10,unique=True, validators=[RegexValidator(regex='^\d{10}$', message='Length has to be 10', code='Invalid number')])
     age = models.PositiveIntegerField(null= False,verbose_name="Student Age")
     father_name = models.CharField(max_length=200)
     address1 = models.CharField(max_length=255,null=False)
@@ -102,5 +96,3 @@ class SendNotification(models.Model):
     def remove_pending_status(self):
         self.is_payment_pending=False
         self.save()
-
-    

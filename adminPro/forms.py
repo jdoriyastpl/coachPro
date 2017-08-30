@@ -23,7 +23,7 @@ class UserLoginForm(forms.Form):
                 raise forms.ValidationError("User is not Active.")
 
         return super(UserLoginForm, self).clean(*args, **kwargs)
-        
+
 class UserRegistrationForm(UserCreationForm):
     class Meta:
         model = User
@@ -55,4 +55,7 @@ class UserProfileUpdateForm(forms.ModelForm):
                   "last_name",
                   "email",
                   "phone",
-                  "picture")
+                  "picture",
+                  "institute_name",
+                  "phone",
+                  "address")
