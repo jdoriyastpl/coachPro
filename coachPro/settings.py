@@ -26,6 +26,7 @@ SECRET_KEY = '_i3y6b7gk@2a)vvl-&+qgyz*-%&$6i6haf)c+_&6ucmghx)m7y'
 DEBUG = False
 
 ALLOWED_HOSTS = ['jitindoriya.pythonanywhere.com','127.0.0.1']
+ALLOWED_HOSTS = ['jitindoriya.pythonanywhere.com','*']
 
 
 # Application definition
