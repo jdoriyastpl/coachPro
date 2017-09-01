@@ -207,6 +207,7 @@ def generate_payment_receipt(request,pk):
     # total_paid_amount = StudentPaymentDetail.objects.filter(student=student[0]).aggregate(Sum('paid_amount'))
     actual_course_amount = Courses.objects.filter(name=student_detail.course_name).values_list('monthly_fee',flat=True)
     print("actual amount is below")
+    # instituteName = User.objects.filter(email = request.user)
     print(actual_course_amount[0])
     dueAmount = actual_course_amount[0] - total_paid_amount
     html = render_to_string('students/pdf.html', {'student_detail':student_detail,'total_paid_amount':total_paid_amount,'due_amount':dueAmount})
@@ -216,18 +217,6 @@ def generate_payment_receipt(request,pk):
     return response
 
 
-def display_pdf(request,pk):
-    generate_payment_receipt(request,pk)
-    # http://www.supinfo.com/articles/single/379-generate-pdf-files-out-of-html-templates-with-django
-    # return  redirect('students:payment_preview', pk=pk)
-#     Maybe you want to store the PDF file, we can do it using Django SimpleUploadedFiles. Let's say you have a field on your User model, called pdf_report (This snippet takes place after the pdf_file generation, before the HttpResponse creation) :
-# from django.core.files.uploadedfile import SimpleUploadedFile
-#
-#     user.pdf_report = SimpleUploadedFile('Report-'+ user.first_name +'.pdf', pdf_file, content_type='application/pdf')
-#     user.save()
-# In order to not have to keep generating the PDF each time the user access the page, you will now store it in the database.
-# I encourage you to try it if you have to automate receipts generation for orders, it does not take a lot of resources to generate a file, and depending on your template complexity, it's really fast.
-    return '<a href="{}">PDF</a>'.format(reverse('students:payment_preview', args=pk))
 
 class PendingStudentListView(LoginRequiredMixin,ListView):
     login_url = 'login'

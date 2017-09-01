@@ -53,12 +53,7 @@
                                                 <td>Student Id</td>
                                                 <td><span class="label label-success">{{ students_details.student_Id }}</span></td>
                                             </tr>
-                                            <tr>
-<!--
-                                                <td>User Rating</td>
-                                                <td><i class="fa fa-star text-yellow fa-fw"></i><i class="fa fa-star text-yellow fa-fw"></i><i class="fa fa-star text-yellow fa-fw"></i><i class="fa fa-star text-yellow fa-fw"></i><i class="fa fa-star text-yellow fa-fw"></i></td>
--->
-                                            </tr>
+                                      
                                             <tr>
                                                 <td>Member Since</td>
                                                 <td>{{students_details.created_date}}</td>
@@ -78,149 +73,6 @@
                                     <div id="generalTabContent" class="tab-content">
                                         <div id="tab-edit" class="tab-pane fade in active">
                                             <form action="#" class="form-horizontal">
-                                                <!--
-                                            <div class="form-group"><label class="col-sm-3 control-label">Email</label>
-
-                                                <div class="col-sm-9 controls">
-                                                    <div class="row">
-                                                        <div class="col-xs-9"><input type="email" placeholder="email@yourcompany.com" class="form-control"/></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group"><label class="col-sm-3 control-label">Username</label>
-
-                                                <div class="col-sm-9 controls">
-                                                    <div class="row">
-                                                        <div class="col-xs-9"><input type="text" placeholder="username" class="form-control"/></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group"><label class="col-sm-3 control-label">Password</label>
-
-                                                <div class="col-sm-9 controls">
-                                                    <div class="row">
-                                                        <div class="col-xs-4"><input type="password" placeholder="password" class="form-control"/></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group"><label class="col-sm-3 control-label">Confirm Password</label>
-
-                                                <div class="col-sm-9 controls">
-                                                    <div class="row">
-                                                        <div class="col-xs-4"><input type="password" placeholder="password" class="form-control"/></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr/>
-                                            <h3>Profile Setting</h3>
-
-                                            <div class="form-group"><label class="col-sm-3 control-label">First Name</label>
-
-                                                <div class="col-sm-9 controls">
-                                                    <div class="row">
-                                                        <div class="col-xs-9"><input type="text" placeholder="first name" class="form-control"/></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group"><label class="col-sm-3 control-label">Last Name</label>
-
-                                                <div class="col-sm-9 controls">
-                                                    <div class="row">
-                                                        <div class="col-xs-9"><input type="text" placeholder="last name" class="form-control"/></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group"><label class="col-sm-3 control-label">Gender</label>
-
-                                                <div class="col-sm-9 controls">
-                                                    <div class="row">
-                                                        <div class="col-xs-9">
-                                                            <div class="radio"><label class="radio-inline"><input type="radio" value="0" name="gender" checked="checked"/>&nbsp;
-                                                                Male</label><label class="radio-inline"><input type="radio" value="1" name="gender"/>&nbsp;
-                                                                Female</label></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group"><label class="col-sm-3 control-label">Birthday</label>
-
-                                                <div class="col-sm-9 controls">
-                                                    <div class="row">
-                                                        <div class="col-xs-4"><input id="datepicker-normal" type="text" class="form-control"/></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group"><label class="col-sm-3 control-label">Marital Status</label>
-
-                                                <div class="col-sm-9 controls">
-                                                    <div class="row">
-                                                        <div class="col-xs-4"><select class="form-control">
-                                                            <option>Single</option>
-                                                            <option>Married</option>
-                                                        </select></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group"><label class="col-sm-3 control-label">Position</label>
-
-                                                <div class="col-sm-9 controls">
-                                                    <div class="row">
-                                                        <div class="col-xs-4"><select class="form-control">
-                                                            <option>CEO</option>
-                                                            <option>Director</option>
-                                                            <option>Manager</option>
-                                                            <option>Staff</option>
-                                                            <option>Office Boy</option>
-                                                        </select></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group"><label class="col-sm-3 control-label">About</label>
-
-                                                <div class="col-sm-9 controls">
-                                                    <div class="row">
-                                                        <div class="col-xs-9"><textarea rows="3" class="form-control"></textarea></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr/>
-                                            <h3>Contact Setting</h3>
-
-                                            <div class="form-group"><label class="col-sm-3 control-label">Mobile Phone</label>
-
-                                                <div class="col-sm-9 controls">
-                                                    <div class="row">
-                                                        <div class="col-xs-9"><input type="text" placeholder="mobile phone" class="form-control"/></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group"><label class="col-sm-3 control-label">Website</label>
-
-                                                <div class="col-sm-9 controls">
-                                                    <div class="row">
-                                                        <div class="col-xs-9"><input type="text" placeholder="website" class="form-control"/></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group"><label class="col-sm-3 control-label">Facebook</label>
-
-                                                <div class="col-sm-9 controls">
-                                                    <div class="row">
-                                                        <div class="col-xs-9"><input type="text" placeholder="facebook" class="form-control"/></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group"><label class="col-sm-3 control-label">Twitter</label>
-
-                                                <div class="col-sm-9 controls">
-                                                    <div class="row">
-                                                        <div class="col-xs-9"><input type="text" placeholder="twitter" class="form-control"/></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <hr/>
-                                            <button type="submit" class="btn btn-green btn-block">Finish</button>
--->
 
                                                 <h3>Student Profile Preview:</h3>
 
@@ -242,11 +94,11 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group"><label class="col-sm-3">Student Subject</label>
+                                                <div class="form-group"><label class="col-sm-3">Student Father's Name</label>
 
                                                     <div class="col-sm-9 controls">
                                                         <div class="row">
-                                                            <div class="col-xs-4">{{ students_details.subject }}</div>
+                                                            <div class="col-xs-4">{{ students_details.father_name }}</div>
                                                         </div>
                                                     </div>
                                                 </div>

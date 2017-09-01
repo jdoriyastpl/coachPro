@@ -22,7 +22,7 @@
         line-height:inherit;
         text-align:left;
     }
-    
+
     .invoice-box table td{
         padding:5px;
         vertical-align:top;
@@ -111,15 +111,14 @@
                     <table>
                         <tr>
                             <td>
-                                Next Step Webs, Inc.<br>
-                                12345 Sunny Road<br>
-                                Sunnyville, TX 12345
+                                {{student_detail.user.institute_name}}<br>
+                                {{student_detail.user.address}}<br>
+                                {{student_detail.user.phone}}
                             </td>
 
                             <td>
-                                {{ student_detail.course_name }}<br>
-                                John Doe<br>
-                                john@example.com
+                                {{ student_detail.student }}<br>
+                                {{ student_detail.Student_Enrol_id }}<br>
                             </td>
                         </tr>
                     </table>

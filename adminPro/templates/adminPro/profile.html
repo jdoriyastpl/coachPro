@@ -54,12 +54,7 @@
                                                 <td>Joined</td>
                                                 <td><span class="label label-success">{{ user_profile.date_joined|date:'d-m-Y' }}</span></td>
                                             </tr>
-                                            <tr>
-<!--
-                                                <td>User Rating</td>
-                                                <td><i class="fa fa-star text-yellow fa-fw"></i><i class="fa fa-star text-yellow fa-fw"></i><i class="fa fa-star text-yellow fa-fw"></i><i class="fa fa-star text-yellow fa-fw"></i><i class="fa fa-star text-yellow fa-fw"></i></td>
--->
-                                            </tr>
+
                                             <tr>
                                                 <td>Last seen</td>
                                                 <td>{{ user_profile.last_login|timesince }}</td>
@@ -89,6 +84,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                
+
                                                 <div class="form-group"><label class="col-sm-3">Phone Number</label>
 
                                                     <div class="col-sm-9 controls">
