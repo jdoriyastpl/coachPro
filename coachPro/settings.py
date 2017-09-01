@@ -26,6 +26,7 @@ SECRET_KEY = '_i3y6b7gk@2a)vvl-&+qgyz*-%&$6i6haf)c+_&6ucmghx)m7y'
 DEBUG = False
 
 ALLOWED_HOSTS = ['jitindoriya.pythonanywhere.com','127.0.0.1']
+ALLOWED_HOSTS = ['jitindoriya.pythonanywhere.com','*']
 
 
 # Application definition
@@ -89,17 +90,16 @@ WSGI_APPLICATION = 'coachPro.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django_db',
-        'USER': 'root',
+        'NAME': 'jitindoriya$mysite',
+        'USER': 'jitindoriya',
         'PASSWORD': 'Password23',
-        'HOST': '',
-        'PORT': '',
+        'HOST': 'jitindoriya.mysql.pythonanywhere-services.com',
+        'PORT': '3306',
+        'OPTIONS': {
+                    'charset': 'utf8',
+                    'use_unicode': True, },
+                    },
     }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    # }
-}
 
 
 # Password validation
