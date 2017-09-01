@@ -1,146 +1,199 @@
+<!doctype html>
 <html>
-
 <head>
-    <title> </title>
-    <style type="text/css">
-        #main {
-            padding: 12px;
+    <meta charset="utf-8">
+    <title>A simple, clean, and responsive HTML invoice template</title>
+    
+    <style>
+    .invoice-box{
+        max-width:800px;
+        margin:auto;
+        padding:30px;
+        border:1px solid #eee;
+        box-shadow:0 0 10px rgba(0, 0, 0, .15);
+        font-size:16px;
+        line-height:24px;
+        font-family:'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        color:#555;
+    }
+    
+    .invoice-box table{
+        width:100%;
+        line-height:inherit;
+        text-align:left;
+    }
+    
+    .invoice-box table td{
+        padding:5px;
+        vertical-align:top;
+    }
+    
+    .invoice-box table tr td:nth-child(2){
+        text-align:right;
+    }
+    
+    .invoice-box table tr.top table td{
+        padding-bottom:20px;
+    }
+    
+    .invoice-box table tr.top table td.title{
+        font-size:45px;
+        line-height:45px;
+        color:#333;
+    }
+    
+    .invoice-box table tr.information table td{
+        padding-bottom:40px;
+    }
+    
+    .invoice-box table tr.heading td{
+        background:#eee;
+        border-bottom:1px solid #ddd;
+        font-weight:bold;
+    }
+    
+    .invoice-box table tr.details td{
+        padding-bottom:20px;
+    }
+    
+    .invoice-box table tr.item td{
+        border-bottom:1px solid #eee;
+    }
+    
+    .invoice-box table tr.item.last td{
+        border-bottom:none;
+    }
+    
+    .invoice-box table tr.total td:nth-child(2){
+        border-top:2px solid #eee;
+        font-weight:bold;
+    }
+    
+    @media only screen and (max-width: 600px) {
+        .invoice-box table tr.top table td{
+            width:100%;
+            display:block;
+            text-align:center;
         }
-
-        .offset-margin {
-            margin-top: -10px;
+        
+        .invoice-box table tr.information table td{
+            width:100%;
+            display:block;
+            text-align:center;
         }
-
-        td {
-            padding-left: 10px;
-        }
-
-        .description {
-            min-height: 120px;
-            margin-bottom: 90px;
-        }
-
-        .blank {
-            border-top: solid 1px #eee;
-            border-left: solid 1px #eee;
-            min-height: 120px;
-            padding: 0px !important;
-        }
-
-        .panel-body {
-            padding-bottom: 0 !important;
-        }
-
-        .content {
-            margin-top: 40px;
-            padding-bottom: 20px !important;
-        }
-
-        .table {
-            margin-bottom: 0px !important;
-        }
-        .paid {
-            color: #1bae37;
-            border: 4px solid #1bae37;
-            text-transform: uppercase;
-            font-weight: bold;
-            font-size: 22px;
-            padding: 12px;
-            float: right;
-            transform: rotate(-15deg);
-            margin-right: 40px;
-        }
+    }
     </style>
 </head>
 
 <body>
-    <div class="row">
-        <div class="col-lg-8 col-md-8 col-sm-8 col-lg-offset-2">
-            <div class="panel panel-default main">
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-9 col-md-9 col-sm-9">
-                            <h3>From</h3>
-                            <p>John Doe</p>
-                            <p class="offset-margin">713 Crescent Dr</p>
-                            <p class="offset-margin">Suite 9-2136</p>
-                            <p class="offset-margin">Los Angeles CA 90210</p>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-3">
-                            <h1>Invoice</h1> </div>
-                    </div>
-                    <!--row-->
-                    <hr>
-                    <div class="row">
-                        <div class="col-lg-9 col-md-9 col-sm-9">
-                            <h3>To</h3>
-                            <p>Student ID. {{ student_detail.Student_Enrol_id }}</p>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-3">
-                            <p>
-                                <label>Invoice#:</label> 00013</p>
-                            <p>
-                                <label>Invoice Date:</label> {{ student_detail.created_date|date:"M d, Y" }}</p>
-                            <p>
-                                <label>Due Date:</label> {{student_detail.next_payment_date|date:"M d, Y" }}</p>
-                        </div>
-                    </div>
-                    <!--row-->
-                    <div class="row">
-                        <div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 content">
-                            <div class="panel panel-default">
-                                <!--<div class="panel-heading">-->
-                                <!--    <h1 class="panel-title">Invoice Details</h1>-->
-                                <!--</div>-->
-                                <div class="panel-body">
-                                    <div class="row">
-                                        <div class=" col-lg-12 col-md-12 col-sm-12 description">
-                                            <table class="table table bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Course Enrolled</th>
-                                                        <th>Actual Course Amount ({{ student_detail.fee_by }})</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td> {{ student_detail.course_name }}</td>
-                                                        <td>Rs{{ student_detail.course_name.monthly_fee }}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="col-lg-8 pull-left" style="border-top:solid #ddd 1px;"></div>
-                                        <div class="col-lg-4 col-md-4 col-sm-4 pull-right blank">
-                                            <table class="table table bordered">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <label>Total:</label><span class="pull-right">Rs{{ student_detail.paid_amount }}</span></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <label>Total Amount Paid:</label><span class="pull-right">Rs{{ total_paid_amount }}</span></td>
-                                                    </tr>
-                                                    <tr style="background-color:#eee;">
-                                                        <td>
-                                                            <label>Amount Due:</label><span class="pull-left">Rs{{ due_amount }}</span></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <span class="paid">
-                                                  Paid
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <!--row-->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="invoice-box">
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td class="title">
+                                <img src="http://nextstepwebs.com/images/logo.png" style="width:100%; max-width:300px;">
+                            </td>
+                            
+                            <td>
+                                Invoice #: <br>
+                                {{ student_detail.created_date|date:"M d, Y" }}<br>
+                                 
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            
+            <tr class="information">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td>
+                                Next Step Webs, Inc.<br>
+                                12345 Sunny Road<br>
+                                Sunnyville, TX 12345
+                            </td>
+                            
+                            <td>
+                                {{ student_detail.course_name }}<br>
+                                John Doe<br>
+                                john@example.com
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            
+            <tr class="heading">
+                <td>
+                    Payment Method
+                </td>
+                
+                <td>
+                    Total Amount Paid
+                </td>
+            </tr>
+            
+            <tr class="details">
+                <td>
+                    Check/Cash/Online
+                </td>
+                
+                <td>
+                    Rs{{ total_paid_amount }}
+                </td>
+            </tr>
+            
+            <tr class="heading">
+                <td>
+                    Course Enrolled
+                </td>
+                
+                <td>
+                    Price
+                </td>
+            </tr>
+            
+            <tr class="item">
+                <td>
+                    {{ student_detail.course_name }}
+                </td>
+                
+                <td>
+                   Rs {{ student_detail.course_name.monthly_fee }} {{ student_detail.fee_by }}
+                </td>
+            </tr>
+            
+            <tr class="item">
+                <td>
+                    Total Amount Paid till now
+                </td>
+                
+                <td>
+                    Rs{{ total_paid_amount }}
+                </td>
+            </tr>
+            
+            <tr class="item last">
+                <td>
+                   Due Date:
+                </td>
+                
+                <td>
+                   {{student_detail.next_payment_date|date:"M d, Y" }}
+                </td>
+            </tr>
+            
+            <tr class="total">
+                <td></td>
+                
+                <td>
+                   Total Due Amount: Rs{{ due_amount }}
+                </td>
+            </tr>
+        </table>
     </div>
-
+</body>
 </html>
