@@ -57,8 +57,7 @@
    <input class="btn btn-success" type="submit" value='{{ title }}'>&nbsp; &nbsp;
      {% if request.path == "/adminPro/login/" %}
      Don't Have an Account <a href="{% url 'adminPro:register' %}">Register Here.</a>
-     {% else %}
-     Have an Account <a href="{% url 'adminPro:login' %}">Login Here.</a>
+  
      {% endif %}
        </form>
 

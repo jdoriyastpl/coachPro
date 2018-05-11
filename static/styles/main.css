@@ -120,8 +120,7 @@ hr {
 }
 #wrapper {
   width: 100%;
-/*  min-height: 100%;*/
-    overflow-x: hidden;
+  min-height: 100%;
   background-color: #3C3C3C;
 }
 #page-wrapper {
@@ -1152,7 +1151,7 @@ background: #303030; /* Old browsers */
 }
 /* End Left Sidebar Collapsed */
 .page-content {
-  padding: 20px 20px 20px 20px;
+  padding: 20px 5px 50px 20px;
   min-height: 850px;
 }
 #footer {
@@ -1600,7 +1599,7 @@ ul.chats li.out .message a.chat-datetime {
 }
 .page-form {
   width: 650px;
-  margin: 6% auto 0 auto;
+  margin: 20% auto 0 auto;
   border-radius: 4px;
 }
 .page-form .input-icon i {
@@ -7078,11 +7077,6 @@ div.messages {
     border: 1px solid #adb4bc;
     padding: 0.5em 1em;
 }
-div.success, tr.success .success{
-    color: #ffffff;
-    background-color: #5cb85c;
-}
-
 div.error, tr.error .error{
     color: #a30000;
     background-color: #FFCCCC;

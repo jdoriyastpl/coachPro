@@ -23,10 +23,10 @@ TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
 SECRET_KEY = '_i3y6b7gk@2a)vvl-&+qgyz*-%&$6i6haf)c+_&6ucmghx)m7y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['jitindoriya.pythonanywhere.com','127.0.0.1']
-ALLOWED_HOSTS = ['jitindoriya.pythonanywhere.com','*']
+ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['jitindoriya.pythonanywhere.com','*']
 
 
 # Application definition
@@ -63,7 +63,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'coachPro.urls'
 AUTH_USER_MODEL = 'adminPro.User'
-
+LOGIN_URL = '/'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -86,21 +86,12 @@ WSGI_APPLICATION = 'coachPro.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'jitindoriya$mysite',
-        'USER': 'jitindoriya',
-        'PASSWORD': 'Password23',
-        'HOST': 'jitindoriya.mysql.pythonanywhere-services.com',
-        'PORT': '3306',
-        'OPTIONS': {
-                    'charset': 'utf8',
-                    'use_unicode': True, },
-                    },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -140,17 +131,14 @@ USE_L10N = True
 USE_TZ = False
 
 
+
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
+
 STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-    # '/var/www/static/',
-]
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-# STATIC_ROOT = os.path.join(BASE_DIR, "static-root")
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 MEDIA_URL = "/media/"
 
